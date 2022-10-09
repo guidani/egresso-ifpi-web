@@ -1,3 +1,9 @@
 #top-bar__navigation{
-    background-color: darkgreen;
+    background-color: #137B25;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navLinkRouter{
+    
 }

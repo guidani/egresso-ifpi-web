@@ -1,11 +1,18 @@
-import React from 'react'
+import { Link } from "react-router-dom";
+import "./styles.css";
 
 const Home = () => {
   return (
-    <div>Home</div>
-    // Adicionar botões para cadastrar alunos
-    // Adicionar visualização de listagem de alunos
-  )
-}
+    <>
+    <div className="home-container">
 
-export default Home
+
+      <Link to="/cadastro-aluno">
+        <button className="btn-cadastro-aluno">Cadastrar Novo Aluno</button>
+      </Link>
+    </div>
+    </>
+  );
+};
+
+export default Home;

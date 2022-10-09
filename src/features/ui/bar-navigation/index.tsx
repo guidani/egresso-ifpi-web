@@ -9,7 +9,7 @@ const Barnavigation = () => {
           <img src="topo_ifpi.png" alt="Logo Ifpi" />
         </a>
         <nav>
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/" className="navLinkRouter">Home</NavLink>
         </nav>
       </div>
     </>
