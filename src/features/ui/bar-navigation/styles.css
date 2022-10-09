@@ -2,8 +2,5 @@
     background-color: #137B25;
     display: flex;
     justify-content: space-between;
-}
-
-.navLinkRouter{
-    
+    margin-bottom: 1rem;
 }
