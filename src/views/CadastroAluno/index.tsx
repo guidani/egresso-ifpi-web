@@ -22,20 +22,36 @@ interface IFormCadastroAlunoo {
 }
 
 const CadastroAluno = () => {
-  const [formData, setFormData] = useState<IFormCadastroAlunoo>(
-    {} as IFormCadastroAlunoo
-  );
+  const [formData, setFormData] = useState<IFormCadastroAlunoo>({
+    nome: "",
+    email: "",
+    telefone: 0,
+    dataDeNascimento: "",
+    cpf: "",
+    numeroMatricula: "",
+    dataDeInicioCurso: "",
+    dataDeEncerramentoCurso: "",
+    statusDaMatricula: "",
+    curso: "",
+    tipoDeOcupacao: "",
+    localDeTrabalho: "",
+    dataDeInicioTrabalho: "",
+    dataDeEncerramentoTrabalho: "",
+    trabalhoRemunerado: "",
+  });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setFormData({
-        ...formData,
-        [e.target.name]: e.target.value.trim()
-    })
+      ...formData,
+      [e.target.name]: e.target.value.trim(),
+    });
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData)
+    console.log(formData);
     console.log("formulário enviado");
     // Enviar dados do formulário para o banco de dados
   };
@@ -51,6 +67,7 @@ const CadastroAluno = () => {
               <label htmlFor="nomealuno">
                 Nome:
                 <input
+                
                   type="text"
                   placeholder="Nome do aluno"
                   name="nomealuno"
@@ -148,7 +165,7 @@ const CadastroAluno = () => {
               <label htmlFor="alunostatusmatricula">
                 Status da matrícula:
                 <select name="alunostatusmatricula" id="alunostatusmatricula">
-                  <option value={StatusMatriculaAluno.emAndamento} >
+                  <option value={StatusMatriculaAluno.emAndamento}>
                     {StatusMatriculaAluno.emAndamento}
                   </option>
                   <option value={StatusMatriculaAluno.concluido}>
@@ -222,7 +239,7 @@ const CadastroAluno = () => {
             </div>
             <div className="input-group">
               <label htmlFor="dataencerramentotrabalhoaluno">
-                Data de encerramento: 
+                Data de encerramento:
                 <input
                   type="date"
                   name="dataencerramentotrabalhoaluno"
