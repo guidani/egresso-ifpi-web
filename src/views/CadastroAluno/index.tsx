@@ -280,7 +280,7 @@ const CadastroAluno = () => {
           {/* ### */}
           <button type="submit">Cadastrar</button>
           <Link to="/">
-            <button type="submit">Cancelar</button>
+            <button type="reset">Cancelar</button>
           </Link>
         </form>
       </div>

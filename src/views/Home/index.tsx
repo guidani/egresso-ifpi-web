@@ -6,7 +6,10 @@ const Home = () => {
     <>
       <div className="home-container">
         <Link to="/cadastro-aluno">
-          <button className="btn-cadastro-aluno">Cadastrar Novo Aluno</button>
+          <button className="btn-cadastro">Cadastrar Novo Aluno</button>
+        </Link>
+        <Link to="/cadastro-curso">
+          <button className="btn-cadastro">Cadastrar Novo Curso</button>
         </Link>
       </div>
     </>
