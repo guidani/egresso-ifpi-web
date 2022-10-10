@@ -12,9 +12,9 @@ interface IFormCadastroAlunoo {
   numeroMatricula: string;
   dataDeInicioCurso: string;
   dataDeEncerramentoCurso: string;
-  statusDaMatricula: StatusMatriculaAluno;
+  statusDaMatricula: StatusMatriculaAluno | string;
   curso: string;
-  tipoDeOcupacao: TipoOcupacao;
+  tipoDeOcupacao: TipoOcupacao | string;
   localDeTrabalho: string;
   dataDeInicioTrabalho: string;
   dataDeEncerramentoTrabalho: string;
