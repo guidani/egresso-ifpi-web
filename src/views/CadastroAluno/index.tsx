@@ -52,7 +52,6 @@ const CadastroAluno = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(formData);
-    console.log("formulário enviado");
     // Enviar dados do formulário para o banco de dados
   };
 
@@ -67,22 +66,22 @@ const CadastroAluno = () => {
               <label htmlFor="nomealuno">
                 Nome:
                 <input
-                
                   type="text"
                   placeholder="Nome do aluno"
-                  name="nomealuno"
+                  name="nome"
                   id="nomealuno"
                   onChange={handleChange}
+                  value={formData.nome}
                 />
               </label>
             </div>
             <div className="input-group">
-              <label htmlFor="emailaluno">
+              <label htmlFor="email">
                 E-mail:
                 <input
                   type="email"
                   placeholder="email@email.com.br"
-                  name="emailaluno"
+                  name="email"
                   id="emailaluno"
                   onChange={handleChange}
                 />
@@ -93,7 +92,7 @@ const CadastroAluno = () => {
                 Telefone:
                 <input
                   type="number"
-                  name="telefonealuno"
+                  name="telefone"
                   id="telefonealuno"
                   placeholder="86912345678"
                   onChange={handleChange}
@@ -105,7 +104,7 @@ const CadastroAluno = () => {
                 Data de nascimento:
                 <input
                   type="date"
-                  name="datanascimentoaluno"
+                  name="dataDeNascimento"
                   id="datanascimentoaluno"
                   onChange={handleChange}
                 />
@@ -118,7 +117,7 @@ const CadastroAluno = () => {
                   type="text"
                   placeholder="123.456.789-00"
                   maxLength={14}
-                  name="cpfaluno"
+                  name="cpf"
                   id="cpfaluno"
                   onChange={handleChange}
                 />
@@ -132,7 +131,7 @@ const CadastroAluno = () => {
                 Número da matrícula
                 <input
                   type="text"
-                  name="matriculaaluno"
+                  name="numeroMatricula"
                   id="matriculaaluno"
                   placeholder="número da matrícula"
                   onChange={handleChange}
@@ -144,7 +143,7 @@ const CadastroAluno = () => {
                 Data de início:
                 <input
                   type="date"
-                  name="datainiciocursoaluno"
+                  name="dataDeInicioCurso"
                   id="datainiciocursoaluno"
                   onChange={handleChange}
                 />
@@ -155,16 +154,18 @@ const CadastroAluno = () => {
                 Data de encerramento:
                 <input
                   type="date"
-                  name="dataencerramentocursoaluno"
+                  name="dataDeEncerramentoCurso"
                   id="dataencerramentocursoaluno"
                   onChange={handleChange}
                 />
               </label>
             </div>
+            
             <div className="input-group">
               <label htmlFor="alunostatusmatricula">
                 Status da matrícula:
-                <select name="alunostatusmatricula" id="alunostatusmatricula">
+                <select name="statusDaMatricula" id="alunostatusmatricula" onChange={handleChange} defaultValue="">
+                  <option value="" disabled>--ESCOLHA--</option>
                   <option value={StatusMatriculaAluno.emAndamento}>
                     {StatusMatriculaAluno.emAndamento}
                   </option>
@@ -186,7 +187,7 @@ const CadastroAluno = () => {
                 <input
                   type="text"
                   placeholder="Curso do aluno"
-                  name="cursoaluno"
+                  name="curso"
                   id="cursoaluno"
                   onChange={handleChange}
                 />
@@ -198,10 +199,12 @@ const CadastroAluno = () => {
           {/* #### */}
           <div className="form-input-section">
             <h2>Ocupação</h2>
+            
             <div className="input-group">
               <label htmlFor="">
                 Tipo de ocupação:
-                <select name="alunotipoocupacao" id="alunotipoocupacao">
+                <select name="tipoDeOcupacao" id="alunotipoocupacao" onChange={handleChange} defaultValue="">
+                  <option value="" disabled>--ESCOLHA--</option>
                   <option value={TipoOcupacao.efetivo}>
                     {TipoOcupacao.efetivo}
                   </option>
@@ -220,7 +223,7 @@ const CadastroAluno = () => {
                 <input
                   type="text"
                   placeholder="Nome do local de trabalho"
-                  name="localdetrabalhoaluno"
+                  name="localDeTrabalho"
                   id="localdetrabalhoaluno"
                   onChange={handleChange}
                 />
@@ -231,7 +234,7 @@ const CadastroAluno = () => {
                 Data de início:
                 <input
                   type="date"
-                  name="datainiciotrabalhoaluno"
+                  name="dataDeInicioTrabalho"
                   id="datainiciotrabalhoaluno"
                   onChange={handleChange}
                 />
@@ -242,7 +245,7 @@ const CadastroAluno = () => {
                 Data de encerramento:
                 <input
                   type="date"
-                  name="dataencerramentotrabalhoaluno"
+                  name="dataDeEncerramentoTrabalho"
                   id="dataencerramentotrabalhoaluno"
                   onChange={handleChange}
                 />
@@ -253,7 +256,7 @@ const CadastroAluno = () => {
               <label htmlFor="alunoocupacaoremuneradosim">
                 <input
                   type="radio"
-                  name="alunoocupacaoremunerado"
+                  name="trabalhoRemunerado"
                   value="Sim"
                   id="alunoocupacaoremuneradosim"
                   onChange={handleChange}
@@ -263,7 +266,7 @@ const CadastroAluno = () => {
               <label htmlFor="alunoocupacaoremuneradonao">
                 <input
                   type="radio"
-                  name="alunoocupacaoremunerado"
+                  name="trabalhoRemunerado"
                   value="Não"
                   id="alunoocupacaoremuneradonao"
                   onChange={handleChange}
