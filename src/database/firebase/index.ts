@@ -1,6 +1,6 @@
 import { addDoc, collection } from "firebase/firestore";
-import { IFormCadastroAluno } from "../../views/CadastroAluno";
-import { IFormCadastroCurso } from "../../views/CadastroCurso";
+import { IFormCadastroAluno } from "../../features/CadastroAluno";
+import { IFormCadastroCurso } from "../../features/CadastroCurso";
 import { db } from "./config";
 
 export const addAlunoToDatabase = async (data: IFormCadastroAluno) => {
