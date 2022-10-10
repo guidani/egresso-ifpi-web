@@ -1,5 +1,6 @@
 import React from 'react'
 import InfoAboutAlunos from './components/InfoAboutAlunos'
+import InfoAboutCursos from './components/InfoAboutCursos'
 import './styles.css'
 
 const Dashboard = () => {
@@ -8,6 +9,7 @@ const Dashboard = () => {
         <div>Dashboard</div>
         <div>
             <InfoAboutAlunos/>
+            <InfoAboutCursos/>
         </div>
     </>
   )
