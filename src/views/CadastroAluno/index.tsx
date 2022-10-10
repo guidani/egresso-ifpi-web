@@ -1,9 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
+import { addAlunoToDatabase } from "../../database/firebase";
 import { StatusMatriculaAluno, TipoOcupacao } from "../../types";
 import "./styles.css";
 
-interface IFormCadastroAlunoo {
+export interface IFormCadastroAluno {
   nome: string;
   email: string;
   telefone: number;
@@ -22,7 +23,7 @@ interface IFormCadastroAlunoo {
 }
 
 const CadastroAluno = () => {
-  const [formData, setFormData] = useState<IFormCadastroAlunoo>({
+  const [formData, setFormData] = useState<IFormCadastroAluno>({
     nome: "",
     email: "",
     telefone: 0,
@@ -49,10 +50,11 @@ const CadastroAluno = () => {
     });
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(formData);
     // Enviar dados do formulário para o banco de dados
+    await addAlunoToDatabase(formData);
   };
 
   return (
