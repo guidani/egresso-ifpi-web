@@ -3,8 +3,8 @@ import CadastroAluno from "../features/CadastroAluno";
 import CadastroCurso from "../features/CadastroCurso";
 import Layout from "../shared/Layout";
 import Home from "../views/Home";
-import Login from "../views/Login";
-import Register from "../views/Register";
+import Login from "../features/Login";
+import Register from "../features/Register";
 
 export const Router = () => {
   return (
