@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import CadastroAluno from "../features/CadastroAluno";
-import CadastroCurso from "../features/CadastroCurso";
+import CadastroAluno from "../features/CadastroAluno/components/CadastroAluno";
+import CadastroCurso from "../features/CadastroCurso/components/CadastroCurso";
 import Layout from "../shared/Layout";
 import Home from "../views/Home";
-import Login from "../features/Login";
-import Register from "../features/Register";
+import Login from "../features/Login/components/Login";
+import Register from "../features/Register/components/Register";
 
 export const Router = () => {
   return (

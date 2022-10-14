@@ -1,14 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 
 import { Link } from "react-router-dom";
-import { addCursoToDatabase } from "../../database/firebase";
-import { NivelCurso } from "../../types";
+import { addCursoToDatabase } from "../../../database/firebase";
+import { NivelCurso } from "../../../types";
+import { IFormCadastroCurso } from "../types/IFormCadastroAluno";
 import "./styles.css";
-
-export interface IFormCadastroCurso {
-  nomeDoCurso: string;
-  nivelDoCurso: NivelCurso | string;
-}
 
 const CadastroCurso = () => {
   const [formData, setFormData] = useState<IFormCadastroCurso>({

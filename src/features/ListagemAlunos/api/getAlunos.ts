@@ -6,8 +6,8 @@ export const getAlunos = async () => {
     let alunosLista = [];
     const alunosSnapshot = await getDocs(collection(db, "ALUNOS"));
     alunosSnapshot.forEach((aluno) => {
-        const alunoData = aluno.data();
-        console.log(alunoData)
+      const alunoData = aluno.data();
+      console.log(alunoData);
     });
   } catch (error) {
     // TODO: fazer tratamento de erros

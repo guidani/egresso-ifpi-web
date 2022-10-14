@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import Dashboard from "../../features/Dashboard";
-import Spacer from "../../features/ui/Spacer";
 import "./styles.css";
 
 const Home = () => {

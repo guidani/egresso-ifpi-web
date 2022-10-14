@@ -1,29 +1,12 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import { addAlunoToDatabase } from "../../database/firebase";
-import { StatusMatriculaAluno, TipoOcupacao } from "../../types";
+import { addAlunoToDatabase } from "../../../database/firebase";
+import { StatusMatriculaAluno, TipoOcupacao } from "../../../types";
+import { IAluno } from "../types/IAluno";
 import "./styles.css";
 
-export interface IFormCadastroAluno {
-  nome: string;
-  email: string;
-  telefone: number;
-  dataDeNascimento: string;
-  cpf: string;
-  numeroMatricula: string;
-  dataDeInicioCurso: string;
-  dataDeEncerramentoCurso: string;
-  statusDaMatricula: StatusMatriculaAluno | string;
-  curso: string;
-  tipoDeOcupacao: TipoOcupacao | string;
-  localDeTrabalho: string;
-  dataDeInicioTrabalho: string;
-  dataDeEncerramentoTrabalho: string;
-  trabalhoRemunerado: string;
-}
-
 const CadastroAluno = () => {
-  const [formData, setFormData] = useState<IFormCadastroAluno>({
+  const [formData, setFormData] = useState<IAluno>({
     nome: "",
     email: "",
     telefone: 0,
@@ -162,12 +145,19 @@ const CadastroAluno = () => {
                 />
               </label>
             </div>
-            
+
             <div className="input-group">
               <label htmlFor="alunostatusmatricula">
                 Status da matrícula:
-                <select name="statusDaMatricula" id="alunostatusmatricula" onChange={handleChange} defaultValue="">
-                  <option value="" disabled>--ESCOLHA--</option>
+                <select
+                  name="statusDaMatricula"
+                  id="alunostatusmatricula"
+                  onChange={handleChange}
+                  defaultValue=""
+                >
+                  <option value="" disabled>
+                    --ESCOLHA--
+                  </option>
                   <option value={StatusMatriculaAluno.emAndamento}>
                     {StatusMatriculaAluno.emAndamento}
                   </option>
@@ -201,12 +191,19 @@ const CadastroAluno = () => {
           {/* #### */}
           <div className="form-input-section">
             <h2>Ocupação</h2>
-            
+
             <div className="input-group">
               <label htmlFor="">
                 Tipo de ocupação:
-                <select name="tipoDeOcupacao" id="alunotipoocupacao" onChange={handleChange} defaultValue="">
-                  <option value="" disabled>--ESCOLHA--</option>
+                <select
+                  name="tipoDeOcupacao"
+                  id="alunotipoocupacao"
+                  onChange={handleChange}
+                  defaultValue=""
+                >
+                  <option value="" disabled>
+                    --ESCOLHA--
+                  </option>
                   <option value={TipoOcupacao.efetivo}>
                     {TipoOcupacao.efetivo}
                   </option>

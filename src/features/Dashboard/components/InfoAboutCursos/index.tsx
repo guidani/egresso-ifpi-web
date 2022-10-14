@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { getNumberOfAlunos } from "../../api/getNumberOfAlunos";
 import { getNumberOfCursos } from "../../api/getNumberOfCursos";
 import "./styles.css";
 

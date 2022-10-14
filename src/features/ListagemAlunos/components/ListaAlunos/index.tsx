@@ -1,10 +1,7 @@
-import React from 'react'
-import './styles.css'
+import "./styles.css";
 
 const ListaAlunos = () => {
-  return (
-    <div>ListaAlunos</div>
-  )
-}
+  return <div>ListaAlunos</div>;
+};
 
-export default ListaAlunos
+export default ListaAlunos;
