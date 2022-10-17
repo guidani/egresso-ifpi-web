@@ -1,6 +1,11 @@
-#top-bar__navigation{
+.topBar{
     background-color: #137B25;
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
+}
+
+.topBarImage{
+    width: 100px;
+    height: heigh;
 }

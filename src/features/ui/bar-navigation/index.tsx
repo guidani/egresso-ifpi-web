@@ -1,16 +1,15 @@
-import { Link, NavLink } from "react-router-dom";
-import './styles.css'
+import styles from './styles.module.css';
 
 const Barnavigation = () => {
   return (
     <>
-      <div id="top-bar__navigation">
+      <div className={styles.topBar}>
         <a href="/">
-          <img src="topo_ifpi.png" alt="Logo Ifpi" />
+          <img src="topo_ifpi.png" alt="Logo Ifpi" className={styles.topBarImage} />
         </a>
-        <nav>
-          <NavLink to="/" className="navLinkRouter">Home</NavLink>
-        </nav>
+        {/* <nav className="top-bar_navigation">
+
+        </nav> */}
       </div>
     </>
   );
