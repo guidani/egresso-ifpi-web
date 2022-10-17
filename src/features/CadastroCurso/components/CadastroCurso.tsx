@@ -1,8 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 
 import { Link } from "react-router-dom";
-import { addCursoToDatabase } from "../../../database/firebase";
 import { NivelCurso } from "../../../types";
+import { addCursoToDatabase } from "../api/addCursoToDatabase";
 import { IFormCadastroCurso } from "../types/IFormCadastroAluno";
 import "./styles.css";
 
