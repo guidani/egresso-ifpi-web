@@ -18,7 +18,7 @@ const ListagemCursos = () => {
       };
       courseList.push(newCourse);
       // console.log(newCourse);
-      setCourses(...courses, courseList);
+      setCourses(courseList);
     });
   };
 
