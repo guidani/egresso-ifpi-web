@@ -275,10 +275,16 @@ const CadastroAluno = () => {
             </div>
           </div>
           {/* ### */}
-          <button type="submit">Cadastrar</button>
-          <Link to="/">
-            <button type="reset">Cancelar</button>
-          </Link>
+          <div className="btnRow">
+            <button type="submit" className="btnPrimary">
+              Cadastrar
+            </button>
+            <Link to="/">
+              <button type="reset" className="btnDanger">
+                Cancelar
+              </button>
+            </Link>
+          </div>
         </form>
       </div>
     </>

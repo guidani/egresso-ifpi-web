@@ -1,3 +1,15 @@
+:root {
+  --primary: hsl(100, 100%, 50%);
+  --primary-hover: hsl(100, 80%, 40%);
+  --primary-active: hsl(100, 100%, 30%);
+  --danger: hsl(0, 100%, 50%);
+  --danger-hover: hsl(0, 100%, 40%);
+  --danger-active: hsl(0, 100%, 30%);
+  --outlined: hsl(200, 100%, 50%);
+  --outlined-hover: hsl(200, 100%, 40%);
+  --outlined-active: hsl(200, 100%, 30%);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -20,8 +32,70 @@ button {
   cursor: pointer;
 }
 
+button {
+  padding: 0.5rem 2rem;
+  border: inherit;
+  border-radius: 0.3rem;
+  color: white;
+  cursor: pointer;
+  font-size: 1.275rem;
+  font-weight: bold;
+}
+
 li {
   list-style: none;
+}
+
+/* Specific styles */
+/* Buttons */
+.btnPrimary {
+  background-color: var(--primary);
+}
+
+.btnPrimary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btnPrimary:active {
+  background-color: var(--primary-active);
+}
+
+.btnPrimary-outline {
+  color: var(--outlined);
+  background-color: white;
+  border: 2px solid var(--outlined);
+}
+
+.btnPrimaryOutline:hover {
+  color: white;
+  background-color: var(--outlined-hover);
+}
+
+.btnPrimaryOutline:active {
+  color: white;
+  background-color: var(--outlined-active);
+}
+
+.btnDanger {
+  background-color: var(--danger);
+}
+
+.btnDanger:hover {
+  background-color: var(--danger-hover);
+}
+
+.btnDanger:active {
+  background-color: var(--danger-active);
+}
+.btnRow {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0rem;
+}
+/* Inputs */
+
+input {
+  font-size: 1rem;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -34,4 +108,39 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.form-input-section {
+  font-size: 0.8rem;
+}
+
+.input-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.input-group label {
+  margin-bottom: 0.5rem;
+  /* font-weight: bold; */
+  font-size: 1rem;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+select {
+  width: 100%;
+  padding: 12px 20px;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border: 1px solid var(--primary-active);
+  outline: none;
 }
