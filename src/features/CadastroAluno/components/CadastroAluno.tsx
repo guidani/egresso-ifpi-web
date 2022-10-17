@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import { addAlunoToDatabase } from "../../../database/firebase";
 import { StatusMatriculaAluno, TipoOcupacao } from "../../../types";
+import { addAlunoToDatabase } from "../api/addAlunoToDatabase";
 import { IAluno } from "../types/IAluno";
 import "./styles.css";
 
