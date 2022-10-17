@@ -29,3 +29,9 @@ export enum TipoOcupacao {
   iniciacaoCientifica = "Iniciação Científica",
   efetivo = "Efetivo",
 }
+
+export interface ICurso {
+  id: string,
+  nome: string,
+  nivel: NivelCurso
+}

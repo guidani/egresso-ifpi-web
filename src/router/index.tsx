@@ -5,6 +5,7 @@ import Layout from "../shared/Layout";
 import Home from "../views/Home";
 import Login from "../features/Login/components/Login";
 import Register from "../features/Register/components/Register";
+import Courses from "../views/Courses";
 
 export const Router = () => {
   return (
@@ -13,6 +14,7 @@ export const Router = () => {
         <Route path="/" element={<Home />} />
         <Route path="cadastro-aluno" element={<CadastroAluno />} />
         <Route path="cadastro-curso" element={<CadastroCurso />} />
+        <Route path="listagem-cursos" element={<Courses/>}/>
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />

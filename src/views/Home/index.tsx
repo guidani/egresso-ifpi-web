@@ -14,6 +14,11 @@ const Home = () => {
             <button className="btnPrimary">Cadastrar Novo Curso</button>
           </Link>
         </div>
+        <div className="btnRow">
+          <Link to="/listagem-cursos">
+            <button className="btnPrimary">Ver cursos</button>
+          </Link>
+        </div>
 
         <Dashboard />
       </div>
