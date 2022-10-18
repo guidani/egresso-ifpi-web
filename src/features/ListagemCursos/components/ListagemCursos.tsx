@@ -59,7 +59,7 @@ const ListagemCursos = () => {
           </tbody>
         </table>
       )}
-      {/* {console.log(courses)} */}
+      
     </>
   );
 };

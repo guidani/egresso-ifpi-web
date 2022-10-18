@@ -1,15 +1,19 @@
+import { Link } from 'react-router-dom';
 import styles from './styles.module.css';
 
 const Barnavigation = () => {
   return (
     <>
       <div className={styles.topBar}>
-        <a href="/">
+        <Link to={'/'}>
           <img src="topo_ifpi.png" alt="Logo Ifpi" className={styles.topBarImage} />
-        </a>
-        {/* <nav className="top-bar_navigation">
-
-        </nav> */}
+        </Link>
+        <nav>
+          <Link to={'/login'}>
+            Sair
+          </Link>
+        </nav>
+        
       </div>
     </>
   );

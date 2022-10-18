@@ -87,6 +87,7 @@ li {
 .btnDanger:active {
   background-color: var(--danger-active);
 }
+
 .btnRow {
   display: flex;
   gap: 1rem;
@@ -143,4 +144,18 @@ input[type="text"]:focus,
 input[type="password"]:focus {
   border: 1px solid var(--primary-active);
   outline: none;
+}
+
+/* Media queries */
+@media only screen and (max-width: 350px) {
+  .btnRow {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: .5rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
 }
