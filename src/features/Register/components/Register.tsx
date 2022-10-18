@@ -1,9 +1,11 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../../database/firebase/config";
 
 interface IUserRegister {
-  email: string;
-  password: string;
+  userEmail: string;
+  userPassword: string;
   confirmPassword: string;
 }
 
@@ -20,10 +22,27 @@ const Register = () => {
     });
   };
 
+  const doUserRegister = async (email: string, password: string) => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log({ Code: errorCode, Message: errorMessage });
+        // ..
+      });
+  };
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // validar se a senha e a confirmação de senha são iguais
-    console.log(formData);
+    doUserRegister(formData.userEmail, formData.userPassword);
+    console.log(formData.userEmail, formData.userPassword);
     // Enviar dados do formulário para o banco de dados
   };
 
@@ -35,7 +54,7 @@ const Register = () => {
           <input
             type="email"
             placeholder="Seu e-mail"
-            value={formData.email}
+            value={formData.userEmail}
             id="userEmail"
             name="userEmail"
             onChange={handleChange}
@@ -47,7 +66,7 @@ const Register = () => {
           <input
             type="password"
             placeholder="Sua senha"
-            value={formData.password}
+            value={formData.userPassword}
             id="userPassword"
             name="userPassword"
             onChange={handleChange}
