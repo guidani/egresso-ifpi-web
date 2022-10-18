@@ -1,11 +1,13 @@
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
+import { auth } from "../../../database/firebase/config";
 
-import './styles.css'
+import "./styles.css";
 
 interface IUserLogin {
-  email: string;
-  password: string;
+  userEmail: string;
+  userPassword: string;
 }
 
 const Login = () => {
@@ -20,8 +22,25 @@ const Login = () => {
     });
   };
 
+  const doUserLogin = async (email: string, password: string) => {
+    try {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
+    } catch (error) {}
+  };
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    await doUserLogin(formData.userEmail, formData.userPassword)
     console.log(formData);
     // Enviar dados do formulário para o banco de dados
   };
@@ -34,7 +53,7 @@ const Login = () => {
           <input
             type="email"
             placeholder="Seu e-mail"
-            value={formData.email}
+            value={formData.userEmail}
             id="userEmail"
             name="userEmail"
             onChange={handleChange}
@@ -46,7 +65,7 @@ const Login = () => {
           <input
             type="password"
             placeholder="Sua senha"
-            value={formData.password}
+            value={formData.userPassword}
             id="userPassword"
             name="userPassword"
             onChange={handleChange}
