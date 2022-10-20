@@ -9,7 +9,7 @@ const Barnavigation = () => {
     <>
       <div className={styles.topBar}>
         <Wrapper>
-          <div>
+          <div className={styles.flexRow}>
             <Link to={"/"}>
               <img
                 src="topo_ifpi.png"

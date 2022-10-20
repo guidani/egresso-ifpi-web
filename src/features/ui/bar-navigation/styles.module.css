@@ -1,8 +1,12 @@
 .topBar{
     background-color: #137B25;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.flexRow{
     display: flex;
     justify-content: space-between;
-    margin-bottom: 1rem;
 }
 
 .topBarImage{
