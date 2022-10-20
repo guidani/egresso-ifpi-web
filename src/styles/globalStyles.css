@@ -154,8 +154,4 @@ input[type="password"]:focus {
     flex-direction: column;
     gap: .5rem;
   }
-
-  .btn {
-    width: 100%;
-  }
 }

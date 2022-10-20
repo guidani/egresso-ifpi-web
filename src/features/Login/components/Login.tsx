@@ -76,11 +76,11 @@ const Login = () => {
               required
             />
           </div>
-          <button type="submit" className="btn btnPrimary">
+          <button type="submit" className={`${styles.btn} btnPrimary`}>
             Entrar
           </button>
         </form>
-        <div className="btnRow">
+        <div className={styles.linkRow}>
           <Link to="/register">
             <a href="#">Cadastre-se aqui.</a>
           </Link>
