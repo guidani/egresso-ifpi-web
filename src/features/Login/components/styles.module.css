@@ -1,0 +1,16 @@
+.link-row{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card{
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: .5rem;
+}
+
+.cardHeader{
+    text-align: center;
+}

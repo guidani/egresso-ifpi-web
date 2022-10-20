@@ -5,10 +5,9 @@ import './styles.css'
 const Layout = () => {
   return (
     <>
-    <div className="container">
+    
       <Barnavigation/>
       <Outlet />
-    </div>
     </>
   );
 };

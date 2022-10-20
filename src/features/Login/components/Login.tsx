@@ -3,7 +3,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../../../database/firebase/config";
 
-import "./styles.css";
+import styles from "./styles.module.css";
 
 interface IUserLogin {
   userEmail: string;
@@ -28,7 +28,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          
+
           // ...
         })
         .catch((error) => {
@@ -40,49 +40,54 @@ const Login = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await doUserLogin(formData.userEmail, formData.userPassword)
+    await doUserLogin(formData.userEmail, formData.userPassword);
     console.log(formData);
     // Enviar dados do formulário para o banco de dados
   };
 
   return (
     <>
-      <form action="" onSubmit={handleSubmit}>
-        <div className="input-group">
-          <label htmlFor="userEmail">E-mail</label>
-          <input
-            type="email"
-            placeholder="Seu e-mail"
-            value={formData.userEmail}
-            id="userEmail"
-            name="userEmail"
-            onChange={handleChange}
-            required
-          />
+      <div className={styles.card}>
+        <div className={styles.cardHeader}>
+          <img src="topo_ifpi.png" alt="Logo_IFPI" />
         </div>
-        <div className="input-group">
-          <label htmlFor="userPassword">Senha</label>
-          <input
-            type="password"
-            placeholder="Sua senha"
-            value={formData.userPassword}
-            id="userPassword"
-            name="userPassword"
-            onChange={handleChange}
-            required
-          />
+        <form action="" onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label htmlFor="userEmail">E-mail</label>
+            <input
+              type="email"
+              placeholder="Seu e-mail"
+              value={formData.userEmail}
+              id="userEmail"
+              name="userEmail"
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <label htmlFor="userPassword">Senha</label>
+            <input
+              type="password"
+              placeholder="Sua senha"
+              value={formData.userPassword}
+              id="userPassword"
+              name="userPassword"
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <button type="submit" className="btn btnPrimary">
+            Entrar
+          </button>
+        </form>
+        <div className="btnRow">
+          <Link to="/register">
+            <a href="#">Cadastre-se aqui.</a>
+          </Link>
+          <Link to={"/"}>
+            <a href="#">Recuperar senha</a>
+          </Link>
         </div>
-        <button type="submit" className="btn btnPrimary">
-          Entrar
-        </button>
-      </form>
-      <div className="btnRow">
-        <Link to="/register">
-          <a href="#">Cadastre-se aqui.</a>
-        </Link>
-        <Link to={"/"}>
-          <a href="#">Recuperar senha</a>
-        </Link>
       </div>
     </>
     // adicionar formulário de login
