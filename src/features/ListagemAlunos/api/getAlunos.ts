@@ -1,16 +1,19 @@
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  DocumentData,
+  getDocs,
+  QuerySnapshot,
+} from "firebase/firestore";
 import { db } from "../../../database/firebase/config";
 
-export const getAlunos = async () => {
-  try {
-    let alunosLista = [];
-    const alunosSnapshot = await getDocs(collection(db, "ALUNOS"));
-    alunosSnapshot.forEach((aluno) => {
-      const alunoData = aluno.data();
-      console.log(alunoData);
-    });
-  } catch (error) {
-    // TODO: fazer tratamento de erros
-    console.log(error);
-  }
-};
+export const getAlunosFromDatabase =
+  async (): Promise<QuerySnapshot<DocumentData> | null> => {
+    try {
+      const alunoCollectionRef = collection(db, "ALUNOS");
+      const snapshot = await getDocs(alunoCollectionRef);
+      return snapshot;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };

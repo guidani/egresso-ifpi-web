@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { StatusMatriculaAluno, TipoOcupacao } from "../../../types";
+import Wrapper from "../../ui/wrapper";
 import { addAlunoToDatabase } from "../api/addAlunoToDatabase";
 import { IAluno } from "../types/IAluno";
 import "./styles.css";
@@ -42,6 +43,7 @@ const CadastroAluno = () => {
 
   return (
     <>
+    <Wrapper>
       <div>Cadastro de novo aluno</div>
       <div className="novo-aluno_form">
         <form onSubmit={handleSubmit}>
@@ -287,6 +289,7 @@ const CadastroAluno = () => {
           </div>
         </form>
       </div>
+      </Wrapper>
     </>
   );
 };
