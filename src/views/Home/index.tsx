@@ -9,19 +9,19 @@ const Home = () => {
       <Wrapper>
         <div className="home-container">
           <div className="btnRow">
-            <Link to="/cadastro-aluno">
-              <button className="btnPrimary">Cadastrar Novo Aluno</button>
+            <Link to="/cadastro-aluno" className="btn btnPrimary">
+              Cadastrar Novo Aluno
             </Link>
-            <Link to="/cadastro-curso">
-              <button className="btnPrimary">Cadastrar Novo Curso</button>
+            <Link to="/cadastro-curso" className="btn btnPrimary">
+              Cadastrar Novo Curso
             </Link>
           </div>
           <div className="btnRow">
-            <Link to="/listagem-alunos">
-              <button className="btnPrimary">Ver alunos</button>
+            <Link to="/listagem-alunos" className="btn btnPrimary">
+              Ver alunos
             </Link>
-            <Link to="/listagem-cursos">
-              <button className="btnPrimary">Ver cursos</button>
+            <Link to="/listagem-cursos" className="btn btnPrimary">
+              Ver cursos
             </Link>
           </div>
 

@@ -17,9 +17,9 @@ const Barnavigation = () => {
                 className={styles.topBarImage}
               />
             </Link>
-            <nav>
+            <nav className={styles.navBar}>
               <Link to={"/login"}>Sair</Link>
-              <p>Bem vindo: {email}</p>
+              {/* <p>Bem vindo: {email}</p> */}
             </nav>
           </div>
         </Wrapper>

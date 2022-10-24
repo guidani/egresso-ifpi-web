@@ -37,15 +37,18 @@ const ListagemCursos = () => {
               <div key={item?.id}>
                 <p>{item?.nome}</p>
                 <p>{item?.nivel}</p>
+                <div className="btnRow">
+
+                
                 <button className="btnPrimary">Editar</button>
-                <img src="./icon_delete_forever.svg" alt="" />
+                
                 <button
                   className="btnDanger"
                   onClick={() => deleteCursoFromDatabase(item.id)}
                 >
-                  
                   Deletar
                 </button>
+                </div>
               </div>
             );
           })}

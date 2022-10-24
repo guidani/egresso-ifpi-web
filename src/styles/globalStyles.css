@@ -37,6 +37,7 @@ button {
   border: inherit;
   border-radius: 0.3rem;
   color: white;
+  background-color: var(--primary);
   cursor: pointer;
   font-size: 1.275rem;
   font-weight: bold;
@@ -48,6 +49,19 @@ li {
 
 /* Specific styles */
 /* Buttons */
+.btn{
+  padding: 0.5rem 2rem;
+  border: inherit;
+  border-radius: 0.3rem;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  max-width: 50%;
+  flex: 1;
+}
+
 .btnPrimary {
   background-color: var(--primary);
 }
@@ -90,7 +104,9 @@ li {
 
 .btnRow {
   display: flex;
-  gap: 1rem;
+  flex-direction: row;
+  width: 100%;
+  gap: .4rem;
   margin: 1rem 0rem;
 }
 /* Inputs */
@@ -146,12 +162,17 @@ input[type="password"]:focus {
   outline: none;
 }
 
+.icon{
+  max-width: 1.5rem;
+
+}
+
 /* Media queries */
-@media only screen and (max-width: 350px) {
+/* @media only screen and (max-width: 350px) {
   .btnRow {
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: .5rem;
   }
-}
+} */

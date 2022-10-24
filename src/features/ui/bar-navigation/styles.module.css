@@ -7,9 +7,13 @@
 .flexRow{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .topBarImage{
-    width: 100px;
-    height: heigh;
+    max-width: 100px;
+}
+
+.navBar{
+    display: flex;
 }
