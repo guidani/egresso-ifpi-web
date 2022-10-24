@@ -111,6 +111,7 @@ const CadastroAluno = () => {
               </label>
             </div>
           </div>
+          {/* //TODO deve ser possível adicionar várias matrículas */}
           <div className="form-input-section">
             <h2>Matrícula</h2>
             <div className="input-group">
@@ -175,6 +176,7 @@ const CadastroAluno = () => {
                 </select>
               </label>
             </div>
+            {/* //TODO: deve ser um select. Deve buscar do banco de dados */}
             <div className="input-group">
               <label htmlFor="cursoaluno">
                 Curso:

@@ -38,10 +38,12 @@ const ListagemCursos = () => {
                 <p>{item?.nome}</p>
                 <p>{item?.nivel}</p>
                 <button className="btnPrimary">Editar</button>
+                <img src="./icon_delete_forever.svg" alt="" />
                 <button
                   className="btnDanger"
                   onClick={() => deleteCursoFromDatabase(item.id)}
                 >
+                  
                   Deletar
                 </button>
               </div>
