@@ -31,35 +31,24 @@ const ListagemCursos = () => {
       {!courses ? (
         <p>Nenhum curso cadastrado </p>
       ) : (
-        <table>
-          <thead>
-            <tr>
-              <td>Nome</td>
-              <td>Nível</td>
-              <td></td>
-              <td></td>
-            </tr>
-          </thead>
-          <tbody>
-            {courses?.map((item) => {
-              return (
-                <tr key={item?.id}>
-                  <td>{item?.nome}</td>
-                  <td>{item?.nivel}</td>
-                  <button className="btnPrimary">Editar</button>
-                  <button
-                    className="btnDanger"
-                    onClick={() => deleteCursoFromDatabase(item.id)}
-                  >
-                    Deletar
-                  </button>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div>
+          {courses?.map((item) => {
+            return (
+              <div key={item?.id}>
+                <p>{item?.nome}</p>
+                <p>{item?.nivel}</p>
+                <button className="btnPrimary">Editar</button>
+                <button
+                  className="btnDanger"
+                  onClick={() => deleteCursoFromDatabase(item.id)}
+                >
+                  Deletar
+                </button>
+              </div>
+            );
+          })}
+        </div>
       )}
-      
     </>
   );
 };

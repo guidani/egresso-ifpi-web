@@ -1,10 +1,17 @@
+import { Link } from "react-router-dom";
 import ListagemCursos from "../../features/ListagemCursos/components/ListagemCursos";
+import Wrapper from "../../features/ui/wrapper";
 
 const Courses = () => {
   return (
     <>
-      <div>Cursos cadastrados</div>
-      <ListagemCursos/>
+      <Wrapper>
+        <div>Cursos cadastrados</div>
+        <Link to="/cadastro-curso">
+          <button className="btnPrimary">Cadastrar Novo Curso</button>
+        </Link>
+        <ListagemCursos />
+      </Wrapper>
     </>
   );
 };

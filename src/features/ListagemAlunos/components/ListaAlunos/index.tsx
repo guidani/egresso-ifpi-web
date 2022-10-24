@@ -20,7 +20,6 @@ const ListaAlunos = () => {
         nome: alunoData.nome,
       };
       alunoList.push(newAluno);
-      // console.log(newaluno);
       setAlunos(alunoList);
     });
   };
@@ -36,7 +35,7 @@ const ListaAlunos = () => {
         <div>
           {alunos.map((aluno) => {
             return (
-              <div key={aluno?.id}>
+              <div key={aluno.id}>
                 <p>{aluno.nome}</p>
               </div>
             );
