@@ -18,7 +18,7 @@ const CadastroCurso = () => {
   ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value.trim(),
+      [e.target.name]: e.target.value,
     });
   };
 
