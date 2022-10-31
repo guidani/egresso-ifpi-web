@@ -38,10 +38,7 @@ const ListagemCursos = () => {
                 <p>{item?.nome}</p>
                 <p>{item?.nivel}</p>
                 <div className="btnRow">
-
-                
                 <button className="btnPrimary">Editar</button>
-                
                 <button
                   className="btnDanger"
                   onClick={() => deleteCursoFromDatabase(item.id)}

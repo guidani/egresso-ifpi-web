@@ -1,7 +1,8 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../../database/firebase/config";
+import styles from "./styles.module.css";
 
 interface IUserRegister {
   userEmail: string;
@@ -48,56 +49,58 @@ const Register = () => {
 
   return (
     <>
-      <form action="" onSubmit={handleSubmit}>
-        <div className="input-group">
-          <label htmlFor="userEmail">E-mail</label>
-          <input
-            type="email"
-            placeholder="Seu e-mail"
-            value={formData.userEmail}
-            id="userEmail"
-            name="userEmail"
-            onChange={handleChange}
-            required
-          />
+      <div className={styles.card}>
+        <div className={styles.cardHeader}>
+          <img src="topo_ifpi.png" alt="Logo_IFPI" />
         </div>
-        <div className="input-group">
-          <label htmlFor="userPassword">Senha</label>
-          <input
-            type="password"
-            placeholder="Sua senha"
-            value={formData.userPassword}
-            id="userPassword"
-            name="userPassword"
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="input-group">
-          <label htmlFor="confirmPassword">Repita a Senha</label>
-          <input
-            type="password"
-            placeholder="Repita sua senha"
-            value={formData.confirmPassword}
-            id="confirmPassword"
-            name="confirmPassword"
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="btnRow">
-          <button type="submit" className="btn btnPrimary">
-            Registrar
+        <form action="" onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label htmlFor="userEmail">E-mail</label>
+            <input
+              type="email"
+              placeholder="Seu e-mail"
+              value={formData.userEmail}
+              id="userEmail"
+              name="userEmail"
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <label htmlFor="userPassword">Senha</label>
+            <input
+              type="password"
+              placeholder="Sua senha"
+              value={formData.userPassword}
+              id="userPassword"
+              name="userPassword"
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <label htmlFor="confirmPassword">Repita a Senha</label>
+            <input
+              type="password"
+              placeholder="Repita a senha"
+              value={formData.confirmPassword}
+              id="confirmPassword"
+              name="confirmPassword"
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <button type="submit" className={`${styles.btn} btnPrimary`}>
+            Cadastrar
           </button>
-          <button
-            type="reset"
-            className="btn btnDanger"
-            onClick={() => navigate("/login")}
-          >
-            Cancelar
+          
+          <button type="reset" className={`${styles.btn} btnDanger`}>
+            <Link to="/login" className={`${styles.btn} btnDanger`}>
+              Cancelar
+            </Link>
           </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </>
     // adicionar formulário de login
   );
