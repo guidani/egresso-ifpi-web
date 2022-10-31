@@ -1,7 +1,5 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../../../database/firebase/config";
 import { doUserRegister } from "../api/doUserRegister";
 import styles from "./styles.module.css";
 
@@ -12,33 +10,25 @@ interface IUserRegister {
 }
 
 const Register = () => {
-  const [formData, setFormData] = useState<IUserRegister>({} as IUserRegister);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<IUserRegister>();
+
   const navigate = useNavigate();
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value.trim(),
-    });
-  };
-
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit: SubmitHandler<IUserRegister> = async (data) => {
     try {
-      e.preventDefault();
-
-      if(formData.userPassword !== formData.confirmPassword){
-        console.log('As senhas não conferem');
+      if (data.userPassword !== data.confirmPassword) {
+        console.log("As senhas não conferem");
         return;
       }
-      await doUserRegister(formData.userEmail, formData.userPassword);
-      navigate('/login')
-      console.log(formData.userEmail, formData.userPassword);
-      
+      await doUserRegister(data.userEmail, data.userPassword);
+      navigate("/login");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -48,47 +38,43 @@ const Register = () => {
         <div className={styles.cardHeader}>
           <img src="topo_ifpi.png" alt="Logo_IFPI" />
         </div>
-        <form action="" onSubmit={handleSubmit}>
+        <form action="" onSubmit={handleSubmit(onSubmit)}>
           <div className="input-group">
             <label htmlFor="userEmail">E-mail</label>
             <input
+              {...register("userEmail", { required: true })}
               type="email"
               placeholder="Seu e-mail"
-              value={formData.userEmail}
               id="userEmail"
               name="userEmail"
-              onChange={handleChange}
-              required
             />
+            {errors.userEmail && "Insira um e-mail!"}
           </div>
           <div className="input-group">
             <label htmlFor="userPassword">Senha</label>
             <input
+              {...register("userPassword", { required: true })}
               type="password"
               placeholder="Sua senha"
-              value={formData.userPassword}
               id="userPassword"
               name="userPassword"
-              onChange={handleChange}
-              required
             />
+            {errors.userPassword && "Insira a senha!"}
           </div>
           <div className="input-group">
             <label htmlFor="confirmPassword">Repita a Senha</label>
             <input
+              {...register("confirmPassword", { required: true })}
               type="password"
               placeholder="Repita a senha"
-              value={formData.confirmPassword}
               id="confirmPassword"
               name="confirmPassword"
-              onChange={handleChange}
-              required
             />
+            {errors.confirmPassword && "Insira a senha novamente!"}
           </div>
           <button type="submit" className={`${styles.btn} btnPrimary`}>
             Cadastrar
           </button>
-          
           <button type="reset" className={`${styles.btn} btnDanger`}>
             <Link to="/login" className={`${styles.btn} btnDanger`}>
               Cancelar
@@ -102,3 +88,11 @@ const Register = () => {
 };
 
 export default Register;
+function useForm<T>(): {
+  register: any;
+  handleSubmit: any;
+  watch: any;
+  formState: { errors: any };
+} {
+  throw new Error("Function not implemented.");
+}
