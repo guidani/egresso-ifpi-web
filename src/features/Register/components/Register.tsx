@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../../database/firebase/config";
+import { doUserRegister } from "../api/doUserRegister";
 import styles from "./styles.module.css";
 
 interface IUserRegister {
@@ -23,28 +24,22 @@ const Register = () => {
     });
   };
 
-  const doUserRegister = async (email: string, password: string) => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log({ Code: errorCode, Message: errorMessage });
-        // ..
-      });
-  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // validar se a senha e a confirmação de senha são iguais
-    doUserRegister(formData.userEmail, formData.userPassword);
-    console.log(formData.userEmail, formData.userPassword);
-    // Enviar dados do formulário para o banco de dados
+    try {
+      e.preventDefault();
+
+      if(formData.userPassword !== formData.confirmPassword){
+        console.log('As senhas não conferem');
+        return;
+      }
+      await doUserRegister(formData.userEmail, formData.userPassword);
+      navigate('/login')
+      console.log(formData.userEmail, formData.userPassword);
+      
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (

@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import CadastroAluno from "../features/CadastroAluno/components/CadastroAluno";
 import CadastroCurso from "../features/CadastroCurso/components/CadastroCurso";
+import ForgotPasswordForm from "../features/ForgotPassword/components/ForgotPasswordForm";
 import Login from "../features/Login/components/Login";
 import Register from "../features/Register/components/Register";
 import LoginLayout from "../features/ui/LoginLayout";
@@ -21,8 +22,9 @@ export const Router = () => {
       </Route>
       <Route element={<LoginLayout />}>
         <Route path="/login" element={<Login />} />
-      </Route>
       <Route path="/register" element={<Register />} />
+      <Route path="/forgot-password" element={<ForgotPasswordForm/>}/>
+      </Route>
     </Routes>
   );
 };

@@ -1,17 +1,16 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import { auth } from "../../../database/firebase/config";
 
 import styles from "./styles.module.css";
 
-interface IUserLogin {
+interface IForgotPasswordForm {
   userEmail: string;
-  userPassword: string;
 }
 
-const Login = () => {
-  const [formData, setFormData] = useState<IUserLogin>({} as IUserLogin);
+const ForgotPasswordForm = () => {
+  const [formData, setFormData] = useState<IForgotPasswordForm>(
+    {} as IForgotPasswordForm
+  );
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -22,25 +21,8 @@ const Login = () => {
     });
   };
 
-  const doUserLogin = async (email: string, password: string) => {
-    try {
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-
-          // ...
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-        });
-    } catch (error) {}
-  };
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await doUserLogin(formData.userEmail, formData.userPassword);
     console.log(formData);
     // Enviar dados do formulário para o banco de dados
   };
@@ -64,29 +46,15 @@ const Login = () => {
               required
             />
           </div>
-          <div className="input-group">
-            <label htmlFor="userPassword">Senha</label>
-            <input
-              type="password"
-              placeholder="Sua senha"
-              value={formData.userPassword}
-              id="userPassword"
-              name="userPassword"
-              onChange={handleChange}
-              required
-            />
-          </div>
           <button type="submit" className={`${styles.btn} btnPrimary`}>
-            Entrar
+            Resetar
           </button>
         </form>
         <div className={styles.linkRow}>
-          <Link to="/register">
-            <a href="#">Cadastre-se aqui.</a>
+          <Link to="/login">
+            Voltar
           </Link>
-          <Link to={"/forgot-password"}>
-            <a href="#">Recuperar senha</a>
-          </Link>
+
         </div>
       </div>
     </>
@@ -94,4 +62,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPasswordForm;
