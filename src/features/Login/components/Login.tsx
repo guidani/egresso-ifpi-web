@@ -1,8 +1,7 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import { auth } from "../../../database/firebase/config";
 
+import { SubmitHandler, useForm } from "react-hook-form";
+import { doUserLogin } from "../api/doUserLogin";
 import styles from "./styles.module.css";
 
 interface IUserLogin {
@@ -11,38 +10,15 @@ interface IUserLogin {
 }
 
 const Login = () => {
-  const [formData, setFormData] = useState<IUserLogin>({} as IUserLogin);
-
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value.trim(),
-    });
-  };
-
-  const doUserLogin = async (email: string, password: string) => {
-    try {
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-
-          // ...
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-        });
-    } catch (error) {}
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    await doUserLogin(formData.userEmail, formData.userPassword);
-    console.log(formData);
-    // Enviar dados do formulário para o banco de dados
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<IUserLogin>();
+  const onSubmit: SubmitHandler<IUserLogin> = async (data) => {
+    console.log(data);
+    await doUserLogin(data.userEmail, data.userPassword);
   };
 
   return (
@@ -51,42 +27,36 @@ const Login = () => {
         <div className={styles.cardHeader}>
           <img src="topo_ifpi.png" alt="Logo_IFPI" />
         </div>
-        <form action="" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="input-group">
             <label htmlFor="userEmail">E-mail</label>
             <input
+              {...register("userEmail", { required: true })}
               type="email"
               placeholder="Seu e-mail"
-              value={formData.userEmail}
               id="userEmail"
               name="userEmail"
-              onChange={handleChange}
-              required
             />
+            {errors.userEmail && "Insira um e-mail!"}
           </div>
           <div className="input-group">
             <label htmlFor="userPassword">Senha</label>
             <input
+              {...register("userPassword", { required: true })}
               type="password"
               placeholder="Sua senha"
-              value={formData.userPassword}
               id="userPassword"
               name="userPassword"
-              onChange={handleChange}
-              required
             />
+            {errors.userPassword && "Insira a senha."}
           </div>
           <button type="submit" className={`${styles.btn} btnPrimary`}>
             Entrar
           </button>
         </form>
         <div className={styles.linkRow}>
-          <Link to="/register">
-            <a href="#">Cadastre-se aqui.</a>
-          </Link>
-          <Link to={"/forgot-password"}>
-            <a href="#">Recuperar senha</a>
-          </Link>
+          <Link to="/register">Cadastre-se aqui.</Link>
+          <Link to={"/forgot-password"}>Recuperar senha</Link>
         </div>
       </div>
     </>
