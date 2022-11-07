@@ -76,7 +76,7 @@ const Register = () => {
             Cadastrar
           </button>
           <button type="reset" className={`${styles.btn} btnDanger`}>
-            <Link to="/login" className={`${styles.btn} btnDanger`}>
+            <Link to="/login" >
               Cancelar
             </Link>
           </button>
@@ -88,11 +88,3 @@ const Register = () => {
 };
 
 export default Register;
-function useForm<T>(): {
-  register: any;
-  handleSubmit: any;
-  watch: any;
-  formState: { errors: any };
-} {
-  throw new Error("Function not implemented.");
-}
