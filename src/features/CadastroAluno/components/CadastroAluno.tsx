@@ -1,161 +1,119 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { StatusMatriculaAluno, TipoOcupacao } from "../../../types";
 import Wrapper from "../../ui/wrapper";
-import { addAlunoToDatabase } from "../api/addAlunoToDatabase";
 import { IAluno } from "../types/IAluno";
 import "./styles.css";
 
 const CadastroAluno = () => {
-  const [formData, setFormData] = useState<IAluno>({
-    nome: "",
-    email: "",
-    telefone: 0,
-    dataDeNascimento: "",
-    cpf: "",
-    numeroMatricula: "",
-    dataDeInicioCurso: "",
-    dataDeEncerramentoCurso: "",
-    statusDaMatricula: "",
-    curso: "",
-    tipoDeOcupacao: "",
-    localDeTrabalho: "",
-    dataDeInicioTrabalho: "",
-    dataDeEncerramentoTrabalho: "",
-    trabalhoRemunerado: "",
-  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IAluno>();
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(formData);
+  const onSubmit = async (data: any) => {
+    console.log(data);
     // Enviar dados do formulário para o banco de dados
-    await addAlunoToDatabase(formData);
+    // await addAlunoToDatabase(formData);
   };
 
   return (
     <>
-    <Wrapper>
-      <div>Cadastro de novo aluno</div>
-      <div className="novo-aluno_form">
-        <form onSubmit={handleSubmit}>
-          <div className="form-input-section">
-            <h2>Dados do aluno</h2>
-            <div className="input-group">
-              <label htmlFor="nomealuno">
-                Nome:
+      <Wrapper>
+        <div>Cadastro de novo aluno</div>
+        <div className="novo-aluno_form">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="form-input-section">
+              <h2>Dados do aluno</h2>
+              <div className="input-group">
+                <label htmlFor="nomealuno">Nome:</label>
                 <input
                   type="text"
                   placeholder="Nome do aluno"
-                  name="nome"
                   id="nomealuno"
-                  onChange={handleChange}
-                  value={formData.nome}
+                  {...register("nome", { required: true })}
                 />
-              </label>
-            </div>
-            <div className="input-group">
-              <label htmlFor="email">
-                E-mail:
+              </div>
+              <div className="input-group">
+                <label htmlFor="email">E-mail:</label>
                 <input
                   type="email"
                   placeholder="email@email.com.br"
-                  name="email"
                   id="emailaluno"
-                  onChange={handleChange}
+                  {...register("email", { required: true })}
                 />
-              </label>
-            </div>
-            <div className="input-group">
-              <label htmlFor="telefonealuno">
-                Telefone:
+              </div>
+              <div className="input-group">
+                <label htmlFor="telefonealuno">Telefone:</label>
                 <input
                   type="number"
-                  name="telefone"
                   id="telefonealuno"
                   placeholder="86912345678"
-                  onChange={handleChange}
+                  {...register("telefone")}
                 />
-              </label>
-            </div>
-            <div className="input-group">
-              <label htmlFor="datanascimentoaluno">
-                Data de nascimento:
+              </div>
+              <div className="input-group">
+                <label htmlFor="datanascimentoaluno">Data de nascimento:</label>
                 <input
                   type="date"
-                  name="dataDeNascimento"
                   id="datanascimentoaluno"
-                  onChange={handleChange}
+                  {...register("dataDeNascimento")}
                 />
-              </label>
-            </div>
-            <div className="input-group">
-              <label htmlFor="cpfaluno">
-                CPF:
+              </div>
+              <div className="input-group">
+                <label htmlFor="cpfaluno">CPF:</label>
                 <input
                   type="text"
                   placeholder="123.456.789-00"
                   maxLength={14}
-                  name="cpf"
                   id="cpfaluno"
-                  onChange={handleChange}
+                  {...register("cpf")}
                 />
-              </label>
+              </div>
             </div>
-          </div>
-          {/* //TODO deve ser possível adicionar várias matrículas */}
-          <div className="form-input-section">
-            <h2>Matrícula</h2>
-            <div className="input-group">
-              <label htmlFor="matriculaaluno">
-                Número da matrícula
-                <input
-                  type="text"
-                  name="numeroMatricula"
-                  id="matriculaaluno"
-                  placeholder="número da matrícula"
-                  onChange={handleChange}
-                />
-              </label>
-            </div>
-            <div className="input-group">
-              <label htmlFor="datainiciocursoaluno">
-                Data de início:
-                <input
-                  type="date"
-                  name="dataDeInicioCurso"
-                  id="datainiciocursoaluno"
-                  onChange={handleChange}
-                />
-              </label>
-            </div>
-            <div className="input-group">
-              <label htmlFor="dataencerramentocursoaluno">
-                Data de encerramento:
-                <input
-                  type="date"
-                  name="dataDeEncerramentoCurso"
-                  id="dataencerramentocursoaluno"
-                  onChange={handleChange}
-                />
-              </label>
-            </div>
+            {/* //TODO deve ser possível adicionar várias matrículas */}
+            <div className="form-input-section">
+              <h2>Matrícula</h2>
+              <div className="input-group">
+                <label htmlFor="matriculaaluno">
+                  Número da matrícula
+                  <input
+                    type="text"
+                    name="numeroMatricula"
+                    id="matriculaaluno"
+                    placeholder="número da matrícula"
+                  />
+                </label>
+              </div>
+              <div className="input-group">
+                <label htmlFor="datainiciocursoaluno">
+                  Data de início:
+                  <input
+                    type="date"
+                    name="dataDeInicioCurso"
+                    id="datainiciocursoaluno"
+                  />
+                </label>
+              </div>
+              <div className="input-group">
+                <label htmlFor="dataencerramentocursoaluno">
+                  Data de encerramento:
+                  <input
+                    type="date"
+                    name="dataDeEncerramentoCurso"
+                    id="dataencerramentocursoaluno"
+                  />
+                </label>
+              </div>
 
-            <div className="input-group">
-              <label htmlFor="alunostatusmatricula">
-                Status da matrícula:
+              <div className="input-group">
+                <label htmlFor="alunostatusmatricula">
+                  Status da matrícula:
+                </label>
                 <select
                   name="statusDaMatricula"
                   id="alunostatusmatricula"
-                  onChange={handleChange}
                   defaultValue=""
                 >
                   <option value="" disabled>
@@ -174,123 +132,93 @@ const CadastroAluno = () => {
                     {StatusMatriculaAluno.cancelado}
                   </option>
                 </select>
-              </label>
-            </div>
-            {/* //TODO: deve ser um select. Deve buscar do banco de dados */}
-            <div className="input-group">
-              <label htmlFor="cursoaluno">
-                Curso:
+              </div>
+              <div className="input-group">
+                <label htmlFor="cursoaluno">Curso:</label>
                 <input
                   type="text"
                   placeholder="Curso do aluno"
                   name="curso"
                   id="cursoaluno"
-                  onChange={handleChange}
                 />
-              </label>
+              </div>
+
+              {/* #### */}
             </div>
-
             {/* #### */}
-          </div>
-          {/* #### */}
-          <div className="form-input-section">
-            <h2>Ocupação</h2>
-
-            <div className="input-group">
-              <label htmlFor="">
-                Tipo de ocupação:
-                <select
-                  name="tipoDeOcupacao"
-                  id="alunotipoocupacao"
-                  onChange={handleChange}
-                  defaultValue=""
-                >
+            <div className="form-input-section">
+              <h2>Ocupação</h2>
+              <div className="input-group">
+                <label htmlFor="">Tipo de ocupação:</label>
+             
+                <select {...register("tipoDeOcupacao")}>
                   <option value="" disabled>
                     --ESCOLHA--
                   </option>
-                  <option value={TipoOcupacao.efetivo}>
-                    {TipoOcupacao.efetivo}
-                  </option>
-                  <option value={TipoOcupacao.estagio}>
-                    {TipoOcupacao.estagio}
-                  </option>
+                  <option value={TipoOcupacao.efetivo}>efetivo</option>
+                  <option value={TipoOcupacao.estagio}>estagio</option>
                   <option value={TipoOcupacao.iniciacaoCientifica}>
-                    {TipoOcupacao.iniciacaoCientifica}
+                    iniciacaoCientifica
                   </option>
                 </select>
-              </label>
-            </div>
-            <div className="input-group">
-              <label htmlFor="localdetrabalhoaluno">
-                Local:
+              </div>
+
+              <div className="input-group">
+                <label htmlFor="localdetrabalhoaluno">Local:</label>
                 <input
                   type="text"
                   placeholder="Nome do local de trabalho"
-                  name="localDeTrabalho"
                   id="localdetrabalhoaluno"
-                  onChange={handleChange}
+                  {...register("localDeTrabalho")}
                 />
-              </label>
-            </div>
-            <div className="input-group">
-              <label htmlFor="datainiciotrabalhoaluno">
-                Data de início:
+              </div>
+              <div className="input-group">
+                <label htmlFor="datainiciotrabalhoaluno">Data de início:</label>
                 <input
                   type="date"
-                  name="dataDeInicioTrabalho"
                   id="datainiciotrabalhoaluno"
-                  onChange={handleChange}
+                  {...register("dataDeInicioTrabalho")}
                 />
-              </label>
-            </div>
-            <div className="input-group">
-              <label htmlFor="dataencerramentotrabalhoaluno">
-                Data de encerramento:
+              </div>
+              <div className="input-group">
+                <label htmlFor="dataencerramentotrabalhoaluno">
+                  Data de encerramento:
+                </label>
                 <input
                   type="date"
-                  name="dataDeEncerramentoTrabalho"
                   id="dataencerramentotrabalhoaluno"
-                  onChange={handleChange}
+                  {...register("dataDeEncerramentoTrabalho")}
                 />
-              </label>
-            </div>
-            <div className="input-group">
-              Remunerado:
-              <label htmlFor="alunoocupacaoremuneradosim">
+              </div>
+              <div className="input-group">
+                Trabalho Remunerado:
+                <label htmlFor="alunoocupacaoremuneradosim">Sim</label>
                 <input
+                  {...register("trabalhoRemunerado")}
                   type="radio"
-                  name="trabalhoRemunerado"
                   value="Sim"
-                  id="alunoocupacaoremuneradosim"
-                  onChange={handleChange}
                 />
-                Sim
-              </label>
-              <label htmlFor="alunoocupacaoremuneradonao">
+                <label htmlFor="alunoocupacaoremuneradonao">Não</label>
                 <input
+                  {...register("trabalhoRemunerado")}
                   type="radio"
-                  name="trabalhoRemunerado"
                   value="Não"
-                  id="alunoocupacaoremuneradonao"
-                  onChange={handleChange}
                 />
-                Não
-              </label>
+              </div>
             </div>
-          </div>
-          {/* ### */}
-          <div className="btnRow">
-            <button type="submit" className="btnPrimary">
-              Cadastrar
-            </button>
-            <Link to="/">
-              <button type="reset" className="btnDanger">
-                Cancelar
+            {/* ### */}
+            <div className="btnRow">
+              <button type="submit" className="btnPrimary">
+                Cadastrar
               </button>
-            </Link>
-          </div>
-        </form>
-      </div>
+              <Link to="/">
+                <button type="reset" className="btnDanger">
+                  Cancelar
+                </button>
+              </Link>
+            </div>
+          </form>
+        </div>
       </Wrapper>
     </>
   );
