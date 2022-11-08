@@ -1,16 +1,41 @@
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { StatusMatriculaAluno, TipoOcupacao } from "../../../types";
+import { TipoOcupacao } from "../../../types";
 import Wrapper from "../../ui/wrapper";
 import { IAluno } from "../types/IAluno";
+import MatriculaForm from "./MatriculaForm";
 import "./styles.css";
+
+const fieldArrayName = "matriculas";
 
 const CadastroAluno = () => {
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IAluno>();
+  } = useForm<IAluno>({
+    defaultValues:{
+      cpf:"",
+      dataDeEncerramentoTrabalho:"",
+      dataDeInicioTrabalho:"",
+      dataDeNascimento:"",
+      email:"",
+      localDeTrabalho:"",
+      nome:"",
+      telefone:"",
+      tipoDeOcupacao:"",
+      trabalhoRemunerado:"",
+      matriculas:[]
+    }
+  });
+  const { fields, append, remove, update } = useFieldArray({
+    control,
+    name: fieldArrayName,
+    defaultValues: {
+      [fieldArrayName]: [],
+    },
+  });
 
   const onSubmit = async (data: any) => {
     console.log(data);
@@ -47,7 +72,7 @@ const CadastroAluno = () => {
               <div className="input-group">
                 <label htmlFor="telefonealuno">Telefone:</label>
                 <input
-                  type="number"
+                  type="string"
                   id="telefonealuno"
                   placeholder="86912345678"
                   {...register("telefone")}
@@ -75,82 +100,40 @@ const CadastroAluno = () => {
             {/* //TODO deve ser possível adicionar várias matrículas */}
             <div className="form-input-section">
               <h2>Matrícula</h2>
-              <div className="input-group">
-                <label htmlFor="matriculaaluno">
-                  Número da matrícula
-                  <input
-                    type="text"
-                    name="numeroMatricula"
-                    id="matriculaaluno"
-                    placeholder="número da matrícula"
+              {fields.map((field, index) => (
+                <fieldset key={field.id}>
+                  <MatriculaForm
+                    control={control}
+                    index={index}
+                    update={update}
+                    value={field}
                   />
-                </label>
-              </div>
-              <div className="input-group">
-                <label htmlFor="datainiciocursoaluno">
-                  Data de início:
-                  <input
-                    type="date"
-                    name="dataDeInicioCurso"
-                    id="datainiciocursoaluno"
-                  />
-                </label>
-              </div>
-              <div className="input-group">
-                <label htmlFor="dataencerramentocursoaluno">
-                  Data de encerramento:
-                  <input
-                    type="date"
-                    name="dataDeEncerramentoCurso"
-                    id="dataencerramentocursoaluno"
-                  />
-                </label>
-              </div>
-
-              <div className="input-group">
-                <label htmlFor="alunostatusmatricula">
-                  Status da matrícula:
-                </label>
-                <select
-                  name="statusDaMatricula"
-                  id="alunostatusmatricula"
-                  defaultValue=""
-                >
-                  <option value="" disabled>
-                    --ESCOLHA--
-                  </option>
-                  <option value={StatusMatriculaAluno.emAndamento}>
-                    {StatusMatriculaAluno.emAndamento}
-                  </option>
-                  <option value={StatusMatriculaAluno.concluido}>
-                    {StatusMatriculaAluno.concluido}
-                  </option>
-                  <option value={StatusMatriculaAluno.desistente}>
-                    {StatusMatriculaAluno.desistente}
-                  </option>
-                  <option value={StatusMatriculaAluno.cancelado}>
-                    {StatusMatriculaAluno.cancelado}
-                  </option>
-                </select>
-              </div>
-              <div className="input-group">
-                <label htmlFor="cursoaluno">Curso:</label>
-                <input
-                  type="text"
-                  placeholder="Curso do aluno"
-                  name="curso"
-                  id="cursoaluno"
-                />
-              </div>
-
-              {/* #### */}
+                  <button onClick={() => remove(index)}>Remover</button>
+                </fieldset>
+              ))}
+              <br />
+              <button
+                type="button"
+                className="btnPrimary"
+                onClick={() => {
+                  append({
+                    curso: "",
+                    numeroMatricula: "",
+                    statusDaMatricula: "",
+                    dataDeInicioCurso: "",
+                    dataDeEncerramentoCurso: "",
+                  });
+                }}
+              >
+                Nova matrícula
+              </button>
             </div>
-            {/* #### */}
+            {/* // TODO end */}
             <div className="form-input-section">
               <h2>Ocupação</h2>
               <div className="input-group">
                 <label htmlFor="">Tipo de ocupação:</label>
-             
+
                 <select {...register("tipoDeOcupacao")}>
                   <option value="" disabled>
                     --ESCOLHA--

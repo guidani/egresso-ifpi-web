@@ -1,16 +1,20 @@
 import { StatusMatriculaAluno, TipoOcupacao } from "../../../types";
 
-export interface IAluno {
-  nome: string;
-  email: string;
-  telefone: number;
-  dataDeNascimento: string;
-  cpf: string;
+export interface IMatricula {
   numeroMatricula: string;
   dataDeInicioCurso: string;
   dataDeEncerramentoCurso: string;
   statusDaMatricula: StatusMatriculaAluno | string;
   curso: string;
+}
+
+export interface IAluno {
+  nome: string;
+  email: string;
+  telefone: string;
+  dataDeNascimento: string;
+  cpf: string;
+  matriculas: IMatricula[];
   tipoDeOcupacao: TipoOcupacao | string;
   localDeTrabalho: string;
   dataDeInicioTrabalho: string;
