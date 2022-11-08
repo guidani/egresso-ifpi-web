@@ -15,26 +15,21 @@ const CadastroAluno = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IAluno>({
-    defaultValues:{
-      cpf:"",
-      dataDeEncerramentoTrabalho:"",
-      dataDeInicioTrabalho:"",
-      dataDeNascimento:"",
-      email:"",
-      localDeTrabalho:"",
-      nome:"",
-      telefone:"",
-      tipoDeOcupacao:"",
-      trabalhoRemunerado:"",
-      matriculas:[]
-    }
+    defaultValues: {
+      matriculas: [
+        {
+          curso: "",
+          dataDeEncerramentoCurso: "",
+          dataDeInicioCurso: "",
+          numeroMatricula: "",
+          statusDaMatricula: "",
+        },
+      ],
+    },
   });
   const { fields, append, remove, update } = useFieldArray({
     control,
     name: fieldArrayName,
-    defaultValues: {
-      [fieldArrayName]: [],
-    },
   });
 
   const onSubmit = async (data: any) => {
