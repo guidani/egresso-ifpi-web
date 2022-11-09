@@ -1,33 +1,23 @@
-import { ChangeEvent, FormEvent, useState } from "react";
-
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { NivelCurso } from "../../../types";
+import { ICurso, NivelCurso } from "../../../types";
 import Wrapper from "../../ui/wrapper";
 import { addCursoToDatabase } from "../api/addCursoToDatabase";
-import { IFormCadastroCurso } from "../types/IFormCadastroAluno";
 import "./styles.css";
 
 const CadastroCurso = () => {
-  const [formData, setFormData] = useState<IFormCadastroCurso>({
-    nomeDoCurso: "",
-    nivelDoCurso: "",
-  });
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ICurso>();
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(formData);
+  const submitForm = async (data: any) => {
+    console.log(data);
     // Enviar dados do formulário para o banco de dados
     // TODO: criar função
-    await addCursoToDatabase(formData);
+    await addCursoToDatabase(data);
   };
 
   return (
@@ -35,7 +25,7 @@ const CadastroCurso = () => {
       <Wrapper>
         <div>Cadastrode novo curso</div>
         <div className="novo-curso_form">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(submitForm)}>
             <div className="form-input-section">
               <h2>Dados do curso</h2>
               <div className="input-group">
@@ -44,19 +34,15 @@ const CadastroCurso = () => {
                   type="text"
                   id="nomedocurso"
                   placeholder="Nome do curso"
-                  name="nomeDoCurso"
-                  value={formData.nomeDoCurso}
-                  onChange={handleChange}
+                  {...register("nome", { required: true })}
                 />
               </div>
               {/*  */}
               <div className="input-group">
                 <label htmlFor="niveldocurso">Nível do curso</label>
                 <select
-                  name="nivelDoCurso"
                   id="niveldocurso"
-                  onChange={handleChange}
-                  defaultValue=""
+                  {...register("nivel", { required: true })}
                 >
                   <option value="" disabled>
                     --ESCOLHA--
