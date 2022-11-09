@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { ICurso } from "../../../types";
 import { deleteCursoFromDatabase } from "../api/deleteCursoFromDatabase";
 import { getCursosFromDatabase } from "../api/getCursosFromDatabase";
@@ -12,12 +13,11 @@ const ListagemCursos = () => {
     responseSnapshot?.forEach((course) => {
       const courseData = course.data();
       const newCourse = {
-        id: courseData.id,
+        id: course.id,
         nome: courseData.nomeDoCurso,
         nivel: courseData.nivelDoCurso,
       };
       courseList.push(newCourse);
-      // console.log(newCourse);
       setCourses(courseList);
     });
   };
@@ -32,19 +32,22 @@ const ListagemCursos = () => {
         <p>Nenhum curso cadastrado </p>
       ) : (
         <div>
-          {courses?.map((item) => {
+          {courses.map((item, index) => {
             return (
-              <div key={item?.id}>
-                <p>{item?.nome}</p>
-                <p>{item?.nivel}</p>
+              <div key={index}>
+                <p>{item.nome}</p>
+                <p>{item.nivel}</p>
                 <div className="btnRow">
-                <button className="btnPrimary">Editar</button>
-                <button
-                  className="btnDanger"
-                  onClick={() => deleteCursoFromDatabase(item.id)}
-                >
-                  Deletar
-                </button>
+                  <Link to={`editar-curso/${item.id}`}>
+                    <button className="btnPrimary">Editar</button>
+                  </Link>
+
+                  <button
+                    className="btnDanger"
+                    onClick={() => deleteCursoFromDatabase(item.id)}
+                  >
+                    Deletar
+                  </button>
                 </div>
               </div>
             );
