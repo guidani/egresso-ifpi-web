@@ -1,11 +1,14 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { ICurso, NivelCurso } from "../../../types";
+import { ErrorMessage } from "../../ui/ErrorMessage";
 import Wrapper from "../../ui/wrapper";
 import { addCursoToDatabase } from "../api/addCursoToDatabase";
 import "./styles.css";
 
 const CadastroCurso = () => {
+  const [loading, setLoading] = useState(false);
   const {
     control,
     register,
@@ -14,32 +17,39 @@ const CadastroCurso = () => {
   } = useForm<ICurso>();
 
   const submitForm = async (data: any) => {
-    console.log(data);
-    // Enviar dados do formulário para o banco de dados
-    // TODO: criar função
-    await addCursoToDatabase(data);
+    try {
+      setLoading(true);
+      console.log(data);
+      await addCursoToDatabase(data);
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <>
       <Wrapper>
-        <div>Cadastrode novo curso</div>
         <div className="novo-curso_form">
+          <div>
+            {loading && (<><h2>Aguarde...</h2></>)}
+          </div>
           <form onSubmit={handleSubmit(submitForm)}>
             <div className="form-input-section">
               <h2>Dados do curso</h2>
               <div className="input-group">
-                <label htmlFor="nomedocurso">Nome do curso: </label>
+                <label htmlFor="nomedocurso">Nome do curso*</label>
                 <input
                   type="text"
                   id="nomedocurso"
                   placeholder="Nome do curso"
-                  {...register("nome", { required: true })}
+                  {...register("nome", { required: true, minLength: 3 })}
                 />
+                {errors.nome && "Nome é obrigatório"}
               </div>
               {/*  */}
               <div className="input-group">
-                <label htmlFor="niveldocurso">Nível do curso</label>
+                <label htmlFor="niveldocurso">Nível do curso*</label>
                 <select
                   id="niveldocurso"
                   {...register("nivel", { required: true })}

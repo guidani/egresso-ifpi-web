@@ -1,7 +1,7 @@
-import styles from "./LoginLayout.module.css";
 import { Outlet } from "react-router-dom";
+import styles from "./LoginLayout.module.css";
 
-const LoginLayout = () => {
+const AuthLayout = () => {
   return (
     <>
       <div className={styles.wrapper}>
@@ -11,4 +11,4 @@ const LoginLayout = () => {
   );
 };
 
-export default LoginLayout;
+export default AuthLayout;

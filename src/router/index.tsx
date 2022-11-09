@@ -5,7 +5,7 @@ import { EditarCurso } from "../features/EditarCurso/components/EditarCurso";
 import ForgotPasswordForm from "../features/ForgotPassword/components/ForgotPasswordForm";
 import Login from "../features/Login/components/Login";
 import Register from "../features/Register/components/Register";
-import LoginLayout from "../features/ui/LoginLayout";
+import AuthLayout from "../features/ui/LoginLayout";
 import Layout from "../shared/Layout";
 import Alunos from "../views/Alunos";
 import Courses from "../views/Courses";
@@ -19,6 +19,14 @@ export const Router = () => {
         <Route path="/alunos">
           <Route index path="listagem-alunos" element={<Alunos />} />
           <Route path="cadastro-aluno" element={<CadastroAluno />} />
+          <Route
+            path="editar-aluno/alunoId"
+            element={
+              <>
+                <h1>Not implemented</h1>
+              </>
+            }
+          />
         </Route>
         <Route path="/cursos">
           <Route index path="listagem-cursos" element={<Courses />} />
@@ -26,7 +34,7 @@ export const Router = () => {
           <Route path="editar-curso/:courseId" element={<EditarCurso />} />
         </Route>
       </Route>
-      <Route element={<LoginLayout />}>
+      <Route element={<AuthLayout />}>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPasswordForm />} />
