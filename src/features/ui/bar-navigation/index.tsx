@@ -4,18 +4,13 @@ import Wrapper from "../wrapper";
 import styles from "./styles.module.css";
 
 const Barnavigation = () => {
-  const { email, uid } = useAuth();
   return (
     <>
       <div className={styles.topBar}>
         <Wrapper>
           <div className={styles.flexRow}>
             <Link to={"/"}>
-              <img
-                src="topo_ifpi.png"
-                alt="Logo Ifpi"
-                className={styles.topBarImage}
-              />
+              Egresso IFPI
             </Link>
             <nav className={styles.navBar}>
               <Link to={"/login"}>Sair</Link>
