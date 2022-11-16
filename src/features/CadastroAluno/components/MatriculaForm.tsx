@@ -1,6 +1,5 @@
-import { Control, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { StatusMatriculaAluno } from "../../../types";
-import { IAluno } from "../types/IAluno";
 
 const MatriculaForm = ({ update, index, value, control }) => {
   const { register, handleSubmit } = useForm({

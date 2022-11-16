@@ -2,9 +2,9 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { TipoOcupacao } from "../../../types";
 import Wrapper from "../../ui/wrapper";
+import { addAlunoToDatabase } from "../api/addAlunoToDatabase";
 import { IAluno } from "../types/IAluno";
 import MatriculaForm from "./MatriculaForm";
-import "./styles.css";
 
 const fieldArrayName = "matriculas";
 
@@ -35,7 +35,7 @@ const CadastroAluno = () => {
   const onSubmit = async (data: any) => {
     console.log(data);
     // Enviar dados do formulário para o banco de dados
-    // await addAlunoToDatabase(formData);
+    await addAlunoToDatabase(data);
   };
 
   return (
