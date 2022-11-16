@@ -75,11 +75,11 @@ const Register = () => {
           <button type="submit" className={`${styles.btn} btnPrimary`}>
             Cadastrar
           </button>
-          <button type="reset" className={`${styles.btn} btnDanger`}>
             <Link to="/login" >
+          <button type="reset" className={`${styles.btn} btnDanger`}>
               Cancelar
-            </Link>
           </button>
+            </Link>
         </form>
       </div>
     </>

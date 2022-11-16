@@ -5,7 +5,6 @@ import { ICurso, NivelCurso } from "../../../types";
 import { ErrorMessage } from "../../ui/ErrorMessage";
 import Wrapper from "../../ui/wrapper";
 import { addCursoToDatabase } from "../api/addCursoToDatabase";
-import "./styles.css";
 
 const CadastroCurso = () => {
   const [loading, setLoading] = useState(false);
