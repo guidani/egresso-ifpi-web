@@ -2,6 +2,8 @@
     background-color: #137B25;
     margin-bottom: 1rem;
     width: 100%;
+    padding: 1rem 0rem;
+    color: #fff;
 }
 
 .flexRow{
@@ -12,6 +14,10 @@
 
 .topBarImage{
     max-width: 100px;
+}
+
+.topBarLogo {
+    font-size: 1.4rem;
 }
 
 .navBar{

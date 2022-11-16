@@ -9,7 +9,7 @@ const Barnavigation = () => {
       <div className={styles.topBar}>
         <Wrapper>
           <div className={styles.flexRow}>
-            <Link to={"/"}>
+            <Link to={"/"} className={styles.topBarLogo}>
               Egresso IFPI
             </Link>
             <nav className={styles.navBar}>

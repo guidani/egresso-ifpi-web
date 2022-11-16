@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 400;
+  src: local('Roboto') url(./fonts/Roboto-Regular.ttf) format(open-type);
+}
+
 :root {
   --primary: hsl(100, 100%, 50%);
   --primary-hover: hsl(100, 80%, 40%);
@@ -14,7 +20,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Roboto, Verdana, Geneva, Tahoma, sans-serif;
 }
 
 img {
