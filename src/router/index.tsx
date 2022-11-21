@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import CadastroAluno from "../features/CadastroAluno/components/CadastroAluno";
 import CadastroCurso from "../features/CadastroCurso/components/CadastroCurso";
+import EditarAluno from "../features/EditarAluno/components/EditarAluno";
 import { EditarCurso } from "../features/EditarCurso/components/EditarCurso";
 import ForgotPasswordForm from "../features/ForgotPassword/components/ForgotPasswordForm";
 import Login from "../features/Login/components/Login";
@@ -19,14 +20,7 @@ export const Router = () => {
         <Route path="/alunos">
           <Route index path="listagem-alunos" element={<Alunos />} />
           <Route path="cadastro-aluno" element={<CadastroAluno />} />
-          <Route
-            path="editar-aluno/alunoId"
-            element={
-              <>
-                <h1>Not implemented</h1>
-              </>
-            }
-          />
+          <Route path="editar-aluno/:studentId" element={<EditarAluno />} />
         </Route>
         <Route path="/cursos">
           <Route index path="listagem-cursos" element={<Courses />} />

@@ -19,7 +19,7 @@ const ListaAlunos = () => {
     responseSnapshot?.forEach((aluno) => {
       const alunoData = aluno.data();
       const newAluno = {
-        id: alunoData.id,
+        id: aluno.id,
         nome: alunoData.nome,
         email: alunoData.email,
       };
@@ -37,10 +37,10 @@ const ListaAlunos = () => {
         <p>Não há nenhum aluno cadastrado</p>
       ) : (
         <div>
-          {alunos.map((aluno) => {
+          {alunos.map((aluno, index) => {
             return (
-              <div key={aluno.id}>
-                <p>{aluno.nome[0]}</p>
+              <div key={index}>
+                <p>{aluno.id}</p>
                 <p>{aluno.nome}</p>
                 <p>{aluno.email}</p>
                 <div className="btnRow">
@@ -51,7 +51,9 @@ const ListaAlunos = () => {
                   <button
                     className="btnDanger"
                     onClick={() => deleteStudentFromDatabase(aluno.id)}
-                  ></button>
+                  >
+                    Deletar
+                  </button>
                 </div>
               </div>
             );

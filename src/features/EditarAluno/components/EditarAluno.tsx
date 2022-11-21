@@ -215,7 +215,7 @@ const EditarAluno = () => {
             {/* ### */}
             <div className="btnRow">
               <button type="submit" className="btnPrimary">
-                Cadastrar
+                Salvar
               </button>
               <Link to="/">
                 <button type="reset" className="btnDanger">
