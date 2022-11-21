@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { deleteStudentFromDatabase } from "../../api/deleteStudentFromDatabase";
 import { getAlunosFromDatabase } from "../../api/getAlunos";
 import "./styles.css";
 
@@ -41,6 +43,16 @@ const ListaAlunos = () => {
                 <p>{aluno.nome[0]}</p>
                 <p>{aluno.nome}</p>
                 <p>{aluno.email}</p>
+                <div className="btnRow">
+                  <Link to={`editar-aluno/${aluno.id}`}>
+                    <button className="btnPrimary">Editar</button>
+                  </Link>
+
+                  <button
+                    className="btnDanger"
+                    onClick={() => deleteStudentFromDatabase(aluno.id)}
+                  ></button>
+                </div>
               </div>
             );
           })}
