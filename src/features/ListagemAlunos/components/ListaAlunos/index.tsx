@@ -5,6 +5,7 @@ import "./styles.css";
 interface IAlunoSimpleView {
   id: string;
   nome: string;
+  email: string;
 }
 
 const ListaAlunos = () => {
@@ -18,6 +19,7 @@ const ListaAlunos = () => {
       const newAluno = {
         id: alunoData.id,
         nome: alunoData.nome,
+        email: alunoData.email,
       };
       alunoList.push(newAluno);
       setAlunos(alunoList);
@@ -36,7 +38,9 @@ const ListaAlunos = () => {
           {alunos.map((aluno) => {
             return (
               <div key={aluno.id}>
+                <p>{aluno.nome[0]}</p>
                 <p>{aluno.nome}</p>
+                <p>{aluno.email}</p>
               </div>
             );
           })}
