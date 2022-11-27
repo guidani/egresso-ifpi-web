@@ -1,6 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { doUserRegister } from "../api/doUserRegister";
 import styles from "./styles.module.css";
 
 interface IUserRegister {
@@ -25,7 +24,7 @@ const Register = () => {
         console.log("As senhas não conferem");
         return;
       }
-      await doUserRegister(data.userEmail, data.userPassword);
+      // await doUserRegister(data.userEmail, data.userPassword);
       navigate("/");
     } catch (error) {
       console.log(error);
