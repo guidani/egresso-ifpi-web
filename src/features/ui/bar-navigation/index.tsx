@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import useAuth from "../../Login/hooks/useAuth";
 import Wrapper from "../wrapper";
 import styles from "./styles.module.css";
 

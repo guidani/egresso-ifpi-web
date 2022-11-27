@@ -11,6 +11,7 @@ import Register from "../features/Register/components/Register";
 import PublicRoutes from "../features/ui/PublicRoutes";
 import Alunos from "../views/Alunos";
 import Courses from "../views/Courses";
+import Home from "../views/Home";
 
 export const Router = () => {
   return (
@@ -24,6 +25,7 @@ export const Router = () => {
         </Route>
         {/* Rotas privadas */}
         <Route element={<RequireAuth />}>
+          <Route path="/home" element={<Home />} />
           <Route path="/alunos/listagem-alunos" element={<Alunos />} />
           <Route path="/alunos/cadastro-aluno" element={<CadastroAluno />} />
           <Route
