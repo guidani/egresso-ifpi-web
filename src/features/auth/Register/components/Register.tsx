@@ -32,7 +32,7 @@ const Register = () => {
         return;
       }
 
-      await registerWithEmailAndPassword(data.userEmail, data.userPassword);
+      registerWithEmailAndPassword(data.userEmail, data.userPassword);
 
       navigate("/");
     } catch (error) {

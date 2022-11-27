@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }: LoginProviderProps) => {
     return signInWithEmailAndPassword(auth, email, password);
   }
 
-  async function registerWithEmailAndPassword(email: string, password: string) {
+  function registerWithEmailAndPassword(email: string, password: string) {
     return createUserWithEmailAndPassword(auth, email, password).then(
       (credential) => {
         console.log(credential.user.email);
