@@ -5,7 +5,6 @@ import './styles.css'
 const Layout = () => {
   return (
     <>
-    
       <Barnavigation/>
       <Outlet />
     </>

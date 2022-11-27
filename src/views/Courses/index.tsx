@@ -11,7 +11,8 @@ const Courses = () => {
           <button className="btnPrimary">Cadastrar Novo Curso</button>
         </Link>
         <br />
-        <br /><br />
+        <br />
+        <br />
         <ListagemCursos />
       </Wrapper>
     </>

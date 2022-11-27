@@ -1,9 +1,9 @@
-import { Router } from "./router";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <Router />
+      <Outlet/>
     </>
   );
 }

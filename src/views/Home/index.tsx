@@ -24,7 +24,6 @@ const Home = () => {
               Ver cursos
             </Link>
           </div>
-
           <Dashboard />
         </div>
       </Wrapper>
