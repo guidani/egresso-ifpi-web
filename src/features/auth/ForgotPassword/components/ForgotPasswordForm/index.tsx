@@ -68,6 +68,6 @@ const ForgotPasswordForm = () => {
 
 export default ForgotPasswordForm;
 
-function errorMessage(message: string){
+function errorMessage(message: string) {
   return `${message}`;
 }

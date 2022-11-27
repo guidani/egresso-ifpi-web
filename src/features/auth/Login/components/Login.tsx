@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import styles from "./styles.module.css";
@@ -10,6 +11,7 @@ interface IUserLogin {
 }
 
 const Login = () => {
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { logInWithEmailAndPassword } = useAuth();
   const navigate = useNavigate();
   const {
@@ -20,19 +22,23 @@ const Login = () => {
   } = useForm<IUserLogin>();
 
   const onSubmit: SubmitHandler<IUserLogin> = async (data) => {
-    console.log(data);
     try {
       await logInWithEmailAndPassword(data.userEmail, data.userPassword);
       navigate("/home");
     } catch (error) {
       if (error) {
-        console.log("Algo deu errado");
+        setErrorMessage("Algo deu errado");
       }
     }
   };
 
+  useEffect(() => {
+    setErrorMessage(null);
+  }, []);
+
   return (
     <>
+      {errorMessage && <p>{errorMessage}</p>}
       <div className={styles.card}>
         <div className={styles.cardHeader}>
           <img src="topo_ifpi.png" alt="Logo_IFPI" />
