@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { SubmitHandler, useForm } from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
 import styles from "./styles.module.css";
 
 interface IUserLogin {
@@ -9,6 +10,8 @@ interface IUserLogin {
 }
 
 const Login = () => {
+  const { logInWithEmailAndPassword } = useAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -18,7 +21,14 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<IUserLogin> = async (data) => {
     console.log(data);
-    // await doUserLogin(data.userEmail, data.userPassword);
+    try {
+      await logInWithEmailAndPassword(data.userEmail, data.userPassword);
+      navigate("/home");
+    } catch (error) {
+      if (error) {
+        console.log("Algo deu errado");
+      }
+    }
   };
 
   return (
@@ -56,7 +66,7 @@ const Login = () => {
         </form>
         <div className={styles.linkRow}>
           <Link to="/register">Cadastre-se aqui.</Link>
-          <Link to={"/forgot-password"}>Recuperar senha</Link>
+          <Link to="/forgot-password">Recuperar senha</Link>
         </div>
       </div>
     </>
