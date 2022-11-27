@@ -26,7 +26,7 @@ const Register = () => {
         return;
       }
       await doUserRegister(data.userEmail, data.userPassword);
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -75,7 +75,7 @@ const Register = () => {
           <button type="submit" className={`${styles.btn} btnPrimary`}>
             Cadastrar
           </button>
-            <Link to="/login" >
+            <Link to="/" >
           <button type="reset" className={`${styles.btn} btnDanger`}>
               Cancelar
           </button>
@@ -83,7 +83,6 @@ const Register = () => {
         </form>
       </div>
     </>
-    // adicionar formulário de login
   );
 };
 

@@ -1,7 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-
 import { Link } from "react-router-dom";
-
 import styles from "./styles.module.css";
 
 interface IForgotPasswordForm {
@@ -42,7 +40,7 @@ const ForgotPasswordForm = () => {
           </button>
         </form>
         <div className={styles.linkRow}>
-          <Link to="/login">Voltar</Link>
+          <Link to="/">Voltar</Link>
         </div>
       </div>
     </>

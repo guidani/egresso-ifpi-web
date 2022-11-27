@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 import { SubmitHandler, useForm } from "react-hook-form";
-import { doUserLogin } from "../api/doUserLogin";
 import styles from "./styles.module.css";
 
 interface IUserLogin {
@@ -19,7 +18,7 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<IUserLogin> = async (data) => {
     console.log(data);
-    await doUserLogin(data.userEmail, data.userPassword);
+    // await doUserLogin(data.userEmail, data.userPassword);
   };
 
   return (

@@ -1,13 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import App from "../App";
+import ForgotPasswordForm from "../features/auth/ForgotPassword/components/ForgotPasswordForm";
+import Login from "../features/auth/Login/components/Login";
+import Register from "../features/auth/Register/components/Register";
 import { RequireAuth } from "../features/auth/RequireAuth";
 import CadastroAluno from "../features/CadastroAluno/components/CadastroAluno";
 import CadastroCurso from "../features/CadastroCurso/components/CadastroCurso";
 import EditarAluno from "../features/EditarAluno/components/EditarAluno";
 import { EditarCurso } from "../features/EditarCurso/components/EditarCurso";
-import ForgotPasswordForm from "../features/ForgotPassword/components/ForgotPasswordForm";
-import Login from "../features/Login/components/Login";
-import Register from "../features/Register/components/Register";
 import PublicRoutes from "../features/ui/PublicRoutes";
 import Alunos from "../views/Alunos";
 import Courses from "../views/Courses";

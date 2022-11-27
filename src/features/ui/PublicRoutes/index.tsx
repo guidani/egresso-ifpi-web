@@ -1,9 +1,10 @@
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+import useAuth from "../../auth/hooks/useAuth";
 
 const PublicRoutes = () => {
-  // const { user } = useUserAuth();
+  const { user } = useAuth();
 
-  // if (user) return <Navigate to="/dashboard" replace />;
+  if (user) return <Navigate to="/home" replace />;
 
   return <Outlet />;
 };
