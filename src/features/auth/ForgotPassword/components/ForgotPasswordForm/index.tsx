@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
 import styles from "./styles.module.css";
 
 interface IForgotPasswordForm {
@@ -7,6 +9,9 @@ interface IForgotPasswordForm {
 }
 
 const ForgotPasswordForm = () => {
+  const { resetPassword } = useAuth();
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -14,8 +19,21 @@ const ForgotPasswordForm = () => {
     formState: { errors },
   } = useForm<IForgotPasswordForm>();
 
-  const onSubmit: SubmitHandler<IForgotPasswordForm> = (data) =>
-    console.log(data);
+  const onSubmit: SubmitHandler<IForgotPasswordForm> = async (data) => {
+    try {
+      setLoading(true);
+      await resetPassword(data.userEmail);
+      console.log(
+        "Um link para resetar a senha foi enviado para o seus e-mail. Não esqueça de verificar a caixa de SPAM também!"
+      );
+    } catch (error) {
+      if (error) {
+        console.log("OPS! Algo deu errado.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -33,7 +51,7 @@ const ForgotPasswordForm = () => {
               id="userEmail"
               name="userEmail"
             />
-            {errors.userEmail && "Preencha com um e-mail!"}
+            {errors.userEmail && errorMessage("Preencha com um e-mail!")}
           </div>
           <button type="submit" className={`${styles.btn} btnPrimary`}>
             Resetar
@@ -49,3 +67,7 @@ const ForgotPasswordForm = () => {
 };
 
 export default ForgotPasswordForm;
+
+function errorMessage(message: string){
+  return `${message}`;
+}

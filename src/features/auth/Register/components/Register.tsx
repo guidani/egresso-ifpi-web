@@ -1,5 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import styles from "./styles.module.css";
 
 interface IUserRegister {
@@ -9,6 +10,7 @@ interface IUserRegister {
 }
 
 const Register = () => {
+  const { registerWithEmailAndPassword, user } = useAuth();
   const {
     register,
     handleSubmit,
@@ -21,10 +23,17 @@ const Register = () => {
   const onSubmit: SubmitHandler<IUserRegister> = async (data) => {
     try {
       if (data.userPassword !== data.confirmPassword) {
-        console.log("As senhas não conferem");
+        console.log("As senhas não conferem.");
         return;
       }
-      // await doUserRegister(data.userEmail, data.userPassword);
+
+      if (data.userPassword.length <= 6) {
+        console.log("A senha precisa ter mais de 6 caracteres.");
+        return;
+      }
+
+      await registerWithEmailAndPassword(data.userEmail, data.userPassword);
+
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -74,11 +83,11 @@ const Register = () => {
           <button type="submit" className={`${styles.btn} btnPrimary`}>
             Cadastrar
           </button>
-            <Link to="/" >
-          <button type="reset" className={`${styles.btn} btnDanger`}>
+          <Link to="/">
+            <button type="reset" className={`${styles.btn} btnDanger`}>
               Cancelar
-          </button>
-            </Link>
+            </button>
+          </Link>
         </form>
       </div>
     </>
