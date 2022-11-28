@@ -44,7 +44,7 @@ const ListaAlunos = () => {
                 <p>{aluno.nome}</p>
                 <p>{aluno.email}</p>
                 <div className="btnRow">
-                  <Link to={`editar-aluno/${aluno.id}`}>
+                  <Link to={`/administrativo/alunos/editar-aluno/${aluno.id}`}>
                     <button className="btnPrimary">Editar</button>
                   </Link>
 

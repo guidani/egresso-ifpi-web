@@ -40,7 +40,7 @@ const ListagemCursos = () => {
                 <p>{item.nome}</p>
                 <p>{item.nivel}</p>
                 <div className="btnRow">
-                  <Link to={`editar-curso/${item.id}`}>
+                  <Link to={`/administrativo/cursos/editar-curso/${item.id}`}>
                     <button className="btnPrimary">Editar</button>
                   </Link>
 

@@ -34,12 +34,14 @@ export const Router = () => {
             <Route path="egresso" element={<Egresso />} />
             <Route path="administrativo" element={<Administrativo />}>
               <Route index element={<AdminDashboard />} />
-              <Route path="alunos/listagem-alunos" element={<Alunos />} />
-              <Route path="alunos/cadastro-aluno" element={<CadastroAluno />} />
-              <Route
-                path="alunos/editar-aluno/:studentId"
-                element={<EditarAluno />}
-              />
+              <Route path="alunos">
+                <Route path="listagem-alunos" element={<Alunos />} />
+                <Route path="cadastro-aluno" element={<CadastroAluno />} />
+                <Route path="editar-aluno">
+                  <Route path=":studentId" element={<EditarAluno />} />
+                </Route>
+              </Route>
+              {/*  */}
               <Route path="cursos/listagem-cursos" element={<Courses />} />
               <Route path="cursos/cadastro-curso" element={<CadastroCurso />} />
               <Route
