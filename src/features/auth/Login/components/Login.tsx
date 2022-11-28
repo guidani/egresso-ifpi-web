@@ -24,7 +24,7 @@ const Login = () => {
   const onSubmit: SubmitHandler<IUserLogin> = async (data) => {
     try {
       await logInWithEmailAndPassword(data.userEmail, data.userPassword);
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       if (error) {
         setErrorMessage("Algo deu errado");

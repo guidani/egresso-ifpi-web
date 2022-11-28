@@ -16,7 +16,7 @@ const Barnavigation = () => {
     }
   };
 
-  if (!user) return <Navigate to="/" replace />;
+  // if (!user) return <Navigate to="/" replace />;
 
   return (
     <>

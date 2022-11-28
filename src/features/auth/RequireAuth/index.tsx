@@ -18,7 +18,6 @@ export const RequireAuth = () => {
 
   return (
     <>
-      {/* <Navbar handleLogOut={handleLogOut} user={user} /> */}
       <Outlet />
     </>
   );

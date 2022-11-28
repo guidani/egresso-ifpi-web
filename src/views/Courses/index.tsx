@@ -7,7 +7,7 @@ const Courses = () => {
     <>
       <Wrapper>
         <h1>Cursos cadastrados</h1>
-        <Link to="/cursos/cadastro-curso">
+        <Link to="administrativo/cursos/cadastro-curso">
           <button className="btnPrimary">Cadastrar Novo Curso</button>
         </Link>
         <br />
