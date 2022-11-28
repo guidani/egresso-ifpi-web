@@ -7,8 +7,8 @@ const Alunos = () => {
     <>
       <Wrapper>
         <h2>Alunos cadastrados</h2>
-        <Link to="administrativo/alunos/cadastro-aluno">
-          <button className="btnPrimary">Cadastrar Novo Aluno</button>
+        <Link to="/administrativo/alunos/cadastro-aluno" className="btnPrimary">
+          Cadastrar Novo Aluno
         </Link>
         <ListaAlunos />
       </Wrapper>
