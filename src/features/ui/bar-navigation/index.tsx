@@ -30,7 +30,7 @@ const Barnavigation = () => {
               <Link to="/" onClick={handleLogOut}>
                 Sair
               </Link>
-              {/* <p>Bem vindo: {email}</p> */}
+              <p>Bem vindo: {user.email}</p>
             </nav>
           </div>
         </Wrapper>

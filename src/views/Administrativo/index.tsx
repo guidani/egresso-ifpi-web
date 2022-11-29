@@ -1,10 +1,37 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { doc, getDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import { db } from "../../database/firebase/config";
+import useAuth from "../../features/auth/hooks/useAuth";
 
 const Administrativo = () => {
-  return (
-    <Outlet/>
-  )
-}
+  const { user } = useAuth();
+  // const [isUserAdmin, setIsUserAdmin] = useState(false);
 
-export default Administrativo
+  async function isAdmin() {
+    const userId = user.uid;
+    console.log(userId);
+    //
+    const docRef = doc(db, "admins", `${userId}`);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("Data: ", docSnap.data());
+      // setIsUserAdmin(true);
+      return true;
+    } else {
+      console.log("Documento não existe.");
+      // setIsUserAdmin(false);
+      return false;
+    }
+  }
+
+  useEffect(() => {
+    isAdmin();
+  }, []);
+  
+  // if (!isUserAdmin) return <Navigate to="/home" />;
+
+  return <Outlet />;
+};
+
+export default Administrativo;

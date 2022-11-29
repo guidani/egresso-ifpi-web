@@ -1,18 +1,8 @@
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 export const RequireAuth = () => {
-  const { logOut, user } = useAuth();
-  const navigate = useNavigate();
-
-  const handleLogOut = async () => {
-    try {
-      await logOut();
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { user } = useAuth();
 
   if (!user) return <Navigate to="/" replace />;
 
