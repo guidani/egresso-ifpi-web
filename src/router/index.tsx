@@ -9,6 +9,7 @@ import CadastroAluno from "../features/CadastroAluno/components/CadastroAluno";
 import CadastroCurso from "../features/CadastroCurso/components/CadastroCurso";
 import EditarAluno from "../features/EditarAluno/components/EditarAluno";
 import { EditarCurso } from "../features/EditarCurso/components/EditarCurso";
+import { EgressoDashboard } from "../features/EgressoDashboard/components/EgressoDashboard";
 import PublicRoutes from "../features/ui/PublicRoutes";
 import Layout from "../shared/Layout";
 import Administrativo from "../views/Administrativo";
@@ -32,6 +33,7 @@ export const Router = () => {
           <Route element={<Layout />}>
             <Route path="home" element={<Home />} />
             <Route path="egresso" element={<Egresso />}>
+              <Route index element={<EgressoDashboard/>}/>
               <Route path="cadastro-aluno" element={<CadastroAluno />} />
               <Route path="editar-aluno">
                 <Route path=":studentId" element={<EditarAluno />} />
