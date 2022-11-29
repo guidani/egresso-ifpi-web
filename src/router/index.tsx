@@ -31,7 +31,12 @@ export const Router = () => {
         <Route element={<RequireAuth />}>
           <Route element={<Layout />}>
             <Route path="home" element={<Home />} />
-            <Route path="egresso" element={<Egresso />} />
+            <Route path="egresso" element={<Egresso />}>
+              <Route path="cadastro-aluno" element={<CadastroAluno />} />
+              <Route path="editar-aluno">
+                <Route path=":studentId" element={<EditarAluno />} />
+              </Route>
+            </Route>
             <Route path="administrativo" element={<Administrativo />}>
               <Route index element={<AdminDashboard />} />
               <Route path="alunos">

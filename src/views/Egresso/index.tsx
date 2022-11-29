@@ -47,7 +47,7 @@ const Egresso = () => {
         <div>
           <p>Não foi encontrado nenhum cadastro!</p>
           <br />
-          <Link to="#" className="btn btnPrimary">
+          <Link to="cadastro-aluno" className="btn btnPrimary">
             criar novo cadastro
           </Link>
         </div>
@@ -59,8 +59,8 @@ const Egresso = () => {
                 <p>{aluno.nome}</p>
                 <p>{aluno.email}</p>
                 <br />
-                <Link to="#" className="btn btnPrimary">
-                  ver cadastro
+                <Link to={`editar-aluno/${aluno.id}`}>
+                  <button className="btn btnPrimary">ver cadastro</button>
                 </Link>
               </div>
             );
