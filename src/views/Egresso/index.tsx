@@ -4,38 +4,32 @@ import { Link } from "react-router-dom";
 import { db } from "../../database/firebase/config";
 import useAuth from "../../features/auth/hooks/useAuth";
 
-interface IData {
+interface IAlunoSimpleView {
   id: string;
   nome: string;
-}
-
-interface ITemp {
-  data: IData[];
+  email: string;
 }
 
 const Egresso = () => {
   const { user } = useAuth();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<IAlunoSimpleView[]>([]);
 
   async function getDataFromCurrentUser() {
     try {
-      let temp: any[] = [];
+      let temp: IAlunoSimpleView[] = [];
       const userid = user.uid;
       const colRef = collection(db, "ALUNOS");
       const q = query(colRef, where("userid", "==", `${userid}`));
       const querySnapshot = await getDocs(q);
       if (querySnapshot.empty) return;
       querySnapshot.forEach((doc) => {
-        console.log(
-          "🚀 ~ file: index.tsx:21 ~ getDataFromCurrentUser ~ doc",
-          doc.data()
-        );
-        const docData = doc.data();
-        const dataVisual = {
+        const alunoData = doc.data();
+        const newAluno = {
           id: doc.id,
-          nome: docData.nome,
+          nome: alunoData.nome,
+          email: alunoData.email,
         };
-        temp.push(dataVisual);
+        temp.push(newAluno);
         setData(temp);
       });
     } catch (error) {
@@ -50,22 +44,28 @@ const Egresso = () => {
   return (
     <>
       {data.length <= 0 ? (
-        <div>Não foi encontrado nenhum cadastro!</div>
+        <div>
+          <p>Não foi encontrado nenhum cadastro!</p>
+          <br />
+          <Link to="#" className="btn btnPrimary">
+            criar novo cadastro
+          </Link>
+        </div>
       ) : (
         <div>
-          {data.map( (item, index) => {
+          {data.map((aluno, index) => {
             return (
               <div key={index}>
-                <p>{item.nome}</p>
+                <p>{aluno.nome}</p>
+                <p>{aluno.email}</p>
                 <br />
                 <Link to="#" className="btn btnPrimary">
-                  ver cadastro.
+                  ver cadastro
                 </Link>
               </div>
-            )
+            );
           })}
         </div>
-        
       )}
     </>
   );
