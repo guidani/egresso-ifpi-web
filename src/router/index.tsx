@@ -42,12 +42,13 @@ export const Router = () => {
                 </Route>
               </Route>
               {/*  */}
-              <Route path="cursos/listagem-cursos" element={<Courses />} />
-              <Route path="cursos/cadastro-curso" element={<CadastroCurso />} />
-              <Route
-                path="cursos/editar-curso/:courseId"
-                element={<EditarCurso />}
-              />
+              <Route path="cursos">
+                <Route path="listagem-cursos" element={<Courses />} />
+                <Route path="cadastro-curso" element={<CadastroCurso />} />
+                <Route path="editar-curso">
+                  <Route path=":courseId" element={<EditarCurso />} />
+                </Route>
+              </Route>
             </Route>
           </Route>
         </Route>
