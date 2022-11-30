@@ -20,9 +20,9 @@ export const addAlunoToDatabase = async (data: IAluno) => {
   
       const alunoCollectionRef = collection(db, "ALUNOS");
   
-      const alunoDocRef = await addDoc(alunoCollectionRef, newAluno);
-      console.log("Aluno adicionado com o ID: ", alunoDocRef.id);
+      await addDoc(alunoCollectionRef, newAluno);
+      return true;
     } catch (error) {
-      console.log("Algum error aconteceu: ", error);
+      console.log(error);
     }
   };

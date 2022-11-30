@@ -5,31 +5,30 @@ import { db } from "../../database/firebase/config";
 import useAuth from "../../features/auth/hooks/useAuth";
 
 const Administrativo = () => {
-  const { user } = useAuth();
-  // const [isUserAdmin, setIsUserAdmin] = useState(false);
+  // const { user } = useAuth();
+  // // const [isUserAdmin, setIsUserAdmin] = useState(false);
 
-  async function isAdmin() {
-    const userId = user.uid;
-    console.log(userId);
-    //
-    const docRef = doc(db, "admins", `${userId}`);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      console.log("Data: ", docSnap.data());
-      // setIsUserAdmin(true);
-      return true;
-    } else {
-      console.log("Documento não existe.");
-      // setIsUserAdmin(false);
-      return false;
-    }
-  }
+  // async function isAdmin() {
+  //   const userId = user.uid;
+  //   console.log(userId);
+  //   //
+  //   const docRef = doc(db, "admins", `${userId}`);
+  //   const docSnap = await getDoc(docRef);
+  //   if (docSnap.exists()) {
+  //     console.log("Data: ", docSnap.data());
+  //     // setIsUserAdmin(true);
+  //     return true;
+  //   } else {
+  //     console.log("Documento não existe.");
+  //     // setIsUserAdmin(false);
+  //     return false;
+  //   }
+  // }
 
-  useEffect(() => {
-    isAdmin();
-  }, []);
+  // useEffect(() => {
+  //   isAdmin();
+  // }, []);
   
-  // if (!isUserAdmin) return <Navigate to="/home" />;
 
   return <Outlet />;
 };

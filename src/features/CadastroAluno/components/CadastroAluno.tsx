@@ -33,7 +33,6 @@ const CadastroAluno = () => {
   });
 
   const onSubmit = async (data: any) => {
-    console.log(data);
     // Enviar dados do formulário para o banco de dados
     await addAlunoToDatabase(data);
   };
@@ -92,7 +91,6 @@ const CadastroAluno = () => {
                 />
               </div>
             </div>
-            {/* //TODO deve ser possível adicionar várias matrículas */}
             <div className="form-input-section">
               <h2>Matrícula</h2>
               {fields.map((field, index) => (
@@ -123,7 +121,6 @@ const CadastroAluno = () => {
                 Nova matrícula
               </button>
             </div>
-            {/* // TODO end */}
             <div className="form-input-section">
               <h2>Ocupação</h2>
               <div className="input-group">

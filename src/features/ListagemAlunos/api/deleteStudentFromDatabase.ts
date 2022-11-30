@@ -5,10 +5,10 @@ export const deleteStudentFromDatabase = async (id: string) => {
   try {
     const studentRef = await doc(db, "ALUNOS", id);
     if (!studentRef) {
-      console.log("Aluno não encontrado!");
+      return false;
     } else {
       await deleteDoc(studentRef);
-      console.log("Aluno deletado");
+      return true;
     }
   } catch (error) {
     console.log(error);

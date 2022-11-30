@@ -5,10 +5,10 @@ export const deleteCursoFromDatabase = async (id: string) => {
   try {
     const cursoRef = await doc(db, "CURSOS", id);
     if (!cursoRef) {
-      console.log("Curso não encontrado!");
+      return false;
     } else {
       await deleteDoc(cursoRef);
-      console.log("Curso deletado");
+      return true;
     }
   } catch (error) {
     console.log(error);

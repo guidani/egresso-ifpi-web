@@ -18,7 +18,6 @@ const CadastroCurso = () => {
   const submitForm = async (data: any) => {
     try {
       setLoading(true);
-      console.log(data);
       await addCursoToDatabase(data);
       setLoading(false);
     } catch (err) {

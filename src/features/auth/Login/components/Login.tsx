@@ -76,7 +76,6 @@ const Login = () => {
         </div>
       </div>
     </>
-    // adicionar formulário de login
   );
 };
 

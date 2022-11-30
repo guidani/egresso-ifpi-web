@@ -16,8 +16,6 @@ const Barnavigation = () => {
     }
   };
 
-  // if (!user) return <Navigate to="/" replace />;
-
   return (
     <>
       <div className={styles.topBar}>
@@ -27,10 +25,10 @@ const Barnavigation = () => {
               Egresso IFPI
             </Link>
             <nav className={styles.navBar}>
+              <div>Bem vindo: {user.email}</div>
               <Link to="/" onClick={handleLogOut}>
                 Sair
               </Link>
-              <p>Bem vindo: {user.email}</p>
             </nav>
           </div>
         </Wrapper>

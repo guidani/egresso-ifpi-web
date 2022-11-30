@@ -23,19 +23,15 @@ export const AuthProvider = ({ children }: LoginProviderProps) => {
   }
 
   function registerWithEmailAndPassword(email: string, password: string) {
-    return createUserWithEmailAndPassword(auth, email, password).then(
-      (credential) => {
-        console.log(credential.user.email);
-        console.log(credential.user.uid);
+    return createUserWithEmailAndPassword(auth, email, password)
+      .then((credential) => {
         const userID = credential.user.uid;
         const userEmail = credential.user.email;
-        // Adicionar uma verificação para caso o usuário já exista no banco.
-        // Salvar o usuério no banco de dados.
         setDoc(doc(db, "users", `${userID}`), {
           email: `${userEmail}`,
         });
-      }
-    );
+      })
+      .catch((err) => console.log(err));
   }
 
   function logOut() {

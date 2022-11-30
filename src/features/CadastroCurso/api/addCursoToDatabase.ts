@@ -10,9 +10,9 @@ export const addCursoToDatabase = async (data: ICurso) => {
     };
 
     const cursoCollectionRef = collection(db, "CURSOS");
-    const cursoDocRef = await addDoc(cursoCollectionRef, newCurso);
-    console.log("Curso adicionado com o ID: ", cursoDocRef.id);
+    await addDoc(cursoCollectionRef, newCurso);
+    return true;
   } catch (error) {
-    console.log("Algo de errado aconteceu...", error);
+    console.log(error);
   }
 };

@@ -10,7 +10,7 @@ interface IUserRegister {
 }
 
 const Register = () => {
-  const { registerWithEmailAndPassword, user } = useAuth();
+  const { registerWithEmailAndPassword } = useAuth();
   const {
     register,
     handleSubmit,
@@ -23,12 +23,10 @@ const Register = () => {
   const onSubmit: SubmitHandler<IUserRegister> = async (data) => {
     try {
       if (data.userPassword !== data.confirmPassword) {
-        console.log("As senhas não conferem.");
         return;
       }
 
       if (data.userPassword.length <= 6) {
-        console.log("A senha precisa ter mais de 6 caracteres.");
         return;
       }
 

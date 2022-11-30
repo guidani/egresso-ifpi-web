@@ -7,10 +7,8 @@ export async function getStudentFromDatabase(id: string) {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      // console.log("Document data >>>>", docSnap.data());
       return docSnap.data();
     } else {
-      console.log("Documento não existe");
       return {};
     }
   } catch (err) {

@@ -23,12 +23,11 @@ const ForgotPasswordForm = () => {
     try {
       setLoading(true);
       await resetPassword(data.userEmail);
-      console.log(
-        "Um link para resetar a senha foi enviado para o seus e-mail. Não esqueça de verificar a caixa de SPAM também!"
-      );
+      return true;
     } catch (error) {
       if (error) {
         console.log("OPS! Algo deu errado.");
+        return;
       }
     } finally {
       setLoading(false);
