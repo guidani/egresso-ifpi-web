@@ -10,7 +10,7 @@ interface IAlunoSimpleView {
   email: string;
 }
 
-const EgressoDashboard = () => {
+export const EgressoDashboard = () => {
   const { user } = useAuth();
   const [data, setData] = useState<IAlunoSimpleView[]>([]);
 
@@ -70,5 +70,3 @@ const EgressoDashboard = () => {
     </>
   );
 };
-
-export default EgressoDashboard;
