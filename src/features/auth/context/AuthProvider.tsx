@@ -30,8 +30,12 @@ export const AuthProvider = ({ children }: LoginProviderProps) => {
         setDoc(doc(db, "users", `${userID}`), {
           email: `${userEmail}`,
         });
+        return true;
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        return false;
+      });
   }
 
   function logOut() {

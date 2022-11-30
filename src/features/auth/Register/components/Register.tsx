@@ -1,7 +1,20 @@
+import {
+  Box,
+  Button,
+  Center,
+  Container,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Image,
+  Input,
+  Link,
+  useToast,
+  UseToastOptions,
+} from "@chakra-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link as RouterDomLink, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import styles from "./styles.module.css";
 
 interface IUserRegister {
   userEmail: string;
@@ -15,79 +28,116 @@ const Register = () => {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<IUserRegister>();
-
   const navigate = useNavigate();
+  const toast = useToast();
+
+  const showToast = (
+    title: string,
+    status: UseToastOptions["status"],
+    description?: string
+  ) => {
+    return toast({
+      title: title,
+      description: description,
+      status: status,
+      duration: 2000,
+      isClosable: true,
+    });
+  };
 
   const onSubmit: SubmitHandler<IUserRegister> = async (data) => {
     try {
       if (data.userPassword !== data.confirmPassword) {
+        showToast("As senhas precisam ser iguais.", "error");
         return;
       }
-
       if (data.userPassword.length <= 6) {
+        showToast("A senha precisa ser maior que 6 digitos.", "error");
         return;
       }
-
-      registerWithEmailAndPassword(data.userEmail, data.userPassword);
-
+      await registerWithEmailAndPassword(data.userEmail, data.userPassword);
       navigate("/");
     } catch (error) {
-      console.log(error);
+      showToast("OPS! Algo deu errado!", "error");
+      return;
     }
   };
 
   return (
     <>
-      <div className={styles.card}>
-        <div className={styles.cardHeader}>
-          <img src="topo_ifpi.png" alt="Logo_IFPI" />
-        </div>
-        <form action="" onSubmit={handleSubmit(onSubmit)}>
-          <div className="input-group">
-            <label htmlFor="userEmail">E-mail</label>
-            <input
-              {...register("userEmail", { required: true })}
-              type="email"
-              placeholder="Seu e-mail"
-              id="userEmail"
-              name="userEmail"
-            />
-            {errors.userEmail && "Insira um e-mail!"}
-          </div>
-          <div className="input-group">
-            <label htmlFor="userPassword">Senha</label>
-            <input
-              {...register("userPassword", { required: true })}
-              type="password"
-              placeholder="Sua senha"
-              id="userPassword"
-              name="userPassword"
-            />
-            {errors.userPassword && "Insira a senha!"}
-          </div>
-          <div className="input-group">
-            <label htmlFor="confirmPassword">Repita a Senha</label>
-            <input
-              {...register("confirmPassword", { required: true })}
-              type="password"
-              placeholder="Repita a senha"
-              id="confirmPassword"
-              name="confirmPassword"
-            />
-            {errors.confirmPassword && "Insira a senha novamente!"}
-          </div>
-          <button type="submit" className={`${styles.btn} btnPrimary`}>
-            Cadastrar
-          </button>
-          <Link to="/">
-            <button type="reset" className={`${styles.btn} btnDanger`}>
-              Cancelar
-            </button>
+      <Container
+        h="100vh"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Box>
+          <Center>
+            <Image src="topo_ifpi.png" alt="Logo_IFPI" />
+          </Center>
+          <form action="" onSubmit={handleSubmit(onSubmit)}>
+            <FormControl isInvalid={errors.userEmail}>
+              <FormLabel htmlFor="userEmail">E-mail</FormLabel>
+              <Input
+                {...register("userEmail", { required: true })}
+                type="email"
+                placeholder="Seu e-mail"
+                id="userEmail"
+                name="userEmail"
+              />
+              <FormErrorMessage>
+                {errors.userEmail && "Insira um e-mail!"}
+              </FormErrorMessage>
+            </FormControl>
+            <FormControl isInvalid={errors.userPassword}>
+              <FormLabel htmlFor="userPassword">Senha</FormLabel>
+              <Input
+                {...register("userPassword", { required: true })}
+                type="password"
+                placeholder="Sua senha"
+                id="userPassword"
+                name="userPassword"
+              />
+              <FormErrorMessage>
+                {errors.userPassword && "Insira a senha!"}
+              </FormErrorMessage>
+            </FormControl>
+            <FormControl isInvalid={errors.confirmPassword}>
+              <FormLabel htmlFor="confirmPassword">Repita a Senha</FormLabel>
+              <Input
+                {...register("confirmPassword", { required: true })}
+                type="password"
+                placeholder="Repita a senha"
+                id="confirmPassword"
+                name="confirmPassword"
+              />
+              <FormErrorMessage>
+                {errors.confirmPassword && "Insira a senha novamente!"}
+              </FormErrorMessage>
+            </FormControl>
+            <Button
+              type="submit"
+              w="full"
+              bg="green.400"
+              mt="4"
+              isLoading={isSubmitting}
+            >
+              Cadastrar
+            </Button>
+          </form>
+          <Link
+            as={RouterDomLink}
+            to="/"
+            borderBottom="2px"
+            borderBottomColor="green.400"
+            _hover={{ textDecoration: "none" }}
+          >
+            voltar
           </Link>
-        </form>
-      </div>
+        </Box>
+      </Container>
     </>
   );
 };
