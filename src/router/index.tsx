@@ -33,7 +33,7 @@ export const Router = () => {
           <Route element={<Layout />}>
             <Route path="home" element={<Home />} />
             <Route path="egresso" element={<Egresso />}>
-              <Route index element={<EgressoDashboard/>}/>
+              <Route index element={<EgressoDashboard />} />
               <Route path="cadastro-aluno" element={<CadastroAluno />} />
               <Route path="editar-aluno">
                 <Route path=":studentId" element={<EditarAluno />} />
