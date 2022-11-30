@@ -10,12 +10,12 @@ import {
   Input,
   Link,
   Spacer,
+  useToast,
+  UseToastOptions,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link as RouterDomLink } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
-import styles from "./styles.module.css";
 
 interface IForgotPasswordForm {
   userEmail: string;
@@ -23,8 +23,7 @@ interface IForgotPasswordForm {
 
 const ForgotPasswordForm = () => {
   const { resetPassword } = useAuth();
-  const [loading, setLoading] = useState(false);
-
+  const toast = useToast();
   const {
     register,
     handleSubmit,
@@ -32,18 +31,38 @@ const ForgotPasswordForm = () => {
     formState: { errors, isSubmitting },
   } = useForm<IForgotPasswordForm>();
 
+  const showToast = (
+    title: string,
+    status: UseToastOptions["status"],
+    description?: string
+  ) => {
+    return toast({
+      title: title,
+      description: description,
+      status: status,
+      duration: 2000,
+      isClosable: true,
+    });
+  };
+
   const onSubmit: SubmitHandler<IForgotPasswordForm> = async (data) => {
     try {
-      setLoading(true);
       await resetPassword(data.userEmail);
+      showToast(
+        "Email enviado",
+        "success",
+        "Verifique sua caixa de entrada e/ou sua caixa de SPAM."
+      );
       return true;
     } catch (error) {
       if (error) {
-        console.log("OPS! Algo deu errado.");
+        showToast(
+          "OPS! Algo deu errado!",
+          "warning",
+          "Verifique se o e-mail foi digitado corretamente."
+        );
         return;
       }
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -56,8 +75,8 @@ const ForgotPasswordForm = () => {
         alignItems="center"
       >
         <Box>
-          <Center mb='4'>
-            <Image src="topo_ifpi.png" alt="Logo_IFPI"/>
+          <Center mb="4">
+            <Image src="topo_ifpi.png" alt="Logo_IFPI" />
           </Center>
           <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl isInvalid={errors.userEmail}>
