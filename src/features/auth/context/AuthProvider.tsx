@@ -24,18 +24,7 @@ export const AuthProvider = ({ children }: LoginProviderProps) => {
 
   function registerWithEmailAndPassword(email: string, password: string) {
     return createUserWithEmailAndPassword(auth, email, password)
-      .then((credential) => {
-        const userID = credential.user.uid;
-        const userEmail = credential.user.email;
-        setDoc(doc(db, "users", `${userID}`), {
-          email: `${userEmail}`,
-        });
-        return true;
-      })
-      .catch((err) => {
-        console.log(err);
-        return false;
-      });
+      
   }
 
   function logOut() {

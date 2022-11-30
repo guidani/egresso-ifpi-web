@@ -12,8 +12,12 @@ import {
   useToast,
   UseToastOptions,
 } from "@chakra-ui/react";
+import { FirebaseError } from "firebase/app";
+import { UserCredential } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link as RouterDomLink, useNavigate } from "react-router-dom";
+import { db } from "../../../../database/firebase/config";
 import useAuth from "../../hooks/useAuth";
 
 interface IUserRegister {
@@ -57,8 +61,26 @@ const Register = () => {
         showToast("A senha precisa ser maior que 6 digitos.", "error");
         return;
       }
-      await registerWithEmailAndPassword(data.userEmail, data.userPassword);
-      navigate("/");
+      await registerWithEmailAndPassword(data.userEmail, data.userPassword)
+        .then((credential: UserCredential) => {
+          const userID = credential.user.uid;
+          const userEmail = credential.user.email;
+          setDoc(doc(db, "users", `${userID}`), {
+            email: `${userEmail}`,
+          });
+          showToast("Cadastro criado com sucesso.", "success");
+        })
+        .catch((err: FirebaseError) => {
+          console.log(err.code);
+          if (err.code == "auth/email-already-in-use") {
+            showToast("E-mail já em uso.", "error");
+          } else {
+            showToast(
+              "OPS! Ocorreu um erro inesperado. Tente mais tarde.",
+              "error"
+            );
+          }
+        });
     } catch (error) {
       showToast("OPS! Algo deu errado!", "error");
       return;
