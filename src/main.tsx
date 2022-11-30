@@ -1,3 +1,4 @@
+import { ChakraProvider } from "@chakra-ui/react";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
@@ -10,7 +11,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <AuthProvider>
       <BrowserRouter>
         <AuthProvider>
-          <Router />
+          <ChakraProvider>
+            <Router />
+          </ChakraProvider>
         </AuthProvider>
       </BrowserRouter>
     </AuthProvider>
