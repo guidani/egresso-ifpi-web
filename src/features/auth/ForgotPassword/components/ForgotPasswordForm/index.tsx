@@ -1,6 +1,19 @@
+import {
+  Box,
+  Button,
+  Center,
+  Container,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Image,
+  Input,
+  Link,
+  Spacer,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link as RouterDomLink } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import styles from "./styles.module.css";
 
@@ -16,7 +29,7 @@ const ForgotPasswordForm = () => {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<IForgotPasswordForm>();
 
   const onSubmit: SubmitHandler<IForgotPasswordForm> = async (data) => {
@@ -36,32 +49,54 @@ const ForgotPasswordForm = () => {
 
   return (
     <>
-      <div className={styles.card}>
-        <div className={styles.cardHeader}>
-          <img src="topo_ifpi.png" alt="Logo_IFPI" />
-        </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="input-group">
-            <label htmlFor="userEmail">E-mail</label>
-            <input
-              {...register("userEmail", { required: true })}
-              type="email"
-              placeholder="email@email.com"
-              id="userEmail"
-              name="userEmail"
-            />
-            {errors.userEmail && errorMessage("Preencha com um e-mail!")}
-          </div>
-          <button type="submit" className={`${styles.btn} btnPrimary`}>
-            Resetar
-          </button>
-        </form>
-        <div className={styles.linkRow}>
-          <Link to="/">Voltar</Link>
-        </div>
-      </div>
+      <Container
+        h="100vh"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Box>
+          <Center mb='4'>
+            <Image src="topo_ifpi.png" alt="Logo_IFPI"/>
+          </Center>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <FormControl isInvalid={errors.userEmail}>
+              <FormLabel htmlFor="userEmail">E-mail</FormLabel>
+              <Input
+                {...register("userEmail", { required: true })}
+                type="email"
+                placeholder="email@email.com"
+                id="userEmail"
+                name="userEmail"
+              />
+              <FormErrorMessage>
+                {errors.userEmail && errorMessage("Preencha com um e-mail!")}
+              </FormErrorMessage>
+
+              <Button
+                type="submit"
+                w="full"
+                bg="green.400"
+                mt="4"
+                isLoading={isSubmitting}
+              >
+                Enviar email
+              </Button>
+            </FormControl>
+          </form>
+          <Spacer h="2" />
+          <Link
+            as={RouterDomLink}
+            to="/"
+            borderBottom="2px"
+            borderBottomColor="green.400"
+            _hover={{ textDecoration: "none" }}
+          >
+            voltar
+          </Link>
+        </Box>
+      </Container>
     </>
-    // adicionar formulário de login
   );
 };
 
