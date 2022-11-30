@@ -1,9 +1,19 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link as RouterDomLink, useNavigate } from "react-router-dom";
 
-import { useEffect, useState } from "react";
+import {
+  Box,
+  Button,
+  Center,
+  Container,
+  Flex,
+  FormControl,
+  FormLabel,
+  Image,
+  Input,
+  Link,
+} from "@chakra-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
-import styles from "./styles.module.css";
 
 interface IUserLogin {
   userEmail: string;
@@ -11,14 +21,13 @@ interface IUserLogin {
 }
 
 const Login = () => {
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { logInWithEmailAndPassword } = useAuth();
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<IUserLogin>();
 
   const onSubmit: SubmitHandler<IUserLogin> = async (data) => {
@@ -27,54 +36,70 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       if (error) {
-        setErrorMessage("Algo deu errado");
+        return;
       }
     }
   };
 
-  useEffect(() => {
-    setErrorMessage(null);
-  }, []);
-
   return (
     <>
-      {errorMessage && <p>{errorMessage}</p>}
-      <div className={styles.card}>
-        <div className={styles.cardHeader}>
-          <img src="topo_ifpi.png" alt="Logo_IFPI" />
-        </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="input-group">
-            <label htmlFor="userEmail">E-mail</label>
-            <input
-              {...register("userEmail", { required: true })}
-              type="email"
-              placeholder="Seu e-mail"
-              id="userEmail"
-              name="userEmail"
-            />
-            {errors.userEmail && "Insira um e-mail!"}
-          </div>
-          <div className="input-group">
-            <label htmlFor="userPassword">Senha</label>
-            <input
-              {...register("userPassword", { required: true })}
-              type="password"
-              placeholder="Sua senha"
-              id="userPassword"
-              name="userPassword"
-            />
-            {errors.userPassword && "Insira a senha."}
-          </div>
-          <button type="submit" className={`${styles.btn} btnPrimary`}>
-            Entrar
-          </button>
-        </form>
-        <div className={styles.linkRow}>
-          <Link to="/register">Cadastre-se aqui.</Link>
-          <Link to="/forgot-password">Recuperar senha</Link>
-        </div>
-      </div>
+      <Container
+        h="100vh"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Box w="40rem">
+          <Center mb="4">
+            <Image src="topo_ifpi.png" alt="Logo_IFPI" />
+          </Center>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <FormControl isInvalid={errors.userEmail}>
+              <FormLabel htmlFor="userEmail">E-mail</FormLabel>
+              <Input
+                {...register("userEmail", { required: true })}
+                type="email"
+                placeholder="Seu e-mail"
+                id="userEmail"
+                name="userEmail"
+              />
+              {errors.userEmail && "Insira um e-mail!"}
+            </FormControl>
+            <FormControl isInvalid={errors.userPassword}>
+              <FormLabel htmlFor="userPassword">Senha</FormLabel>
+              <Input
+                {...register("userPassword", { required: true })}
+                type="password"
+                placeholder="Sua senha"
+                id="userPassword"
+                name="userPassword"
+              />
+              {errors.userPassword && "Insira a senha."}
+            </FormControl>
+            <Button
+              type="submit"
+              w="full"
+              bg="green.400"
+              mt="4"
+              isLoading={isSubmitting}
+            >
+              Entrar
+            </Button>
+          </form>
+          <Flex justify="space-between" mt='2'>
+            <Link as={RouterDomLink} to="/register" borderBottom="2px"
+            borderBottomColor="green.400"
+            _hover={{ textDecoration: "none" }}>
+              Cadastre-se aqui.
+            </Link>
+            <Link as={RouterDomLink} to="/forgot-password" borderBottom="2px"
+            borderBottomColor="green.400"
+            _hover={{ textDecoration: "none" }}>
+              Recuperar senha
+            </Link>
+          </Flex>
+        </Box>
+      </Container>
     </>
   );
 };
