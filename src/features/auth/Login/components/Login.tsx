@@ -48,8 +48,10 @@ const Login = () => {
         display="flex"
         justifyContent="center"
         alignItems="center"
+        bg='green.400'
+        minWidth='full'
       >
-        <Box w="40rem">
+        <Box w="40rem" bg='white' rounded='md' p='4'>
           <Center mb="4">
             <Image src="topo_ifpi.png" alt="Logo_IFPI" />
           </Center>
