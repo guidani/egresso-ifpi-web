@@ -1,8 +1,11 @@
+import { Box, Button, Container, Text } from "@chakra-ui/react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 import { db } from "../../../database/firebase/config";
 import useAuth from "../../auth/hooks/useAuth";
+import { ChakraSpinner } from "../../ui/ChakraSpinner";
 
 interface IAlunoSimpleView {
   id: string;
@@ -13,9 +16,12 @@ interface IAlunoSimpleView {
 export const EgressoDashboard = () => {
   const { user } = useAuth();
   const [data, setData] = useState<IAlunoSimpleView[]>([]);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   async function getDataFromCurrentUser() {
     try {
+      setLoading(true);
       let temp: IAlunoSimpleView[] = [];
       const userid = user.uid;
       const colRef = collection(db, "ALUNOS");
@@ -34,39 +40,70 @@ export const EgressoDashboard = () => {
       });
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   }
 
   useEffect(() => {
     getDataFromCurrentUser();
-  }, []);
+  }, [data]);
 
   return (
     <>
-      {data.length <= 0 ? (
-        <div>
-          <p>Não foi encontrado nenhum cadastro!</p>
-          <br />
-          <Link to="cadastro-aluno" className="btn btnPrimary">
-            criar novo cadastro
-          </Link>
-        </div>
-      ) : (
-        <div>
-          {data.map((aluno, index) => {
-            return (
-              <div key={index}>
-                <p>{aluno.nome}</p>
-                <p>{aluno.email}</p>
-                <br />
-                <Link to={`editar-aluno/${aluno.id}`}>
-                  <button className="btn btnPrimary">ver cadastro</button>
-                </Link>
-              </div>
-            );
-          })}
-        </div>
-      )}
+      <Container minW="full">
+        {loading ? (
+          <ChakraSpinner />
+        ) : data.length <= 0 ? (
+          <Box>
+            <Text>Não foi encontrado nenhum cadastro!</Text>
+            <Button
+              marginTop="2"
+              bg="green.400"
+              onClick={() => navigate(`cadastro-aluno`)}
+            >
+              Adicionar meus dados
+            </Button>
+          </Box>
+        ) : (
+          <Box>
+            {data.map((aluno, index) => {
+              return (
+                <Box
+                  key={index}
+                  border="1px"
+                  rounded="md"
+                  borderColor="gray.400"
+                  p="2"
+                >
+                  <Box display="flex">
+                    <Text fontWeight="black" marginRight="2">
+                      Nome:{" "}
+                    </Text>
+                    <p>{aluno.nome}</p>
+                  </Box>
+                  <Box display="flex" marginTop="2">
+                    <Text fontWeight="black" marginRight="2">
+                      Email:{" "}
+                    </Text>
+                    <p>{aluno.email}</p>
+                  </Box>
+
+                  <Button
+                    marginTop="2"
+                    bg="green.400"
+                    onClick={() => navigate(`editar-aluno/${aluno.id}`)}
+                  >
+                    Ver Cadastro
+                  </Button>
+                </Box>
+              );
+            })}
+          </Box>
+        )}
+
+        {}
+      </Container>
     </>
   );
 };
