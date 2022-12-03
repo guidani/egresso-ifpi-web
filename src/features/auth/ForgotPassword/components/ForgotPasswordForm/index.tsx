@@ -74,7 +74,7 @@ const ForgotPasswordForm = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Box>
+        <Box w='40rem'>
           <Center mb="4">
             <Image src="topo_ifpi.png" alt="Logo_IFPI" />
           </Center>
