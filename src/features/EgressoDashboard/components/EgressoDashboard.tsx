@@ -47,7 +47,7 @@ export const EgressoDashboard = () => {
 
   useEffect(() => {
     getDataFromCurrentUser();
-  }, [data]);
+  }, []);
 
   return (
     <>

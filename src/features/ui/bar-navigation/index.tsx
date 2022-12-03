@@ -1,9 +1,8 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Box, Button, Container, Flex, Image, Text } from "@chakra-ui/react";
+import { FaSignOutAlt } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import ifpi_logo from "../../../shared/images/topo_ifpi.png";
 import useAuth from "../../auth/hooks/useAuth";
-import Wrapper from "../wrapper";
-import styles from "./styles.module.css";
-import {Icon} from '@chakra-ui/react'
-import {FaSignOutAlt} from 'react-icons/fa'
 
 const Barnavigation = () => {
   const { logOut, user } = useAuth();
@@ -20,22 +19,24 @@ const Barnavigation = () => {
 
   return (
     <>
-      <div className={styles.topBar}>
-        <Wrapper>
-          <div className={styles.flexRow}>
-            <Link to={"/"} className={styles.topBarLogo}>
-              Egresso IFPI
-            </Link>
-            <nav className={styles.navBar}>
-              <div>Bem vindo: {user.email}</div>
-              <Link to="/" onClick={handleLogOut}>
-                Sair
-                <Icon as={FaSignOutAlt}/>
+      <Box w="full" bg="green.500" py="2" mb="4">
+        <Container minW="full">
+          <Flex justify="space-between">
+            <Box display="flex" gap='5' alignItems='center'>
+              <Image src={ifpi_logo} alt="imagem" boxSize="50px" bg='whiteAlpha.400' rounded='md'/>
+              <Link to={"/"}>
+                <Text fontSize="2xl" fontWeight='bold' color='white'>Egresso IFPI</Text>
               </Link>
-            </nav>
-          </div>
-        </Wrapper>
-      </div>
+            </Box>
+            <Flex align="center" gap="5">
+              <Text>Bem vindo: {user.email}</Text>
+              <Link to="/" onClick={handleLogOut}>
+                <Button rightIcon={<FaSignOutAlt />}>Sair</Button>
+              </Link>
+            </Flex>
+          </Flex>
+        </Container>
+      </Box>
     </>
   );
 };
