@@ -2,6 +2,8 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import useAuth from "../../auth/hooks/useAuth";
 import Wrapper from "../wrapper";
 import styles from "./styles.module.css";
+import {Icon} from '@chakra-ui/react'
+import {FaSignOutAlt} from 'react-icons/fa'
 
 const Barnavigation = () => {
   const { logOut, user } = useAuth();
@@ -28,6 +30,7 @@ const Barnavigation = () => {
               <div>Bem vindo: {user.email}</div>
               <Link to="/" onClick={handleLogOut}>
                 Sair
+                <Icon as={FaSignOutAlt}/>
               </Link>
             </nav>
           </div>
