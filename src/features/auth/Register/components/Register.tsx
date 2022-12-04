@@ -21,6 +21,7 @@ import { db } from "../../../../database/firebase/config";
 import useAuth from "../../hooks/useAuth";
 
 interface IUserRegister {
+  userName: string;
   userEmail: string;
   userPassword: string;
   confirmPassword: string;
@@ -34,7 +35,7 @@ const Register = () => {
     watch,
     formState: { errors, isSubmitting },
   } = useForm<IUserRegister>();
-  const navigate = useNavigate();
+  
   const toast = useToast();
 
   const showToast = (
@@ -88,24 +89,39 @@ const Register = () => {
   };
 
   return (
-    <>
+    
       <Container
-        h="100vh"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
+         h="100vh"
+         display="flex"
+         justifyContent="center"
+         alignItems="center"
+         bg="green.400"
+         minWidth="full"
       >
-        <Box w='40rem'>
+        <Box w="40rem" bg="white" rounded="md" p="4">
           <Center mb='4'>
             <Image src="topo_ifpi.png" alt="Logo_IFPI" />
           </Center>
           <form action="" onSubmit={handleSubmit(onSubmit)}>
+            <FormControl isInvalid={errors.userName} mb='2'>
+              <FormLabel htmlFor="userName">Seu nome</FormLabel>
+              <Input
+                {...register("userName", { required: true, minLength: 3, maxLength: 20 })}
+                type="text"
+                placeholder="Seu nome"
+                id="userName"
+                name="userName"
+              />
+              <FormErrorMessage>
+                {errors.userName && "Insira um nome válido!"}
+              </FormErrorMessage>
+            </FormControl>
             <FormControl isInvalid={errors.userEmail}>
               <FormLabel htmlFor="userEmail">E-mail</FormLabel>
               <Input
-                {...register("userEmail", { required: true })}
+                {...register("userEmail", { required: true, pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/gi })}
                 type="email"
-                placeholder="Seu e-mail"
+                placeholder="email@email.com"
                 id="userEmail"
                 name="userEmail"
               />
@@ -116,9 +132,9 @@ const Register = () => {
             <FormControl isInvalid={errors.userPassword}>
               <FormLabel htmlFor="userPassword">Senha</FormLabel>
               <Input
-                {...register("userPassword", { required: true })}
+                {...register("userPassword", { required: true, minLength: 7 })}
                 type="password"
-                placeholder="Sua senha"
+                placeholder="*******"
                 id="userPassword"
                 name="userPassword"
               />
@@ -129,9 +145,9 @@ const Register = () => {
             <FormControl isInvalid={errors.confirmPassword}>
               <FormLabel htmlFor="confirmPassword">Repita a Senha</FormLabel>
               <Input
-                {...register("confirmPassword", { required: true })}
+                {...register("confirmPassword", { required: true, minLength: 7 })}
                 type="password"
-                placeholder="Repita a senha"
+                placeholder="*******"
                 id="confirmPassword"
                 name="confirmPassword"
               />
@@ -160,7 +176,6 @@ const Register = () => {
           </Link>
         </Box>
       </Container>
-    </>
   );
 };
 
