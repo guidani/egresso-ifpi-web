@@ -10,14 +10,24 @@ import {
   Heading,
   Input,
   Select,
+  useToast,
+  UseToastOptions,
 } from "@chakra-ui/react";
+import {
+  collection,
+  getDocsFromServer,
+  query,
+  where,
+} from "firebase/firestore";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { db } from "../../../database/firebase/config";
 import { ICurso, NivelCurso } from "../../../types";
 import { addCursoToDatabase } from "../api/addCursoToDatabase";
 
 const CadastroCurso = () => {
+  const toast = useToast();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const {
@@ -27,15 +37,37 @@ const CadastroCurso = () => {
     formState: { errors },
   } = useForm<ICurso>();
 
+  const showToast = (
+    title: string,
+    status: UseToastOptions["status"],
+    description?: string
+  ) => {
+    return toast({
+      title: title,
+      description: description,
+      status: status,
+      duration: 2000,
+      isClosable: true,
+    });
+  };
+
   const submitForm = async (data: any) => {
-    try {
-      setLoading(true);
-      await addCursoToDatabase(data);
-      setLoading(false);
-      navigate(-1);
-    } catch (err) {
-      console.log(err);
-    }
+    const colRef = collection(db, "CURSOS");
+    const q = query(colRef, where("codcurso", "==", `${data?.codcurso}`));
+    await getDocsFromServer(q)
+      .then((resp) => {
+        console.log(resp.size);
+        if (resp.size !== 0) {
+          showToast("Já existe um curso com esse código!", "info");
+          return;
+        } else {
+          addCursoToDatabase(data);
+          navigate(-1);
+        }
+      })
+      .catch(() => {
+        showToast("OPS! Ocorreu um erro inesperado!", "error");
+      });
   };
 
   return (

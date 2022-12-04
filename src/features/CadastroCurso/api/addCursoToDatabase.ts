@@ -7,6 +7,7 @@ export const addCursoToDatabase = async (data: ICurso) => {
     const newCurso: ICurso = {
       nome: data.nome,
       nivel: data.nivel,
+      codcurso: data.codcurso
     };
 
     const cursoCollectionRef = collection(db, "CURSOS");
@@ -14,5 +15,6 @@ export const addCursoToDatabase = async (data: ICurso) => {
     return true;
   } catch (error) {
     console.log(error);
+    return false;
   }
 };

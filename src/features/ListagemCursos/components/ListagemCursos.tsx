@@ -55,6 +55,7 @@ const ListagemCursos = () => {
           id: course.id,
           nome: courseData.nome,
           nivel: courseData.nivel,
+          codcurso: courseData.codcurso,
         };
         courseList.push(newCourse);
         setCourses(courseList);
@@ -98,6 +99,12 @@ const ListagemCursos = () => {
                       Nível:{" "}
                     </Text>
                     <Text>{item.nivel}</Text>
+                  </Flex>
+                  <Flex>
+                    <Text fontWeight="bold" mr="2">
+                      Código:{" "}
+                    </Text>
+                    <Text>{item.codcurso}</Text>
                   </Flex>
                   <Flex gap={2}>
                     <Link to={`/administrativo/cursos/editar-curso/${item.id}`}>
