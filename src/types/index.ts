@@ -32,5 +32,6 @@ export enum TipoOcupacao {
 
 export interface ICurso {
   nome: string,
+  codcurso: string,
   nivel: NivelCurso
 }

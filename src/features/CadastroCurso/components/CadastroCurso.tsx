@@ -4,7 +4,12 @@ import {
   Container,
   Divider,
   Flex,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
   Heading,
+  Input,
+  Select,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -27,7 +32,7 @@ const CadastroCurso = () => {
       setLoading(true);
       await addCursoToDatabase(data);
       setLoading(false);
-      navigate(-1)
+      navigate(-1);
     } catch (err) {
       console.log(err);
     }
@@ -43,20 +48,36 @@ const CadastroCurso = () => {
       <div className="novo-curso_form">
         <form onSubmit={handleSubmit(submitForm)}>
           <div className="form-input-section">
-            <div className="input-group">
-              <label htmlFor="nomedocurso">Nome do curso*</label>
-              <input
+            <FormControl isInvalid={errors.nome} mb="2">
+              <FormLabel htmlFor="nomedocurso">Nome do curso*</FormLabel>
+              <Input
                 type="text"
                 id="nomedocurso"
                 placeholder="Nome do curso"
                 {...register("nome", { required: true, minLength: 3 })}
               />
-              {errors.nome && "Nome é obrigatório"}
-            </div>
+              <FormErrorMessage>
+                {errors.nome && "Nome é obrigatório"}
+              </FormErrorMessage>
+            </FormControl>
             {/*  */}
-            <div className="input-group">
-              <label htmlFor="niveldocurso">Nível do curso*</label>
-              <select
+            <FormControl isInvalid={errors.codcurso} mb="2">
+              <FormLabel htmlFor="codcurso">Código do curso*</FormLabel>
+              <Input
+                type="text"
+                id="codcurso"
+                placeholder="Código do curso"
+                {...register("codcurso", { required: true })}
+              />
+              <FormErrorMessage>
+                {errors.codcurso && "Código do curso é obrigatório"}
+              </FormErrorMessage>
+            </FormControl>
+            {/*  */}
+            <FormControl isInvalid={errors.nivel} mb='2'>
+              <FormLabel htmlFor="niveldocurso">Nível do curso*</FormLabel>
+              <Select
+              variant='outline'
                 id="niveldocurso"
                 {...register("nivel", { required: true })}
               >
@@ -76,8 +97,8 @@ const CadastroCurso = () => {
                 <option value={NivelCurso.tecnologo}>
                   {NivelCurso.tecnologo}
                 </option>
-              </select>
-            </div>
+              </Select>
+            </FormControl>
           </div>
           {/*  */}
           <Flex gap="4">
