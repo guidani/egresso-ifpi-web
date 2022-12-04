@@ -58,7 +58,7 @@ const Login = () => {
           <FormControl isInvalid={errors.userEmail}>
             <FormLabel htmlFor="userEmail">E-mail</FormLabel>
             <Input
-              {...register("userEmail", { required: true })}
+              {...register("userEmail", { required: true, pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/gi  })}
               type="email"
               placeholder="Seu e-mail"
               id="userEmail"
@@ -69,7 +69,7 @@ const Login = () => {
           <FormControl isInvalid={errors.userPassword}>
             <FormLabel htmlFor="userPassword">Senha</FormLabel>
             <Input
-              {...register("userPassword", { required: true })}
+              {...register("userPassword", { required: true, minLength: 7 })}
               type="password"
               placeholder="Sua senha"
               id="userPassword"
