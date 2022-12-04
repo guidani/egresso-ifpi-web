@@ -1,32 +1,43 @@
+import { Button, Container, Wrap, WrapItem } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import Dashboard from "../../Dashboard";
-import Wrapper from "../../ui/wrapper";
 import "./styles.css";
 
 const AdminDashboard = () => {
   return (
     <>
-      <Wrapper>
-        <div className="home-container">
-          <div className="btnRow">
-            <Link to="alunos/cadastro-aluno" className="btn btnPrimary">
-              Cadastrar Novo Aluno
+      <Container minW="full">
+        <Wrap>
+          <WrapItem>
+            <Link to="alunos/cadastro-aluno">
+              <Button colorScheme="green" width="full">
+                Cadastrar Novo Aluno
+              </Button>
             </Link>
-            <Link to="cursos/cadastro-curso" className="btn btnPrimary">
-              Cadastrar Novo Curso
+          </WrapItem>
+          <WrapItem>
+            <Link to="cursos/cadastro-curso">
+              <Button colorScheme="green" width="full">
+                Cadastrar Novo Curso
+              </Button>
             </Link>
-          </div>
-          <div className="btnRow">
-            <Link to="alunos/listagem-alunos" className="btn btnPrimary">
-              Ver alunos
+          </WrapItem>
+          <WrapItem>
+            <Link to="alunos/listagem-alunos">
+              <Button colorScheme="green" width="min-content">
+                Ver alunos
+              </Button>
             </Link>
-            <Link to="cursos/listagem-cursos" className="btn btnPrimary">
-              Ver cursos
+          </WrapItem>
+
+          <WrapItem>
+            <Link to="cursos/listagem-cursos">
+              <Button colorScheme="green">Ver cursos</Button>
             </Link>
-          </div>
-          <Dashboard />
-        </div>
-      </Wrapper>
+          </WrapItem>
+        </Wrap>
+        <Dashboard />
+      </Container>
     </>
   );
 };
