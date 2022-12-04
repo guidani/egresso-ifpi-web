@@ -66,8 +66,10 @@ const Register = () => {
         .then((credential: UserCredential) => {
           const userID = credential.user.uid;
           const userEmail = credential.user.email;
+          const userName = data.userName;
           setDoc(doc(db, "users", `${userID}`), {
             email: `${userEmail}`,
+            name: `${userName}`
           });
           showToast("Cadastro criado com sucesso.", "success");
         })
