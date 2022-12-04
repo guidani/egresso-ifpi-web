@@ -1,10 +1,28 @@
+import { Button, useToast, UseToastOptions } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import { FaSave } from "react-icons/fa";
 import { StatusMatriculaAluno } from "../../../types";
 
 const MatriculaForm = ({ update, index, value, control }) => {
+  const toast = useToast();
   const { register, handleSubmit } = useForm({
     defaultValues: value,
   });
+
+  const showToast = (
+    title: string,
+    status: UseToastOptions["status"],
+    description?: string
+  ) => {
+    return toast({
+      title: title,
+      description: description,
+      status: status,
+      duration: 2000,
+      isClosable: true,
+    });
+  };
+  
   return (
     <div>
       <div className="input-group">
@@ -68,15 +86,16 @@ const MatriculaForm = ({ update, index, value, control }) => {
           {...register("curso")}
         />
       </div>
-      <button
-        type="button"
-        className="btnPrimary"
+      <Button
+        rightIcon={<FaSave />}
+        colorScheme="green"
         onClick={handleSubmit((data) => {
           update(index, data);
+          showToast("As alterações foram salvas.", "success");
         })}
       >
         Salvar
-      </button>
+      </Button>
     </div>
   );
 };

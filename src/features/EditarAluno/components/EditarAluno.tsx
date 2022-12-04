@@ -1,6 +1,21 @@
+import {
+  Button,
+  Center,
+  Divider,
+  Flex,
+  Heading,
+  useToast,
+  UseToastOptions,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { Link, useParams } from "react-router-dom";
+import {
+  FaPlusSquare,
+  FaSave,
+  FaTimesCircle,
+  FaTrashAlt,
+} from "react-icons/fa";
+import { useNavigate, useParams } from "react-router-dom";
 import { TipoOcupacao } from "../../../types";
 import Wrapper from "../../ui/wrapper";
 import { getStudentFromDatabase } from "../api/getStudentFromDatabase";
@@ -11,6 +26,8 @@ import MatriculaForm from "./MatriculaForm";
 const fieldArrayName = "matriculas";
 
 const EditarAluno = () => {
+  const navigate = useNavigate();
+  const toast = useToast();
   const { studentId } = useParams();
   const [loading, setLoading] = useState(false);
   const {
@@ -37,14 +54,33 @@ const EditarAluno = () => {
     name: fieldArrayName,
   });
 
+  const showToast = (
+    title: string,
+    status: UseToastOptions["status"],
+    description?: string
+  ) => {
+    return toast({
+      title: title,
+      description: description,
+      status: status,
+      duration: 2000,
+      isClosable: true,
+    });
+  };
+
   const onSubmit = async (data: any) => {
     // Enviar dados do formulário para o banco de dados
     try {
       setLoading(true);
       await updateStudent(studentId!, data);
-      setLoading(false);
+      showToast("As alterações foram salvas.", "success");
     } catch (error) {
+      if (error) {
+        showToast("OPS! Algo deu errado!", "error");
+      }
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -69,11 +105,13 @@ const EditarAluno = () => {
   return (
     <>
       <Wrapper>
-        <div>Editar aluno</div>
+        <Center>
+          <Heading fontSize="2xl">Editar aluno</Heading>
+        </Center>
+        <Divider orientation="horizontal" m="2" />
         <div className="novo-aluno_form">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-input-section">
-              <h2>Dados do aluno</h2>
               <div className="input-group">
                 <label htmlFor="nomealuno">Nome:</label>
                 <input
@@ -121,8 +159,11 @@ const EditarAluno = () => {
               </div>
             </div>
             {/* //TODO deve ser possível adicionar várias matrículas */}
+            <Divider m="4" />
             <div className="form-input-section">
-              <h2>Matrícula</h2>
+              <Heading as="h2" size="md">
+                Matrículas
+              </Heading>
               {fields.map((field, index) => (
                 <fieldset key={field.id}>
                   <MatriculaForm
@@ -131,13 +172,21 @@ const EditarAluno = () => {
                     update={update}
                     value={field}
                   />
-                  <button onClick={() => remove(index)}>Remover</button>
+                  <Button
+                    rightIcon={<FaTrashAlt />}
+                    mt="2"
+                    colorScheme="red"
+                    onClick={() => remove(index)}
+                  >
+                    Remover
+                  </Button>
                 </fieldset>
               ))}
               <br />
-              <button
-                type="button"
-                className="btnPrimary"
+              <Button
+                rightIcon={<FaPlusSquare />}
+                mt="2"
+                colorScheme="green"
                 onClick={() => {
                   append({
                     curso: "",
@@ -149,9 +198,10 @@ const EditarAluno = () => {
                 }}
               >
                 Nova matrícula
-              </button>
+              </Button>
             </div>
             {/* // TODO end */}
+            <Divider m="4" />
             <div className="form-input-section">
               <h2>Ocupação</h2>
               <div className="input-group">
@@ -213,16 +263,19 @@ const EditarAluno = () => {
               </div>
             </div>
             {/* ### */}
-            <div className="btnRow">
-              <button type="submit" className="btnPrimary">
+            <Flex gap="2" mb="4">
+              <Button colorScheme="green" type="submit" rightIcon={<FaSave />}>
                 Salvar
-              </button>
-              <Link to="/">
-                <button type="reset" className="btnDanger">
-                  Cancelar
-                </button>
-              </Link>
-            </div>
+              </Button>
+
+              <Button
+                colorScheme="red"
+                rightIcon={<FaTimesCircle />}
+                onClick={() => navigate(-1)}
+              >
+                Cancelar
+              </Button>
+            </Flex>
           </form>
         </div>
       </Wrapper>

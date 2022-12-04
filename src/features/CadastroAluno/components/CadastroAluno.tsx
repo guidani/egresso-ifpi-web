@@ -191,11 +191,11 @@ const CadastroAluno = () => {
             </div>
             {/* ### */}
             <Flex gap="2" mb="4">
-              <Button colorScheme="green" type="submit" className="btnPrimary" rightIcon={<FaSave/>}>
+              <Button colorScheme="green" type="submit" rightIcon={<FaSave/>}>
                 Cadastrar
               </Button>
               <Link to="/">
-                <Button colorScheme="red" type="reset" className="btnDanger" rightIcon={<FaTimesCircle/>}>
+                <Button colorScheme="red" type="reset" rightIcon={<FaTimesCircle/>}>
                   Cancelar
                 </Button>
               </Link>
