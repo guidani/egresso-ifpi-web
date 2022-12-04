@@ -1,4 +1,16 @@
-import { Button, Center, Container, Divider, Heading } from "@chakra-ui/react";
+import {
+  Button,
+  Center,
+  Container,
+  Divider,
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Heading,
+  Input,
+  Select,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaSave, FaTimesCircle } from "react-icons/fa";
@@ -36,75 +48,90 @@ export const EditarCurso = () => {
   useEffect(() => {
     getCourseFromDatabase(courseId!)
       .then((resp) => {
+        setLoading(true);
         reset({
           nome: resp?.nome,
           nivel: resp?.nivel,
+          codcurso: resp?.codcurso,
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   return (
     <Container minW="full">
-      <div className="novo-curso_form">
-        {loading && <ChakraSpinner />}
-        <Center>
-          <Heading fontSize="2xl">Dados do curso</Heading>
-        </Center>
-        <Divider orientation="horizontal" m="2" />
-        <form onSubmit={handleSubmit(submitForm)}>
-          <div className="form-input-section">
-            <div className="input-group">
-              <label htmlFor="nomedocurso">Nome do curso*</label>
-              <input
-                type="text"
-                id="nomedocurso"
-                placeholder="Nome do curso"
-                {...register("nome", { required: true, minLength: 3 })}
-              />
-            </div>
-            {/*  */}
-            <div className="input-group">
-              <label htmlFor="niveldocurso">Nível do curso*</label>
-              <select
-                id="niveldocurso"
-                {...register("nivel", { required: true })}
-              >
-                <option value="" disabled>
-                  --ESCOLHA--
-                </option>
-                <option value={NivelCurso.bacharel}>
-                  {NivelCurso.bacharel}
-                </option>
-                <option value={NivelCurso.licenciatura}>
-                  {NivelCurso.licenciatura}
-                </option>
-                <option value={NivelCurso.medio_integrado}>
-                  {NivelCurso.medio_integrado}
-                </option>
-                <option value={NivelCurso.tecnico}>{NivelCurso.tecnico}</option>
-                <option value={NivelCurso.tecnologo}>
-                  {NivelCurso.tecnologo}
-                </option>
-              </select>
-            </div>
-          </div>
-          {/*  */}
-          <div className="btnRow">
-            <Button colorScheme="green" rightIcon={<FaSave />} type="submit">
-              Atualizar
-            </Button>
-            <Button
-              colorScheme="red"
-              rightIcon={<FaTimesCircle />}
-              type="reset"
-              onClick={() => navigate(-1)}
-            >
-              Cancelar
-            </Button>
-          </div>
-        </form>
-      </div>
+      {loading && <ChakraSpinner />}
+      <Center>
+        <Heading fontSize="2xl">Dados do curso</Heading>
+      </Center>
+      <Divider orientation="horizontal" m="2" />
+      <form onSubmit={handleSubmit(submitForm)}>
+        <FormControl isInvalid={errors.nome} mb="2">
+          <FormLabel htmlFor="nomedocurso">Nome do curso*</FormLabel>
+          <Input
+            type="text"
+            id="nomedocurso"
+            placeholder="Nome do curso"
+            {...register("nome", { required: true, minLength: 3 })}
+          />
+          <FormErrorMessage>
+            {errors.nome && "Nome é obrigatório"}
+          </FormErrorMessage>
+        </FormControl>
+        {/*  */}
+        <FormControl isInvalid={errors.codcurso} mb="2">
+          <FormLabel htmlFor="codcurso">Código do curso*</FormLabel>
+          <Input
+            type="text"
+            id="codcurso"
+            placeholder="Código do curso"
+            {...register("codcurso", { required: true })}
+          />
+          <FormErrorMessage>
+            {errors.codcurso && "Código do curso é obrigatório"}
+          </FormErrorMessage>
+        </FormControl>
+        {/*  */}
+        <FormControl className="input-group">
+          <FormLabel htmlFor="niveldocurso">Nível do curso*</FormLabel>
+          <Select
+            variant="outline"
+            id="niveldocurso"
+            {...register("nivel", { required: true })}
+          >
+            <option value="" disabled>
+              --ESCOLHA--
+            </option>
+            <option value={NivelCurso.bacharel}>{NivelCurso.bacharel}</option>
+            <option value={NivelCurso.licenciatura}>
+              {NivelCurso.licenciatura}
+            </option>
+            <option value={NivelCurso.medio_integrado}>
+              {NivelCurso.medio_integrado}
+            </option>
+            <option value={NivelCurso.tecnico}>{NivelCurso.tecnico}</option>
+            <option value={NivelCurso.tecnologo}>{NivelCurso.tecnologo}</option>
+          </Select>
+        </FormControl>
+
+        {/*  */}
+        <Flex gap={2}>
+          <Button colorScheme="green" rightIcon={<FaSave />} type="submit">
+            Atualizar
+          </Button>
+          <Button
+            colorScheme="red"
+            rightIcon={<FaTimesCircle />}
+            type="reset"
+            onClick={() => navigate(-1)}
+          >
+            Cancelar
+          </Button>
+        </Flex>
+      </form>
     </Container>
   );
 };
