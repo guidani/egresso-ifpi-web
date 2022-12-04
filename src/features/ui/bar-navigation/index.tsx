@@ -18,26 +18,32 @@ const Barnavigation = () => {
   };
 
   return (
-    <>
-      <Box w="full" bg="green.500" py="2" mb="4">
-        <Container minW="full">
-          <Flex justify="space-between">
-            <Box display="flex" gap='5' alignItems='center'>
-              <Image src={ifpi_logo} alt="imagem" boxSize="50px" bg='whiteAlpha.400' rounded='md'/>
-              <Link to={"/"}>
-                <Text fontSize="2xl" fontWeight='bold' color='white'>Egresso IFPI</Text>
-              </Link>
-            </Box>
-            <Flex align="center" gap="5">
-              <Text>Bem vindo: {user.email}</Text>
-              <Link to="/" onClick={handleLogOut}>
-                <Button rightIcon={<FaSignOutAlt />}>Sair</Button>
-              </Link>
-            </Flex>
+    <Box w="full" bg="green.500" py="2" mb="4">
+      <Container minW="full">
+        <Flex justify="space-between">
+          <Box display="flex" gap="5" alignItems="center">
+            <Image
+              src={ifpi_logo}
+              alt="imagem"
+              boxSize="50px"
+              bg="whiteAlpha.400"
+              rounded="md"
+            />
+            <Link to={"/"}>
+              <Text fontSize="2xl" fontWeight="bold" color="white">
+                Egresso IFPI
+              </Text>
+            </Link>
+          </Box>
+          <Flex align="center" gap="5">
+            <Text>Bem vindo: {user.email}</Text>
+            <Link to="/" onClick={handleLogOut}>
+              <Button rightIcon={<FaSignOutAlt />}>Sair</Button>
+            </Link>
           </Flex>
-        </Container>
-      </Box>
-    </>
+        </Flex>
+      </Container>
+    </Box>
   );
 };
 

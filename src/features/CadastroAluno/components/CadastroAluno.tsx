@@ -1,3 +1,4 @@
+import { Button, Center, Divider, Flex, Heading } from "@chakra-ui/react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { TipoOcupacao } from "../../../types";
@@ -5,6 +6,7 @@ import Wrapper from "../../ui/wrapper";
 import { addAlunoToDatabase } from "../api/addAlunoToDatabase";
 import { IAluno } from "../types/IAluno";
 import MatriculaForm from "./MatriculaForm";
+import {FaTrashAlt, FaPlusSquare, FaSave,FaTimesCircle} from 'react-icons/fa'
 
 const fieldArrayName = "matriculas";
 
@@ -40,11 +42,13 @@ const CadastroAluno = () => {
   return (
     <>
       <Wrapper>
-        <div>Cadastro de novo aluno</div>
+        <Center>
+          <Heading fontSize="2xl">Novo cadastro</Heading>
+        </Center>
+        <Divider orientation="horizontal" m="2" />
         <div className="novo-aluno_form">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-input-section">
-              <h2>Dados do aluno</h2>
               <div className="input-group">
                 <label htmlFor="nomealuno">Nome:</label>
                 <input
@@ -59,14 +63,14 @@ const CadastroAluno = () => {
                 <input
                   type="email"
                   placeholder="email@email.com.br"
-                  id="emailaluno"
+                  id="email"
                   {...register("email", { required: true })}
                 />
               </div>
               <div className="input-group">
                 <label htmlFor="telefonealuno">Telefone:</label>
                 <input
-                  type="string"
+                  type="text"
                   id="telefonealuno"
                   placeholder="86912345678"
                   {...register("telefone")}
@@ -91,8 +95,11 @@ const CadastroAluno = () => {
                 />
               </div>
             </div>
+            <Divider m="4" />
             <div className="form-input-section">
-              <h2>Matrícula</h2>
+              <Heading as="h2" size="md">
+                Matrículas
+              </Heading>
               {fields.map((field, index) => (
                 <fieldset key={field.id}>
                   <MatriculaForm
@@ -101,13 +108,13 @@ const CadastroAluno = () => {
                     update={update}
                     value={field}
                   />
-                  <button onClick={() => remove(index)}>Remover</button>
+                  <Button rightIcon={<FaTrashAlt/>} mt="2" colorScheme="red" onClick={() => remove(index)}>Remover</Button>
                 </fieldset>
               ))}
-              <br />
-              <button
-                type="button"
-                className="btnPrimary"
+              <Button
+              rightIcon={<FaPlusSquare/>}
+              mt="2"
+              colorScheme="green"
                 onClick={() => {
                   append({
                     curso: "",
@@ -118,9 +125,10 @@ const CadastroAluno = () => {
                   });
                 }}
               >
-                Nova matrícula
-              </button>
+                Adicionar nova matricula
+              </Button>
             </div>
+            <Divider m="4"/>
             <div className="form-input-section">
               <h2>Ocupação</h2>
               <div className="input-group">
@@ -182,16 +190,16 @@ const CadastroAluno = () => {
               </div>
             </div>
             {/* ### */}
-            <div className="btnRow">
-              <button type="submit" className="btnPrimary">
+            <Flex gap="2" mb="4">
+              <Button colorScheme="green" type="submit" className="btnPrimary" rightIcon={<FaSave/>}>
                 Cadastrar
-              </button>
+              </Button>
               <Link to="/">
-                <button type="reset" className="btnDanger">
+                <Button colorScheme="red" type="reset" className="btnDanger" rightIcon={<FaTimesCircle/>}>
                   Cancelar
-                </button>
+                </Button>
               </Link>
-            </div>
+              </Flex>
           </form>
         </div>
       </Wrapper>

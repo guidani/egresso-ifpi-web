@@ -1,5 +1,7 @@
+import { Button } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { StatusMatriculaAluno } from "../../../types";
+import {FaSave} from 'react-icons/fa'
 
 const MatriculaForm = ({ update, index, value, control }) => {
   const { register, handleSubmit } = useForm({
@@ -68,15 +70,15 @@ const MatriculaForm = ({ update, index, value, control }) => {
           {...register("curso")}
         />
       </div>
-      <button
-        type="button"
-        className="btnPrimary"
+      <Button
+      rightIcon={<FaSave/>}
+        colorScheme="green"
         onClick={handleSubmit((data) => {
           update(index, data);
         })}
       >
         Salvar
-      </button>
+      </Button>
     </div>
   );
 };
