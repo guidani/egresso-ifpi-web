@@ -1,4 +1,4 @@
-import { Button, Center, Divider, Flex, Heading } from "@chakra-ui/react";
+import { Button, Center, Divider, Flex, Heading, useToast, UseToastOptions } from "@chakra-ui/react";
 import { useFieldArray, useForm } from "react-hook-form";
 import {
   FaPlusSquare,
@@ -17,6 +17,7 @@ const fieldArrayName = "matriculas";
 
 const CadastroAluno = () => {
   const navigate = useNavigate();
+  const toast = useToast()
   const {
     control,
     register,
@@ -40,9 +41,31 @@ const CadastroAluno = () => {
     name: fieldArrayName,
   });
 
+  const showToast = (
+    title: string,
+    status: UseToastOptions["status"],
+    description?: string
+  ) => {
+    return toast({
+      title: title,
+      description: description,
+      status: status,
+      duration: 2000,
+      isClosable: true,
+    });
+  };
+
   const onSubmit = async (data: any) => {
-    // Enviar dados do formulário para o banco de dados
-    await addAlunoToDatabase(data);
+    try {
+      await addAlunoToDatabase(data);
+      showToast("Dados adicionados com sucesso", "success");
+    } catch (error) {
+      console.log(error);
+      if(error){
+        showToast("OPS! Ocorreu um erro inesperado!", "error");
+      }
+    }
+    
   };
 
   return (

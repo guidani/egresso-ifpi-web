@@ -1,6 +1,9 @@
 import { Box, Button, Container, Flex, Image, Text } from "@chakra-ui/react";
+import { doc, getDocFromServer } from "firebase/firestore";
+import { useEffect } from "react";
 import { FaSignOutAlt } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import { db } from "../../../database/firebase/config";
 import ifpi_logo from "../../../shared/images/topo_ifpi.png";
 import useAuth from "../../auth/hooks/useAuth";
 
@@ -16,6 +19,22 @@ const Barnavigation = () => {
       console.log(error);
     }
   };
+
+  // const getUserData = async () => {
+  //   try {
+  //     const docRef = doc(db, "users", `${user.id}`);
+  //     const docSnap = await getDocFromServer(docRef);
+  //     if (docSnap.exists()) {
+  //       console.log("Data: ", docSnap.data());
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getUserData();
+  // }, []);
 
   return (
     <Box w="full" bg="green.500" py="2" mb="4">
