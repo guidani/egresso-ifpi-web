@@ -1,10 +1,12 @@
+import { Button, Center, Container, Divider, Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import { ICurso, NivelCurso } from "../../../types";
-import Wrapper from "../../ui/wrapper";
+import { ChakraSpinner } from "../../ui/ChakraSpinner";
 import { getCourseFromDatabase } from "../api/getCourseFromDatabase";
 import { updateCourse } from "../api/updateCourse";
+import {FaSave, FaTimesCircle} from 'react-icons/fa'
 
 export const EditarCurso = () => {
   const { courseId } = useParams();
@@ -40,18 +42,15 @@ export const EditarCurso = () => {
   }, []);
 
   return (
-    <Wrapper>
+    <Container minW="full">
       <div className="novo-curso_form">
-        <div>
-          {loading && (
-            <>
-              <h2>Aguarde...</h2>
-            </>
-          )}
-        </div>
+        {loading && <ChakraSpinner />}
+        <Center>
+          <Heading fontSize="2xl">Dados do curso</Heading>
+        </Center>
+        <Divider orientation="horizontal" m="2" />
         <form onSubmit={handleSubmit(submitForm)}>
           <div className="form-input-section">
-            <h2>Dados do curso</h2>
             <div className="input-group">
               <label htmlFor="nomedocurso">Nome do curso*</label>
               <input
@@ -89,17 +88,17 @@ export const EditarCurso = () => {
           </div>
           {/*  */}
           <div className="btnRow">
-            <button type="submit" className="btnPrimary">
+            <Button colorScheme='green' rightIcon={<FaSave/>} type="submit">
               Atualizar
-            </button>
-            <Link to="/">
-              <button type="reset" className="btnDanger">
+            </Button>
+            <Link to="/administrativo/cursos/listagem-cursos">
+              <Button colorScheme='red' rightIcon={<FaTimesCircle/>} type="reset" >
                 Cancelar
-              </button>
+              </Button>
             </Link>
           </div>
         </form>
       </div>
-    </Wrapper>
+    </Container>
   );
 };
