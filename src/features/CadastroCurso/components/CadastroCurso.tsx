@@ -8,12 +8,13 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ICurso, NivelCurso } from "../../../types";
 import { addCursoToDatabase } from "../api/addCursoToDatabase";
 
 const CadastroCurso = () => {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const {
     control,
     register,
@@ -26,6 +27,7 @@ const CadastroCurso = () => {
       setLoading(true);
       await addCursoToDatabase(data);
       setLoading(false);
+      navigate(-1)
     } catch (err) {
       console.log(err);
     }
@@ -82,11 +84,9 @@ const CadastroCurso = () => {
             <Button colorScheme="green" type="submit">
               Cadastrar
             </Button>
-            <Link to="/">
-              <Button colorScheme="red" type="reset">
-                Cancelar
-              </Button>
-            </Link>
+            <Button colorScheme="red" type="reset" onClick={() => navigate(-1)}>
+              Cancelar
+            </Button>
           </Flex>
         </form>
       </div>
