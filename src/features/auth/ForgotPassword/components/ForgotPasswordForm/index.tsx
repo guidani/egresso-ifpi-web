@@ -83,7 +83,10 @@ const ForgotPasswordForm = () => {
           <FormControl isInvalid={errors.userEmail}>
             <FormLabel htmlFor="userEmail">E-mail</FormLabel>
             <Input
-              {...register("userEmail", { required: true })}
+              {...register("userEmail", {
+                required: true,
+                pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/gi,
+              })}
               type="email"
               placeholder="email@email.com"
               id="userEmail"
