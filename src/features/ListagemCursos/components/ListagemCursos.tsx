@@ -1,27 +1,69 @@
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Text,
+  useToast,
+  UseToastOptions,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ChakraSpinner } from "../../ui/ChakraSpinner";
 import { deleteCursoFromDatabase } from "../api/deleteCursoFromDatabase";
 import { getCursosFromDatabase } from "../api/getCursosFromDatabase";
 import { INewCourse } from "../types/INewCourse";
 
 const ListagemCursos = () => {
   const [courses, setCourses] = useState<INewCourse[]>([]);
+  const [loading, setLoading] = useState(false);
+  const toast = useToast();
+
+  const showToast = (
+    title: string,
+    status: UseToastOptions["status"],
+    description?: string
+  ) => {
+    return toast({
+      title: title,
+      description: description,
+      status: status,
+      duration: 2000,
+      isClosable: true,
+    });
+  };
+
+  const handleDeleteCourse = async (courseid: string) => {
+    try {
+      await deleteCursoFromDatabase(courseid);
+      showToast("Curso deletado", "success");
+    } catch (error) {
+      if (error) {
+        showToast("OPS! Ocorreu m erro.", "info");
+      }
+    }
+  };
 
   const getCursos = async () => {
-    let courseList: INewCourse[] = [];
-    const responseSnapshot = await getCursosFromDatabase();
-    responseSnapshot?.forEach((course) => {
-      const courseData = course.data();
-      const newCourse = {
-        id: course.id,
-        nome: courseData.nome,
-        nivel: courseData.nivel,
-      };
-      courseList.push(newCourse);
-      setCourses(courseList);
-    });
+    try {
+      setLoading(true);
+      let courseList: INewCourse[] = [];
+      const responseSnapshot = await getCursosFromDatabase();
+      responseSnapshot?.forEach((course) => {
+        const courseData = course.data();
+        const newCourse = {
+          id: course.id,
+          nome: courseData.nome,
+          nivel: courseData.nivel,
+        };
+        courseList.push(newCourse);
+        setCourses(courseList);
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -30,6 +72,7 @@ const ListagemCursos = () => {
 
   return (
     <>
+      {loading ? <ChakraSpinner /> : null}
       {courses.length == 0 ? (
         <p>Nenhum curso cadastrado </p>
       ) : (
@@ -45,11 +88,15 @@ const ListagemCursos = () => {
                   p="2"
                 >
                   <Flex>
-                    <Text fontWeight='bold' mr='2'>Curso: </Text>
+                    <Text fontWeight="bold" mr="2">
+                      Curso:{" "}
+                    </Text>
                     <Text>{item.nome}</Text>
                   </Flex>
                   <Flex>
-                    <Text  fontWeight='bold' mr='2'>Nível: </Text>
+                    <Text fontWeight="bold" mr="2">
+                      Nível:{" "}
+                    </Text>
                     <Text>{item.nivel}</Text>
                   </Flex>
                   <Flex gap={2}>
@@ -62,7 +109,7 @@ const ListagemCursos = () => {
                     <Button
                       rightIcon={<FaTrashAlt />}
                       colorScheme="red"
-                      onClick={() => deleteCursoFromDatabase(item.id)}
+                      onClick={() => handleDeleteCourse(item.id)}
                     >
                       Deletar
                     </Button>

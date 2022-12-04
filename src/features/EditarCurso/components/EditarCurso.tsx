@@ -1,15 +1,16 @@
 import { Button, Center, Container, Divider, Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useParams } from "react-router-dom";
+import { FaSave, FaTimesCircle } from "react-icons/fa";
+import { useNavigate, useParams } from "react-router-dom";
 import { ICurso, NivelCurso } from "../../../types";
 import { ChakraSpinner } from "../../ui/ChakraSpinner";
 import { getCourseFromDatabase } from "../api/getCourseFromDatabase";
 import { updateCourse } from "../api/updateCourse";
-import {FaSave, FaTimesCircle} from 'react-icons/fa'
 
 export const EditarCurso = () => {
   const { courseId } = useParams();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -24,9 +25,11 @@ export const EditarCurso = () => {
       setLoading(true);
       // Atualizar curso no banco de dados
       await updateCourse(courseId!, data);
-      setLoading(false);
+      navigate(-1);
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -88,14 +91,17 @@ export const EditarCurso = () => {
           </div>
           {/*  */}
           <div className="btnRow">
-            <Button colorScheme='green' rightIcon={<FaSave/>} type="submit">
+            <Button colorScheme="green" rightIcon={<FaSave />} type="submit">
               Atualizar
             </Button>
-            <Link to="/administrativo/cursos/listagem-cursos">
-              <Button colorScheme='red' rightIcon={<FaTimesCircle/>} type="reset" >
-                Cancelar
-              </Button>
-            </Link>
+            <Button
+              colorScheme="red"
+              rightIcon={<FaTimesCircle />}
+              type="reset"
+              onClick={() => navigate(-1)}
+            >
+              Cancelar
+            </Button>
           </div>
         </form>
       </div>
