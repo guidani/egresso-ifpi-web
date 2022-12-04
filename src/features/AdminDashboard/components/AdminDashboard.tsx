@@ -1,4 +1,4 @@
-import { Button, Container, Wrap, WrapItem } from "@chakra-ui/react";
+import { Button, Container, Divider, Wrap, WrapItem } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import Dashboard from "../../Dashboard";
 import "./styles.css";
@@ -22,6 +22,8 @@ const AdminDashboard = () => {
               </Button>
             </Link>
           </WrapItem>
+        </Wrap>
+        <Wrap mt='4'>
           <WrapItem>
             <Link to="alunos/listagem-alunos">
               <Button colorScheme="green" width="min-content">
@@ -36,6 +38,7 @@ const AdminDashboard = () => {
             </Link>
           </WrapItem>
         </Wrap>
+        <Divider m='4'/>
         <Dashboard />
       </Container>
     </>
