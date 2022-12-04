@@ -1,20 +1,24 @@
+import { Box, Button, Center, Container, Divider, Heading } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import ListagemCursos from "../../features/ListagemCursos/components/ListagemCursos";
-import Wrapper from "../../features/ui/wrapper";
 
 const Courses = () => {
   return (
     <>
-      <Wrapper>
-        <h1>Cursos cadastrados</h1>
-        <Link to="/administrativo/cursos/cadastro-curso">
-          <button className="btnPrimary">Cadastrar Novo Curso</button>
-        </Link>
-        <br />
-        <br />
-        <br />
+      <Container minW="full">
+        <Box mb="4">
+          <Center>
+            <Heading as="h1" mb="2">
+              Cursos cadastrados
+            </Heading>
+          </Center>
+          <Divider/>
+          <Link to="/administrativo/cursos/cadastro-curso">
+            <Button colorScheme="green">Cadastrar Novo Curso</Button>
+          </Link>
+        </Box>
         <ListagemCursos />
-      </Wrapper>
+      </Container>
     </>
   );
 };
