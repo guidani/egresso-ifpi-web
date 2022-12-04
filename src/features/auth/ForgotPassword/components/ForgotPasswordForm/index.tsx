@@ -67,55 +67,55 @@ const ForgotPasswordForm = () => {
   };
 
   return (
-    <>
-      <Container
-        h="100vh"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Box w='40rem'>
-          <Center mb="4">
-            <Image src="topo_ifpi.png" alt="Logo_IFPI" />
-          </Center>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <FormControl isInvalid={errors.userEmail}>
-              <FormLabel htmlFor="userEmail">E-mail</FormLabel>
-              <Input
-                {...register("userEmail", { required: true })}
-                type="email"
-                placeholder="email@email.com"
-                id="userEmail"
-                name="userEmail"
-              />
-              <FormErrorMessage>
-                {errors.userEmail && errorMessage("Preencha com um e-mail!")}
-              </FormErrorMessage>
+    <Container
+      h="100vh"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      bg="green.400"
+      minWidth="full"
+    >
+      <Box w="40rem" bg="white" rounded="md" p="4">
+        <Center mb="4">
+          <Image src="topo_ifpi.png" alt="Logo_IFPI" />
+        </Center>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <FormControl isInvalid={errors.userEmail}>
+            <FormLabel htmlFor="userEmail">E-mail</FormLabel>
+            <Input
+              {...register("userEmail", { required: true })}
+              type="email"
+              placeholder="email@email.com"
+              id="userEmail"
+              name="userEmail"
+            />
+            <FormErrorMessage>
+              {errors.userEmail && errorMessage("Preencha com um e-mail!")}
+            </FormErrorMessage>
 
-              <Button
-                type="submit"
-                w="full"
-                bg="green.400"
-                mt="4"
-                isLoading={isSubmitting}
-              >
-                Enviar email
-              </Button>
-            </FormControl>
-          </form>
-          <Spacer h="2" />
-          <Link
-            as={RouterDomLink}
-            to="/"
-            borderBottom="2px"
-            borderBottomColor="green.400"
-            _hover={{ textDecoration: "none" }}
-          >
-            voltar
-          </Link>
-        </Box>
-      </Container>
-    </>
+            <Button
+              type="submit"
+              w="full"
+              bg="green.400"
+              mt="4"
+              isLoading={isSubmitting}
+            >
+              Enviar email
+            </Button>
+          </FormControl>
+        </form>
+        <Spacer h="2" />
+        <Link
+          as={RouterDomLink}
+          to="/"
+          borderBottom="2px"
+          borderBottomColor="green.400"
+          _hover={{ textDecoration: "none" }}
+        >
+          voltar
+        </Link>
+      </Box>
+    </Container>
   );
 };
 
