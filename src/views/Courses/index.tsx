@@ -4,7 +4,6 @@ import ListagemCursos from "../../features/ListagemCursos/components/ListagemCur
 
 const Courses = () => {
   return (
-    <>
       <Container minW="full">
         <Box mb="4">
           <Center>
@@ -12,14 +11,13 @@ const Courses = () => {
               Cursos cadastrados
             </Heading>
           </Center>
-          <Divider/>
+          <Divider m='4'/>
           <Link to="/administrativo/cursos/cadastro-curso">
             <Button colorScheme="green">Cadastrar Novo Curso</Button>
           </Link>
         </Box>
         <ListagemCursos />
       </Container>
-    </>
   );
 };
 

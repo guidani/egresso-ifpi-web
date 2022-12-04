@@ -1,4 +1,6 @@
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { FaTrashAlt, FaUserEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { deleteStudentFromDatabase } from "../../api/deleteStudentFromDatabase";
 import { getAlunosFromDatabase } from "../../api/getAlunos";
@@ -40,21 +42,43 @@ const ListaAlunos = () => {
           {alunos.map((aluno, index) => {
             return (
               <div key={index}>
-                <p>{aluno.id}</p>
-                <p>{aluno.nome}</p>
-                <p>{aluno.email}</p>
-                <div className="btnRow">
-                  <Link to={`/administrativo/alunos/editar-aluno/${aluno.id}`}>
-                    <button className="btnPrimary">Editar</button>
-                  </Link>
+                <Box
+                  mb="2"
+                  rounded="md"
+                  border="1px"
+                  borderColor="gray.400"
+                  p="2"
+                >
+                  <Flex>
+                    <Text fontWeight="bold" mr="2">
+                      Nome:{" "}
+                    </Text>
+                    <Text>{aluno.nome}</Text>
+                  </Flex>
+                  <Flex>
+                    <Text fontWeight="bold" mr="2">
+                      E-mail:
+                    </Text>
+                    <Text>{aluno.email}</Text>
+                  </Flex>
+                  <Flex gap={2}>
+                    <Link
+                      to={`/administrativo/alunos/editar-aluno/${aluno.id}`}
+                    >
+                      <Button colorScheme="green" rightIcon={<FaUserEdit />}>
+                        Editar
+                      </Button>
+                    </Link>
 
-                  <button
-                    className="btnDanger"
-                    onClick={() => deleteStudentFromDatabase(aluno.id)}
-                  >
-                    Deletar
-                  </button>
-                </div>
+                    <Button
+                      colorScheme="red"
+                      rightIcon={<FaTrashAlt />}
+                      onClick={() => deleteStudentFromDatabase(aluno.id)}
+                    >
+                      Deletar
+                    </Button>
+                  </Flex>
+                </Box>
               </div>
             );
           })}
