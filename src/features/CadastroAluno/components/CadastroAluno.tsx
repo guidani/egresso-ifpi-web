@@ -1,16 +1,22 @@
 import { Button, Center, Divider, Flex, Heading } from "@chakra-ui/react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import {
+  FaPlusSquare,
+  FaSave,
+  FaTimesCircle,
+  FaTrashAlt,
+} from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import { TipoOcupacao } from "../../../types";
 import Wrapper from "../../ui/wrapper";
 import { addAlunoToDatabase } from "../api/addAlunoToDatabase";
 import { IAluno } from "../types/IAluno";
 import MatriculaForm from "./MatriculaForm";
-import {FaTrashAlt, FaPlusSquare, FaSave,FaTimesCircle} from 'react-icons/fa'
 
 const fieldArrayName = "matriculas";
 
 const CadastroAluno = () => {
+  const navigate = useNavigate();
   const {
     control,
     register,
@@ -108,13 +114,20 @@ const CadastroAluno = () => {
                     update={update}
                     value={field}
                   />
-                  <Button rightIcon={<FaTrashAlt/>} mt="2" colorScheme="red" onClick={() => remove(index)}>Remover</Button>
+                  <Button
+                    rightIcon={<FaTrashAlt />}
+                    mt="2"
+                    colorScheme="red"
+                    onClick={() => remove(index)}
+                  >
+                    Remover
+                  </Button>
                 </fieldset>
               ))}
               <Button
-              rightIcon={<FaPlusSquare/>}
-              mt="2"
-              colorScheme="green"
+                rightIcon={<FaPlusSquare />}
+                mt="2"
+                colorScheme="green"
                 onClick={() => {
                   append({
                     curso: "",
@@ -128,7 +141,7 @@ const CadastroAluno = () => {
                 Adicionar nova matricula
               </Button>
             </div>
-            <Divider m="4"/>
+            <Divider m="4" />
             <div className="form-input-section">
               <h2>Ocupação</h2>
               <div className="input-group">
@@ -191,15 +204,19 @@ const CadastroAluno = () => {
             </div>
             {/* ### */}
             <Flex gap="2" mb="4">
-              <Button colorScheme="green" type="submit" rightIcon={<FaSave/>}>
+              <Button colorScheme="green" type="submit" rightIcon={<FaSave />}>
                 Cadastrar
               </Button>
-              <Link to="/">
-                <Button colorScheme="red" type="reset" rightIcon={<FaTimesCircle/>}>
-                  Cancelar
-                </Button>
-              </Link>
-              </Flex>
+
+              <Button
+                colorScheme="red"
+                type="reset"
+                rightIcon={<FaTimesCircle />}
+                onClick={() => navigate(-1)}
+              >
+                Cancelar
+              </Button>
+            </Flex>
           </form>
         </div>
       </Wrapper>
