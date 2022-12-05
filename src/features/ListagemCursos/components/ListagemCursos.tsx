@@ -6,8 +6,11 @@ import {
   useToast,
   UseToastOptions,
 } from "@chakra-ui/react";
+import { collection, onSnapshot } from "firebase/firestore";
+import { useEffect } from "react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { db } from "../../../database/firebase/config";
 import { ChakraSpinner } from "../../ui/ChakraSpinner";
 import { deleteCursoFromDatabase } from "../api/deleteCursoFromDatabase";
 import { useGetCourses } from "../hooks/useGetCourses";
@@ -40,6 +43,8 @@ const ListagemCursos = () => {
       }
     }
   };
+
+  
 
   return (
     <>

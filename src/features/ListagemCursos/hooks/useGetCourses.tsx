@@ -1,4 +1,6 @@
+import { collection, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { db } from "../../../database/firebase/config";
 import { getCursosFromDatabase } from "../api/getCursosFromDatabase";
 import { INewCourse } from "../types/INewCourse";
 
@@ -29,7 +31,14 @@ export const useGetCourses = () => {
     }
   };
   useEffect(() => {
-    getCursos();
+    const unsub = onSnapshot(collection(db, "CURSOS"), (snapshot) => {
+      getCursos();
+    }, (error) => {
+      console.log(error);
+    });
+    return () => {
+      unsub();
+    };
   }, []);
   return { courses, loading };
 };
