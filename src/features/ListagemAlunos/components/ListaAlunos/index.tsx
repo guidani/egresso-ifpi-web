@@ -1,40 +1,17 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import { FaTrashAlt, FaUserEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { ChakraSpinner } from "../../../ui/ChakraSpinner";
 import { deleteStudentFromDatabase } from "../../api/deleteStudentFromDatabase";
-import { getAlunosFromDatabase } from "../../api/getAlunos";
+import { useGetAlunos } from "../../hooks/useGetAlunos";
 import "./styles.css";
 
-interface IAlunoSimpleView {
-  id: string;
-  nome: string;
-  email: string;
-}
-
 const ListaAlunos = () => {
-  const [alunos, setAlunos] = useState<IAlunoSimpleView[]>([]);
+  const { alunos, loading } = useGetAlunos();
 
-  const getAlunos = async () => {
-    let alunoList: IAlunoSimpleView[] = [];
-    const responseSnapshot = await getAlunosFromDatabase();
-    responseSnapshot?.forEach((aluno) => {
-      const alunoData = aluno.data();
-      const newAluno = {
-        id: aluno.id,
-        nome: alunoData.nome,
-        email: alunoData.email,
-      };
-      alunoList.push(newAluno);
-      setAlunos(alunoList);
-    });
-  };
-
-  useEffect(() => {
-    getAlunos();
-  }, []);
   return (
     <>
+      {loading ? <ChakraSpinner /> : null}
       {!alunos ? (
         <p>Não há nenhum aluno cadastrado</p>
       ) : (
