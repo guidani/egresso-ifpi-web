@@ -93,7 +93,7 @@ const ForgotPasswordForm = () => {
               name="userEmail"
             />
             <FormErrorMessage>
-              {errors.userEmail && errorMessage("Preencha com um e-mail!")}
+              {errors.userEmail && "Preencha com um e-mail!"}
             </FormErrorMessage>
 
             <Button
@@ -124,6 +124,3 @@ const ForgotPasswordForm = () => {
 
 export default ForgotPasswordForm;
 
-function errorMessage(message: string) {
-  return `${message}`;
-}
