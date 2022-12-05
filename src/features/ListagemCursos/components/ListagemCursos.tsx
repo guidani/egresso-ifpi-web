@@ -6,17 +6,14 @@ import {
   useToast,
   UseToastOptions,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ChakraSpinner } from "../../ui/ChakraSpinner";
 import { deleteCursoFromDatabase } from "../api/deleteCursoFromDatabase";
-import { getCursosFromDatabase } from "../api/getCursosFromDatabase";
-import { INewCourse } from "../types/INewCourse";
+import { useGetCourses } from "../hooks/useGetCourses";
 
 const ListagemCursos = () => {
-  const [courses, setCourses] = useState<INewCourse[]>([]);
-  const [loading, setLoading] = useState(false);
+  const { courses, loading } = useGetCourses();
   const toast = useToast();
 
   const showToast = (
@@ -43,33 +40,6 @@ const ListagemCursos = () => {
       }
     }
   };
-
-  const getCursos = async () => {
-    try {
-      setLoading(true);
-      let courseList: INewCourse[] = [];
-      const responseSnapshot = await getCursosFromDatabase();
-      responseSnapshot?.forEach((course) => {
-        const courseData = course.data();
-        const newCourse = {
-          id: course.id,
-          nome: courseData.nome,
-          nivel: courseData.nivel,
-          codcurso: courseData.codcurso,
-        };
-        courseList.push(newCourse);
-        setCourses(courseList);
-      });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getCursos();
-  }, []);
 
   return (
     <>
