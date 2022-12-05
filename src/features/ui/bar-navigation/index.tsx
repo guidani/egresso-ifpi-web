@@ -1,15 +1,32 @@
-import { Box, Button, Container, Flex, Image, Text } from "@chakra-ui/react";
-import { doc, getDocFromServer } from "firebase/firestore";
-import { useEffect } from "react";
-import { FaSignOutAlt } from "react-icons/fa";
+import {
+  Box,
+  Button,
+  Container,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  Flex,
+  Icon,
+  Image,
+  Text,
+  useDisclosure,
+  VStack,
+} from "@chakra-ui/react";
+import React, { RefObject } from "react";
+import { FaBars, FaSignOutAlt } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { db } from "../../../database/firebase/config";
 import ifpi_logo from "../../../shared/images/topo_ifpi.png";
 import useAuth from "../../auth/hooks/useAuth";
 
 const Barnavigation = () => {
   const { logOut, user } = useAuth();
   const navigate = useNavigate();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = React.useRef() as RefObject<any>;
 
   const handleLogOut = async () => {
     try {
@@ -54,12 +71,39 @@ const Barnavigation = () => {
               </Text>
             </Link>
           </Box>
-          <Flex align="center" gap="5">
+          <Flex align="center" gap="5" display={{ base: "none", md: "flex" }}>
             <Text>Bem vindo: {user.email}</Text>
             <Link to="/" onClick={handleLogOut}>
               <Button rightIcon={<FaSignOutAlt />}>Sair</Button>
             </Link>
           </Flex>
+          <Box display={{ base: "block", md: "none" }}>
+            <Button onClick={onOpen} ref={btnRef}>
+              <Icon as={FaBars} />
+            </Button>
+            <Drawer
+              isOpen={isOpen}
+              placement="right"
+              onClose={onClose}
+              finalFocusRef={btnRef}
+            >
+              <DrawerOverlay />
+              <DrawerContent bg='green.500'>
+                <DrawerCloseButton />
+                <DrawerHeader></DrawerHeader>
+                <DrawerBody>
+                  <VStack>
+                    <Text>Bem vindo: {user.email}</Text>
+                  </VStack>
+                </DrawerBody>
+                <DrawerFooter>
+                  <Link to="/" onClick={handleLogOut}>
+                    <Button rightIcon={<FaSignOutAlt />}>Sair</Button>
+                  </Link>
+                </DrawerFooter>
+              </DrawerContent>
+            </Drawer>
+          </Box>
         </Flex>
       </Container>
     </Box>
