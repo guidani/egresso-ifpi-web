@@ -1,4 +1,15 @@
-import { Button, Center, Divider, Flex, Heading, useToast, UseToastOptions } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Container,
+  Divider,
+  Flex,
+  Heading,
+  Link,
+  useToast,
+  UseToastOptions,
+} from "@chakra-ui/react";
 import { useFieldArray, useForm } from "react-hook-form";
 import {
   FaPlusSquare,
@@ -8,7 +19,6 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { TipoOcupacao } from "../../../types";
-import Wrapper from "../../ui/wrapper";
 import { addAlunoToDatabase } from "../api/addAlunoToDatabase";
 import { IAluno } from "../types/IAluno";
 import MatriculaForm from "./MatriculaForm";
@@ -17,7 +27,7 @@ const fieldArrayName = "matriculas";
 
 const CadastroAluno = () => {
   const navigate = useNavigate();
-  const toast = useToast()
+  const toast = useToast();
   const {
     control,
     register,
@@ -61,16 +71,25 @@ const CadastroAluno = () => {
       showToast("Dados adicionados com sucesso", "success");
     } catch (error) {
       console.log(error);
-      if(error){
+      if (error) {
         showToast("OPS! Ocorreu um erro inesperado!", "error");
       }
     }
-    
   };
 
   return (
     <>
-      <Wrapper>
+      <Container minW="full">
+        <Box>
+          <Link
+            borderBottom="2px"
+            borderBottomColor="green.400"
+            _hover={{ textDecoration: "none" }}
+            onClick={() => navigate(-1)}
+          >
+            voltar
+          </Link>
+        </Box>
         <Center>
           <Heading fontSize="2xl">Novo cadastro</Heading>
         </Center>
@@ -242,7 +261,7 @@ const CadastroAluno = () => {
             </Flex>
           </form>
         </div>
-      </Wrapper>
+      </Container>
     </>
   );
 };

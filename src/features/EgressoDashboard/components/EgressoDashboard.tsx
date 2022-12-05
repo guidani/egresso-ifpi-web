@@ -1,4 +1,4 @@
-import { Box, Button, Container, Text } from "@chakra-ui/react";
+import { Box, Button, Container, Link, Text } from "@chakra-ui/react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -52,6 +52,16 @@ export const EgressoDashboard = () => {
   return (
     <>
       <Container minW="full">
+        <Box mb='4'>
+          <Link
+            borderBottom="2px"
+            borderBottomColor="green.400"
+            _hover={{ textDecoration: "none" }}
+            onClick={() => navigate(-1)}
+          >
+            voltar
+          </Link>
+        </Box>
         {loading ? (
           <ChakraSpinner />
         ) : data.length <= 0 ? (

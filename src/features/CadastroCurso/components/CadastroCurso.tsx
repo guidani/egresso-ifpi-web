@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Center,
   Container,
@@ -12,6 +13,7 @@ import {
   Select,
   useToast,
   UseToastOptions,
+  Link
 } from "@chakra-ui/react";
 import {
   collection,
@@ -72,6 +74,16 @@ const CadastroCurso = () => {
 
   return (
     <Container minW="full">
+      <Box>
+        <Link
+          borderBottom="2px"
+          borderBottomColor="green.400"
+          _hover={{ textDecoration: "none" }}
+          onClick={() => navigate(-1)}
+        >
+          voltar
+        </Link>
+      </Box>
       <Center>
         <Heading fontSize="2xl">Novo curso</Heading>
       </Center>

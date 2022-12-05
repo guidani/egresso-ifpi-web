@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Center,
   Container,
@@ -9,6 +10,7 @@ import {
   FormLabel,
   Heading,
   Input,
+  Link,
   Select,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -63,6 +65,16 @@ export const EditarCurso = () => {
 
   return (
     <Container minW="full">
+      <Box>
+        <Link
+          borderBottom="2px"
+          borderBottomColor="green.400"
+          _hover={{ textDecoration: "none" }}
+          onClick={() => navigate(-1)}
+        >
+          voltar
+        </Link>
+      </Box>
       {loading && <ChakraSpinner />}
       <Center>
         <Heading fontSize="2xl">Dados do curso</Heading>
