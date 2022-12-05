@@ -10,21 +10,13 @@ import {
 import { FaUserPlus } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import ListaAlunos from "../../features/ListagemAlunos/components/ListaAlunos";
+import { BackButton } from "../../features/ui/BackButton";
 
 const Alunos = () => {
   const navigate = useNavigate()
   return (
     <Container minW="full">
-      <Box mb='4'>
-          <ChakraLink
-            borderBottom="2px"
-            borderBottomColor="green.400"
-            _hover={{ textDecoration: "none" }}
-            onClick={() => navigate(-1)}
-          >
-            voltar
-          </ChakraLink>
-        </Box>
+      <BackButton/>
       <Box mb="4">
         <Center>
           <Heading as="h1" mb="2">

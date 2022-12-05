@@ -19,6 +19,7 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { TipoOcupacao } from "../../../types";
+import { BackButton } from "../../ui/BackButton";
 import { addAlunoToDatabase } from "../api/addAlunoToDatabase";
 import { IAluno } from "../types/IAluno";
 import MatriculaForm from "./MatriculaForm";
@@ -80,16 +81,7 @@ const CadastroAluno = () => {
   return (
     <>
       <Container minW="full">
-        <Box>
-          <Link
-            borderBottom="2px"
-            borderBottomColor="green.400"
-            _hover={{ textDecoration: "none" }}
-            onClick={() => navigate(-1)}
-          >
-            voltar
-          </Link>
-        </Box>
+        <BackButton/>
         <Center>
           <Heading fontSize="2xl">Novo cadastro</Heading>
         </Center>

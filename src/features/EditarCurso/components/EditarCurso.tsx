@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Center,
   Container,
@@ -10,7 +9,6 @@ import {
   FormLabel,
   Heading,
   Input,
-  Link,
   Select,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -18,6 +16,7 @@ import { useForm } from "react-hook-form";
 import { FaSave, FaTimesCircle } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import { ICurso, NivelCurso } from "../../../types";
+import { BackButton } from "../../ui/BackButton";
 import { ChakraSpinner } from "../../ui/ChakraSpinner";
 import { getCourseFromDatabase } from "../api/getCourseFromDatabase";
 import { updateCourse } from "../api/updateCourse";
@@ -65,16 +64,7 @@ export const EditarCurso = () => {
 
   return (
     <Container minW="full">
-      <Box>
-        <Link
-          borderBottom="2px"
-          borderBottomColor="green.400"
-          _hover={{ textDecoration: "none" }}
-          onClick={() => navigate(-1)}
-        >
-          voltar
-        </Link>
-      </Box>
+      <BackButton />
       {loading && <ChakraSpinner />}
       <Center>
         <Heading fontSize="2xl">Dados do curso</Heading>

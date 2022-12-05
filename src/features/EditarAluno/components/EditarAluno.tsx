@@ -20,6 +20,7 @@ import {
 } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import { TipoOcupacao } from "../../../types";
+import { BackButton } from "../../ui/BackButton";
 import { getStudentFromDatabase } from "../api/getStudentFromDatabase";
 import { updateStudent } from "../api/updateStudent";
 import { IAluno } from "../types/IAluno";
@@ -106,16 +107,7 @@ const EditarAluno = () => {
 
   return (
     <Container minW="full">
-      <Box>
-        <Link
-          borderBottom="2px"
-          borderBottomColor="green.400"
-          _hover={{ textDecoration: "none" }}
-          onClick={() => navigate(-1)}
-        >
-          voltar
-        </Link>
-      </Box>
+      <BackButton/>
       <Center>
         <Heading fontSize="2xl">Editar aluno</Heading>
       </Center>

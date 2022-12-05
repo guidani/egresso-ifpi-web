@@ -26,6 +26,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { db } from "../../../database/firebase/config";
 import { ICurso, NivelCurso } from "../../../types";
+import { BackButton } from "../../ui/BackButton";
 import { addCursoToDatabase } from "../api/addCursoToDatabase";
 
 const CadastroCurso = () => {
@@ -74,16 +75,7 @@ const CadastroCurso = () => {
 
   return (
     <Container minW="full">
-      <Box>
-        <Link
-          borderBottom="2px"
-          borderBottomColor="green.400"
-          _hover={{ textDecoration: "none" }}
-          onClick={() => navigate(-1)}
-        >
-          voltar
-        </Link>
-      </Box>
+      <BackButton/>
       <Center>
         <Heading fontSize="2xl">Novo curso</Heading>
       </Center>
