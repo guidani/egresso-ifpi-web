@@ -14,6 +14,7 @@ import { FaSave } from "react-icons/fa";
 import { StatusMatriculaAluno } from "../../../types";
 import { useGetCourses } from "../hooks/useGetCourses";
 import { IMatricula } from "../types/IAluno";
+import {useEffect} from 'react'
 
 const MatriculaForm = ({ update, index, value, control }: any) => {
   const { courses } = useGetCourses();
@@ -21,7 +22,8 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    setValue,
+    formState: { errors, defaultValues },
   } = useForm<IMatricula>({
     defaultValues: {
       ...value,
@@ -41,6 +43,14 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
       isClosable: true,
     });
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setValue('curso', `${value?.curso}`)
+    }, 1000)
+    
+  }, [defaultValues])
+  
 
   return (
     <>
