@@ -60,7 +60,7 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
         </FormErrorMessage>
       </FormControl>
       {/*  */}
-      <Stack direction={{base: 'column', md: "row"}}>
+      <Stack direction={{ base: "column", md: "row" }}>
         <FormControl isInvalid={errors.numeroMatricula}>
           <FormLabel htmlFor="matriculaaluno">Número da matrícula</FormLabel>
           <Input
@@ -101,7 +101,7 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
         </FormControl>
       </Stack>
       {/*  */}
-      <Stack direction={{base: 'column', md: "row"}}>
+      <Stack direction={{ base: "column", md: "row" }}>
         <FormControl isInvalid={errors.dataDeInicioCurso}>
           <FormLabel htmlFor="datainiciocursoaluno">Data de início:</FormLabel>
           <Input

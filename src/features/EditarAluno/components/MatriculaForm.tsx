@@ -39,7 +39,7 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
   };
 
   return (
-    <div>
+    <>
       <FormControl isInvalid={errors.curso}>
         <FormLabel htmlFor="cursoaluno">Curso:</FormLabel>
         <Select {...register("curso", { required: true })}>
@@ -135,7 +135,7 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
       >
         Salvar
       </Button>
-    </div>
+    </>
   );
 };
 
