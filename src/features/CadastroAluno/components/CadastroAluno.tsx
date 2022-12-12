@@ -120,7 +120,6 @@ const CadastroAluno = () => {
               {errors.email && <p>Este campo é obrigatório.</p>}
             </FormErrorMessage>
           </FormControl>
-
           <FormControl isInvalid={errors.telefone}>
             <FormLabel htmlFor="telefonealuno">Telefone:</FormLabel>
             <Input
