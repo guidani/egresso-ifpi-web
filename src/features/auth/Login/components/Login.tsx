@@ -7,6 +7,7 @@ import {
   Container,
   Flex,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Image,
   Input,
@@ -58,13 +59,18 @@ const Login = () => {
           <FormControl isInvalid={errors.userEmail}>
             <FormLabel htmlFor="userEmail">E-mail</FormLabel>
             <Input
-              {...register("userEmail", { required: true, pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/gi  })}
+              {...register("userEmail", {
+                required: true,
+                pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/gi,
+              })}
               type="email"
               placeholder="Seu e-mail"
               id="userEmail"
               name="userEmail"
             />
-            {errors.userEmail && "Insira um e-mail!"}
+            <FormErrorMessage>
+              {errors.userEmail && "Insira um e-mail!"}
+            </FormErrorMessage>
           </FormControl>
           <FormControl isInvalid={errors.userPassword}>
             <FormLabel htmlFor="userPassword">Senha</FormLabel>
@@ -75,7 +81,9 @@ const Login = () => {
               id="userPassword"
               name="userPassword"
             />
-            {errors.userPassword && "Insira a senha."}
+            <FormErrorMessage>
+              {errors.userPassword && "Insira a senha."}
+            </FormErrorMessage>
           </FormControl>
           <Button
             type="submit"
