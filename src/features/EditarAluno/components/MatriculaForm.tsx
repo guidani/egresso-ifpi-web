@@ -13,17 +13,21 @@ import { useForm } from "react-hook-form";
 import { FaSave } from "react-icons/fa";
 import { StatusMatriculaAluno } from "../../../types";
 import { useGetCourses } from "../hooks/useGetCourses";
+import { IMatricula } from "../types/IAluno";
 
 const MatriculaForm = ({ update, index, value, control }: any) => {
+  const { courses } = useGetCourses();
   const toast = useToast();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    defaultValues: value,
+  } = useForm<IMatricula>({
+    defaultValues: {
+      ...value,
+      curso: value?.curso
+    },
   });
-  const { courses } = useGetCourses();
   const showToast = (
     title: string,
     status: UseToastOptions["status"],
@@ -40,6 +44,7 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
 
   return (
     <>
+    {/* {console.log(value)} */}
       <FormControl isInvalid={Boolean(errors.curso)}>
         <FormLabel htmlFor="cursoaluno">Curso:</FormLabel>
         <Select {...register("curso", { required: true })} defaultValue={value?.curso}>
