@@ -1,11 +1,26 @@
-import { Button, useToast } from "@chakra-ui/react";
+import {
+  Button,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
+  Select,
+  useToast,
+  UseToastOptions,
+} from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { FaSave } from "react-icons/fa";
 import { StatusMatriculaAluno } from "../../../types";
+import { useGetCourses } from "../hooks/useGetCourses";
 
-const MatriculaForm = ({ update, index, value, control }) => {
+const MatriculaForm = ({ update, index, value, control }: any) => {
   const toast = useToast();
-  const { register, handleSubmit } = useForm({
+  const { courses, loading } = useGetCourses();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: value,
   });
 
@@ -24,38 +39,51 @@ const MatriculaForm = ({ update, index, value, control }) => {
   };
 
   return (
-    <div>
-      <div className="input-group">
-        <label htmlFor="matriculaaluno">Número da matrícula</label>
-        <input
+    <>
+      <FormControl isInvalid={errors.numeroMatricula}>
+        <FormLabel htmlFor="matriculaaluno">Número da matrícula</FormLabel>
+        <Input
           type="text"
-          {...register("numeroMatricula")}
+          {...register("numeroMatricula", { required: true })}
           id="matriculaaluno"
           placeholder="número da matrícula"
         />
-      </div>
-      <div className="input-group">
-        <label htmlFor="datainiciocursoaluno">Data de início:</label>
-        <input
+        <FormErrorMessage>
+          {errors.numeroMatricula && <p>Esse campo é obrigatório.</p>}
+        </FormErrorMessage>
+      </FormControl>
+      {/*  */}
+      <FormControl isInvalid={errors.dataDeInicioCurso}>
+        <FormLabel htmlFor="datainiciocursoaluno">Data de início:</FormLabel>
+        <Input
           type="date"
           id="datainiciocursoaluno"
-          {...register("dataDeInicioCurso")}
+          {...register("dataDeInicioCurso", { required: true })}
         />
-      </div>
-      <div className="input-group">
-        <label htmlFor="dataencerramentocursoaluno">
+        <FormErrorMessage>
+          {errors.dataDeInicioCurso && <p>Este campo é obrigatório.</p>}
+        </FormErrorMessage>
+      </FormControl>
+      {/*  */}
+      <FormControl isInvalid={errors.dataDeEncerramentoCurso}>
+        <FormLabel htmlFor="dataencerramentocursoaluno">
           Data de encerramento:
-        </label>
-        <input
+        </FormLabel>
+        <Input
           type="date"
           id="dataencerramentocursoaluno"
-          {...register("dataDeEncerramentoCurso")}
+          {...register("dataDeEncerramentoCurso", { required: true })}
         />
-      </div>
+        <FormErrorMessage>
+          {errors.dataDeEncerramentoCurso && <p>Este campo é obrigatório.</p>}
+        </FormErrorMessage>
+      </FormControl>
 
-      <div className="input-group">
-        <label htmlFor="alunostatusmatricula">Status da matrícula:</label>
-        <select
+      <FormControl isInvalid={errors.statusDaMatricula}>
+        <FormLabel htmlFor="alunostatusmatricula">
+          Status da matrícula:
+        </FormLabel>
+        <Select
           id="alunostatusmatricula"
           defaultValue=""
           {...register("statusDaMatricula")}
@@ -75,17 +103,28 @@ const MatriculaForm = ({ update, index, value, control }) => {
           <option value={StatusMatriculaAluno.cancelado}>
             {StatusMatriculaAluno.cancelado}
           </option>
-        </select>
-      </div>
-      <div className="input-group">
-        <label htmlFor="cursoaluno">Curso:</label>
-        <input
-          type="text"
-          placeholder="Curso do aluno"
-          id="cursoaluno"
-          {...register("curso")}
-        />
-      </div>
+        </Select>
+      </FormControl>
+      {/*  */}
+      <FormControl isInvalid={errors.curso}>
+        <FormLabel htmlFor="cursoaluno">Curso:</FormLabel>
+        <Select defaultValue="" {...register("curso", { required: true })}>
+          <option value="" disabled>
+            --ESCOLHA--
+          </option>
+          {courses.map((course, index) => {
+            return (
+              <option key={index} value={course.nome}>
+                {course.nome}
+              </option>
+            );
+          })}
+        </Select>
+        <FormErrorMessage>
+          {errors.curso && <p>Este campo é obrigatório.</p>}
+        </FormErrorMessage>
+      </FormControl>
+      {/*  */}
       <Button
         rightIcon={<FaSave />}
         colorScheme="green"
@@ -96,7 +135,7 @@ const MatriculaForm = ({ update, index, value, control }) => {
       >
         Salvar
       </Button>
-    </div>
+    </>
   );
 };
 
