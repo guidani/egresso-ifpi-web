@@ -13,16 +13,26 @@ import { useForm } from "react-hook-form";
 import { FaSave } from "react-icons/fa";
 import { StatusMatriculaAluno } from "../../../types";
 import { useGetCourses } from "../hooks/useGetCourses";
+import {yupResolver} from '@hookform/resolvers/yup'
+import * as yup from 'yup';
 
 const MatriculaForm = ({ update, index, value, control }: any) => {
   const toast = useToast();
   const { courses, loading } = useGetCourses();
+  const matriculaSchema = yup.object().shape({
+    curso: yup.string().required(),
+    numeroMatricula: yup.string().required(),
+    statusDaMatricula: yup.string().required(),
+    dataDeInicioCurso: yup.date().required(),
+    dataDeEncerramentoCurso: yup.date().required().min(yup.ref('dataDeInicioCurso'), 'A data de encerramento do curso não pode ser inferior a data de inicio do curso.')
+  })
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    defaultValues: value,
+    resolver: yupResolver(matriculaSchema),
+    // defaultValues: value,
   });
 
   const showToast = (
@@ -38,6 +48,8 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
       isClosable: true,
     });
   };
+
+  
 
   return (
     <>
@@ -110,7 +122,7 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
             {...register("dataDeInicioCurso", { required: true })}
           />
           <FormErrorMessage>
-            {errors.dataDeInicioCurso && <p>Este campo é obrigatório.</p>}
+            {errors.dataDeInicioCurso && `${errors?.dataDeInicioCurso?.message}`}
           </FormErrorMessage>
         </FormControl>
         {/*  */}
@@ -124,7 +136,7 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
             {...register("dataDeEncerramentoCurso", { required: true })}
           />
           <FormErrorMessage>
-            {errors.dataDeEncerramentoCurso && <p>Este campo é obrigatório.</p>}
+            {errors.dataDeEncerramentoCurso && `${errors?.dataDeEncerramentoCurso?.message}`}
           </FormErrorMessage>
         </FormControl>
       </Stack>
