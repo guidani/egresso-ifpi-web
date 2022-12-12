@@ -56,7 +56,7 @@ const Login = () => {
           <Image src="topo_ifpi.png" alt="Logo_IFPI" />
         </Center>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormControl isInvalid={errors.userEmail}>
+          <FormControl isInvalid={Boolean(errors.userEmail)}>
             <FormLabel htmlFor="userEmail">E-mail</FormLabel>
             <Input
               {...register("userEmail", {
@@ -72,7 +72,7 @@ const Login = () => {
               {errors.userEmail && "Insira um e-mail!"}
             </FormErrorMessage>
           </FormControl>
-          <FormControl isInvalid={errors.userPassword}>
+          <FormControl isInvalid={Boolean(errors.userPassword)}>
             <FormLabel htmlFor="userPassword">Senha</FormLabel>
             <Input
               {...register("userPassword", { required: true, minLength: 7 })}

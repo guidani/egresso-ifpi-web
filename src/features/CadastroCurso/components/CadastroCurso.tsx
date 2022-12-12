@@ -82,7 +82,7 @@ const CadastroCurso = () => {
       <Divider orientation="horizontal" m="2" />
 
       <form onSubmit={handleSubmit(submitForm)}>
-        <FormControl isInvalid={errors.nome} mb="2">
+        <FormControl isInvalid={Boolean(errors.nome)} mb="2">
           <FormLabel htmlFor="nomedocurso">Nome do curso*</FormLabel>
           <Input
             type="text"
@@ -95,7 +95,7 @@ const CadastroCurso = () => {
           </FormErrorMessage>
         </FormControl>
         {/*  */}
-        <FormControl isInvalid={errors.codcurso} mb="2">
+        <FormControl isInvalid={Boolean(errors.codcurso)} mb="2">
           <FormLabel htmlFor="codcurso">Código do curso*</FormLabel>
           <Input
             type="text"
@@ -108,7 +108,7 @@ const CadastroCurso = () => {
           </FormErrorMessage>
         </FormControl>
         {/*  */}
-        <FormControl isInvalid={errors.nivel} mb="2">
+        <FormControl isInvalid={Boolean(errors.nivel)} mb="2">
           <FormLabel htmlFor="niveldocurso">Nível do curso*</FormLabel>
           <Select
             variant="outline"

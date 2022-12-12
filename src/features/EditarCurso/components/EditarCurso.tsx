@@ -71,7 +71,7 @@ export const EditarCurso = () => {
       </Center>
       <Divider orientation="horizontal" m="2" />
       <form onSubmit={handleSubmit(submitForm)}>
-        <FormControl isInvalid={errors.nome} mb="2">
+        <FormControl isInvalid={Boolean(errors.nome)} mb="2">
           <FormLabel htmlFor="nomedocurso">Nome do curso*</FormLabel>
           <Input
             type="text"
@@ -84,7 +84,7 @@ export const EditarCurso = () => {
           </FormErrorMessage>
         </FormControl>
         {/*  */}
-        <FormControl isInvalid={errors.codcurso} mb="2">
+        <FormControl isInvalid={Boolean(errors.codcurso)} mb="2">
           <FormLabel htmlFor="codcurso">Código do curso*</FormLabel>
           <Input
             type="text"

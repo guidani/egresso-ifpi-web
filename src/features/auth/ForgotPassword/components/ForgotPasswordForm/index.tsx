@@ -80,7 +80,7 @@ const ForgotPasswordForm = () => {
           <Image src="topo_ifpi.png" alt="Logo_IFPI" />
         </Center>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormControl isInvalid={errors.userEmail}>
+          <FormControl isInvalid={Boolean(errors.userEmail)}>
             <FormLabel htmlFor="userEmail">E-mail</FormLabel>
             <Input
               {...register("userEmail", {

@@ -40,8 +40,8 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
 
   return (
     <>
-      <FormControl isInvalid={errors.curso}>
-        {console.log(value.curso)}
+      <FormControl isInvalid={Boolean(errors.curso)}>
+        
         <FormLabel htmlFor="cursoaluno">Curso:</FormLabel>
         <Select {...register("curso", { required: true })} defaultValue={value?.curso}>
           <option value="" disabled>
@@ -59,7 +59,7 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
           {errors.curso && <p>Este campo é obrigatório.</p>}
         </FormErrorMessage>
       </FormControl>
-      <FormControl isInvalid={errors.numeroMatricula}>
+      <FormControl isInvalid={Boolean(errors.numeroMatricula)}>
         <FormLabel htmlFor="matriculaaluno">Número da matrícula</FormLabel>
         <Input
           type="text"
@@ -72,7 +72,7 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
         </FormErrorMessage>
       </FormControl>
       <Stack direction={{ base: "column", md: "row" }}>
-        <FormControl isInvalid={errors.dataDeInicioCurso}>
+        <FormControl isInvalid={Boolean(errors.dataDeInicioCurso)}>
           <FormLabel htmlFor="datainiciocursoaluno">Data de início:</FormLabel>
           <Input
             type="date"
@@ -84,7 +84,7 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
           </FormErrorMessage>
         </FormControl>
         {/*  */}
-        <FormControl isInvalid={errors.dataDeEncerramentoCurso}>
+        <FormControl isInvalid={Boolean(errors.dataDeEncerramentoCurso)}>
           <FormLabel htmlFor="dataencerramentocursoaluno">
             Data de encerramento:
           </FormLabel>
@@ -99,7 +99,7 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
         </FormControl>
       </Stack>
 
-      <FormControl isInvalid={errors.statusDaMatricula}>
+      <FormControl isInvalid={Boolean(errors.statusDaMatricula)}>
         <FormLabel htmlFor="alunostatusmatricula">
           Status da matrícula:
         </FormLabel>

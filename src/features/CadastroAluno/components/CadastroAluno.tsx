@@ -94,7 +94,7 @@ const CadastroAluno = () => {
       <Divider orientation="horizontal" m="2" />
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormControl isInvalid={errors.nome}>
+        <FormControl isInvalid={Boolean(errors.nome)}>
           <FormLabel htmlFor="nomealuno">Nome:</FormLabel>
           <Input
             type="text"
@@ -108,7 +108,7 @@ const CadastroAluno = () => {
         </FormControl>
         {/*  */}
         <Stack direction={{ base: "column", md: "row" }}>
-          <FormControl isInvalid={errors.email}>
+          <FormControl isInvalid={Boolean(errors.email)}>
             <FormLabel htmlFor="email">E-mail:</FormLabel>
             <Input
               type="email"
@@ -120,7 +120,7 @@ const CadastroAluno = () => {
               {errors.email && <p>Este campo é obrigatório.</p>}
             </FormErrorMessage>
           </FormControl>
-          <FormControl isInvalid={errors.telefone}>
+          <FormControl isInvalid={Boolean(errors.telefone)}>
             <FormLabel htmlFor="telefonealuno">Telefone:</FormLabel>
             <Input
               type="text"
@@ -135,7 +135,7 @@ const CadastroAluno = () => {
         </Stack>
         {/*  */}
         <Stack direction={{ base: "column", md: "row" }}>
-          <FormControl isInvalid={errors.dataDeNascimento}>
+          <FormControl isInvalid={Boolean(errors.dataDeNascimento)}>
             <FormLabel htmlFor="datanascimentoaluno">
               Data de nascimento:
             </FormLabel>
@@ -149,7 +149,7 @@ const CadastroAluno = () => {
             </FormErrorMessage>
           </FormControl>
           {/*  */}
-          <FormControl isInvalid={errors.cpf}>
+          <FormControl isInvalid={Boolean(errors.cpf)}>
             <FormLabel htmlFor="cpfaluno">CPF:</FormLabel>
             <Input
               type="text"
@@ -210,7 +210,7 @@ const CadastroAluno = () => {
         </Heading>
 
         {/*  */}
-        <FormControl isInvalid={errors.localDeTrabalho}>
+        <FormControl isInvalid={Boolean(errors.localDeTrabalho)}>
           <FormLabel htmlFor="localdetrabalhoaluno">Local:</FormLabel>
           <Input
             type="text"
@@ -224,7 +224,7 @@ const CadastroAluno = () => {
         </FormControl>
         {/*  */}
         <Stack direction={{ base: "column", md: "row" }}>
-          <FormControl isInvalid={errors.dataDeInicioTrabalho}>
+          <FormControl isInvalid={Boolean(errors.dataDeInicioTrabalho)}>
             <FormLabel htmlFor="datainiciotrabalhoaluno">
               Data de início:
             </FormLabel>
@@ -238,7 +238,7 @@ const CadastroAluno = () => {
             </FormErrorMessage>
           </FormControl>
 
-          <FormControl isInvalid={errors.dataDeEncerramentoTrabalho}>
+          <FormControl isInvalid={Boolean(errors.dataDeEncerramentoTrabalho)}>
             <FormLabel htmlFor="dataencerramentotrabalhoaluno">
               Data de encerramento:
             </FormLabel>
@@ -256,7 +256,7 @@ const CadastroAluno = () => {
         </Stack>
         {/*  */}
         <Stack direction={{ base: "column", md: "row" }}>
-          <FormControl isInvalid={errors.tipoDeOcupacao}>
+          <FormControl isInvalid={Boolean(errors.tipoDeOcupacao)}>
             <FormLabel htmlFor="">Tipo de ocupação:</FormLabel>
             <Select {...register("tipoDeOcupacao", { required: true })}>
               <option value="" disabled>
@@ -273,7 +273,7 @@ const CadastroAluno = () => {
             </FormErrorMessage>
           </FormControl>
           {/*  */}
-          <FormControl my={2} isInvalid={errors.trabalhoRemunerado}>
+          <FormControl my={2} isInvalid={Boolean(errors.trabalhoRemunerado)}>
             Trabalho Remunerado:
             <RadioGroup >
               <Stack spacing="5" direction="row" >

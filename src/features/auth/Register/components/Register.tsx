@@ -105,7 +105,7 @@ const Register = () => {
             <Image src="topo_ifpi.png" alt="Logo_IFPI" />
           </Center>
           <form action="" onSubmit={handleSubmit(onSubmit)}>
-            <FormControl isInvalid={errors.userName} mb='2'>
+            <FormControl isInvalid={Boolean(errors.userName)} mb='2'>
               <FormLabel htmlFor="userName">Seu nome</FormLabel>
               <Input
                 {...register("userName", { required: true, minLength: 3, maxLength: 20 })}
@@ -118,7 +118,7 @@ const Register = () => {
                 {errors.userName && "Insira um nome válido!"}
               </FormErrorMessage>
             </FormControl>
-            <FormControl isInvalid={errors.userEmail}>
+            <FormControl isInvalid={Boolean(errors.userEmail)}>
               <FormLabel htmlFor="userEmail">E-mail</FormLabel>
               <Input
                 {...register("userEmail", { required: true, pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/gi })}
@@ -131,7 +131,7 @@ const Register = () => {
                 {errors.userEmail && "Insira um e-mail!"}
               </FormErrorMessage>
             </FormControl>
-            <FormControl isInvalid={errors.userPassword}>
+            <FormControl isInvalid={Boolean(errors.userPassword)}>
               <FormLabel htmlFor="userPassword">Senha</FormLabel>
               <Input
                 {...register("userPassword", { required: true, minLength: 7 })}
@@ -144,7 +144,7 @@ const Register = () => {
                 {errors.userPassword && "Insira a senha!"}
               </FormErrorMessage>
             </FormControl>
-            <FormControl isInvalid={errors.confirmPassword}>
+            <FormControl isInvalid={Boolean(errors.confirmPassword)}>
               <FormLabel htmlFor="confirmPassword">Repita a Senha</FormLabel>
               <Input
                 {...register("confirmPassword", { required: true, minLength: 7 })}

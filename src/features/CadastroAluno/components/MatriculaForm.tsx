@@ -41,7 +41,7 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
 
   return (
     <>
-      <FormControl isInvalid={errors.curso}>
+      <FormControl isInvalid={Boolean(errors.curso)}>
         <FormLabel htmlFor="cursoaluno">Curso:</FormLabel>
         <Select defaultValue="" {...register("curso", { required: true })}>
           <option value="" disabled>
@@ -61,7 +61,7 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
       </FormControl>
       {/*  */}
       <Stack direction={{ base: "column", md: "row" }}>
-        <FormControl isInvalid={errors.numeroMatricula}>
+        <FormControl isInvalid={Boolean(errors.numeroMatricula)}>
           <FormLabel htmlFor="matriculaaluno">Número da matrícula</FormLabel>
           <Input
             type="text"
@@ -73,7 +73,7 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
             {errors.numeroMatricula && <p>Esse campo é obrigatório.</p>}
           </FormErrorMessage>
         </FormControl>
-        <FormControl isInvalid={errors.statusDaMatricula}>
+        <FormControl isInvalid={Boolean(errors.statusDaMatricula)}>
           <FormLabel htmlFor="alunostatusmatricula">
             Status da matrícula:
           </FormLabel>
@@ -102,7 +102,7 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
       </Stack>
       {/*  */}
       <Stack direction={{ base: "column", md: "row" }}>
-        <FormControl isInvalid={errors.dataDeInicioCurso}>
+        <FormControl isInvalid={Boolean(errors.dataDeInicioCurso)}>
           <FormLabel htmlFor="datainiciocursoaluno">Data de início:</FormLabel>
           <Input
             type="date"
@@ -114,7 +114,7 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
           </FormErrorMessage>
         </FormControl>
         {/*  */}
-        <FormControl isInvalid={errors.dataDeEncerramentoCurso}>
+        <FormControl isInvalid={Boolean(errors.dataDeEncerramentoCurso)}>
           <FormLabel htmlFor="dataencerramentocursoaluno">
             Data de encerramento:
           </FormLabel>
