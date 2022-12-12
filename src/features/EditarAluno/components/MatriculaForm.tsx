@@ -41,8 +41,9 @@ const MatriculaForm = ({ update, index, value, control }: any) => {
   return (
     <>
       <FormControl isInvalid={errors.curso}>
+        {console.log(value.curso)}
         <FormLabel htmlFor="cursoaluno">Curso:</FormLabel>
-        <Select {...register("curso", { required: true })}>
+        <Select {...register("curso", { required: true })} defaultValue={value?.curso}>
           <option value="" disabled>
             --ESCOLHA--
           </option>
